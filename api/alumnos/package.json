@@ -1,0 +1,17 @@
+{
+  "name": "alumnos",
+  "version": "1.0.0",
+  "description": "Microservicio alumnos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alejandro de la Torre Barón",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.5"
+  }
+}
