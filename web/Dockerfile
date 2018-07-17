@@ -16,7 +16,7 @@ RUN rm -rf ./build
 RUN rm -rf ./test
 RUN rm -rf ./src
 
-ENV PORT=3000
+ENV PORT = 3000
 
 EXPOSE 3000
 
