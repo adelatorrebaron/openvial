@@ -1,4 +1,47 @@
 <template>
+<div class="login-box">
+  <div class="login-logo">
+    <router-link to="/"><b>Open</b>Vial</router-link>
+    <!-- <a href="../../index2.html"><b>Open</b>Vial</a> -->
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Logueate para iniciar sesion</p>
+
+    <form @submit.prevent="login">
+      <div class="alert alert-danger" v-if="error">{{ error }}</div>
+      <div class="form-group has-feedback">
+        <input v-model="email" type="email" class="form-control" placeholder="Email" required autofocus>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input v-model="password" type="password" class="form-control" placeholder="Password" required>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    <!-- <a href="#">Olvidé mi contraseña</a><br> -->
+    <router-link to="/recuperar-password" class="text-center">Olvidé mi contraseña</router-link>
+    <br>
+    <!-- <a href="register.html" class="text-center">Registrarme como un nuevo usuario</a> -->
+    <router-link to="/registro" class="text-center">Registrarme como un nuevo usuario</router-link>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+</template>
+<!--
+<template>
   <div class="login-overlay">
     <div class="login-wrapper border border-light">
       <form class="form-signin" @submit.prevent="login">
@@ -13,6 +56,7 @@
     </div>
   </div>
 </template>
+-->
 
 <script>
 import { mapGetters } from 'vuex'
@@ -38,7 +82,7 @@ export default {
   methods: {
     checkCurrentLogin () {
       if (this.currentUser) {
-        this.$router.replace(this.$route.query.redirect || '/authors')
+        this.$router.replace(this.$route.query.redirect || '/dashboard')
       }
     },
     login () {
@@ -55,7 +99,7 @@ export default {
       this.error = false
       localStorage.token = req.data.token
       this.$store.dispatch('login')
-      this.$router.replace(this.$route.query.redirect || '/authors')
+      this.$router.replace(this.$route.query.redirect || '/dashboard')
     },
     loginFailed () {
       this.error = 'Login failed!'
@@ -67,58 +111,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.login-overlay {
-  background: #605B56 !important;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+.login-box-body {
+  background-color: #ecf0f5;
 }
 
-.login-wrapper {
-  background: #fff;
-  width: 70%;
-  margin: 12% auto;
-  animation: fadein 0.6s;
-}
 
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 10% 15px;
-  margin: 0 auto;
-}
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
-  font-weight: normal;
-}
-.form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
 </style>

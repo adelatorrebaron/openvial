@@ -5,18 +5,18 @@
     </template>
     <div class="container-fluid">
       <router-view></router-view>
-      <template v-if="currentUser">
+      <!-- <template v-if="currentUser">
         <Foot></Foot>
-      </template>
+      </template> -->
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Navbar from '@/components/Navbar'
-import Foot from '@/components/Foot'
-
+import Navbar from '@/components/backend/Navbar'
+import Foot from '@/components/backend/Foot'
+/*
 export default {
   name: 'app',
   computed: {
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/') {
+      if (!this.currentUser && this.$route.path !== '/login') {
         this.$router.push('/?redirect=' + this.$route.path)
       }
     }
@@ -40,6 +40,19 @@ export default {
     Foot
   }
 }
+*/
+
+export default {
+  name: 'app',
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
+  components: {
+    Navbar,
+    Foot
+  }
+}
+
 </script>
 
 <style>
