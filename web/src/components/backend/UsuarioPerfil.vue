@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div class="perfil">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>{{ msg }}</h1>
@@ -7,6 +7,7 @@
         <li>
           <router-link to="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</router-link>
         </li>
+        <li class="active">Perfil</li>
       </ol>
     </section>
   </div>
@@ -16,10 +17,10 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'dashboard',
+  name: 'perfil',
   data () {
     return {
-      msg: 'Dashboard'
+      msg: 'Perfil'
     }
   },
   computed: {

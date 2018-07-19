@@ -1,7 +1,7 @@
 <template>
 <div class="login-box">
   <div class="login-logo">
-    <router-link to="/"><b>Open</b>Vial</router-link>
+    <router-link to="/"><span class="text-primary"><b>Open</b>Vial</span></router-link>
     <!-- <a href="../../index2.html"><b>Open</b>Vial</a> -->
   </div>
   <!-- /.login-logo -->

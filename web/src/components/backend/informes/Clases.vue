@@ -1,14 +1,6 @@
 <template>
-  <div class="dashboard">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>{{ msg }}</h1>
-      <ol class="breadcrumb">
-        <li>
-          <router-link to="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</router-link>
-        </li>
-      </ol>
-    </section>
+  <div class="informe_clases">
+    <h1>{{ msg }}</h1>
   </div>
 </template>
 
@@ -16,10 +8,10 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'dashboard',
+  name: 'informe_clases',
   data () {
     return {
-      msg: 'Dashboard'
+      msg: 'Informe clases'
     }
   },
   computed: {

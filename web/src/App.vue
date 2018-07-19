@@ -1,21 +1,33 @@
 <template>
   <div id="app">
-    <template v-if="currentUser">
-      <Navbar></Navbar>
+    <!-- <template v-if="currentUser"> -->
+    <template>
+      <Header></Header>
     </template>
-    <div class="container-fluid">
-      <router-view></router-view>
-      <!-- <template v-if="currentUser">
-        <Foot></Foot>
-      </template> -->
+    <template v-if="currentUser">
+      <Sidebar></Sidebar>
+    </template>
+    <div>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+
+        <!-- Main content -->
+        <section class="content">
+
+          <router-view></router-view>
+
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Navbar from '@/components/backend/Navbar'
-import Foot from '@/components/backend/Foot'
+import Header from '@/components/backend/Header'
+import Sidebar from '@/components/backend/Sidebar'
 /*
 export default {
   name: 'app',
@@ -48,8 +60,8 @@ export default {
     ...mapGetters({ currentUser: 'currentUser' })
   },
   components: {
-    Navbar,
-    Foot
+    Header,
+    Sidebar
   }
 }
 
