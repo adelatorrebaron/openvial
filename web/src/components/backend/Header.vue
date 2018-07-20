@@ -142,7 +142,7 @@
 						<li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<img src="static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-							<span class="hidden-xs">{{ currentUser.email }}</span>
+							<span class="hidden-xs">{{ currentUser.username }}</span>
 						</a>
 						<ul class="dropdown-menu">
 							<!-- User image -->
@@ -150,8 +150,8 @@
 							<img src="static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
 							<p>
-								Alexander Pierce - Web Developer
-								<small>Member since Nov. 2012</small>
+								{{ currentUser.username }}
+								<small>Web Developer & System Admin</small>
 							</p>
 							</li>
 							<!-- Menu Footer-->

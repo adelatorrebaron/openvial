@@ -4,6 +4,7 @@ const mongoose  = require('mongoose')
 
 const UsuarioSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
+    username: {type: String, required: true, maxlength: 100},
     email: {
         type: String,
         required: true,

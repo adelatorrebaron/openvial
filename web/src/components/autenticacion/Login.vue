@@ -91,7 +91,7 @@ export default {
         .catch(() => this.loginFailed())
     },
     loginSuccessful (req) {
-      console.log(req.data);
+      //console.log(req.data);
       if (!req.data.token) {
         this.loginFailed()
         return

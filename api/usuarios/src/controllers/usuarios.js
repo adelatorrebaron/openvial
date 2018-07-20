@@ -10,7 +10,7 @@ const config = require('../config');
 
 
 exports.usuarios_registro =  (req, res, next) => {
-    console.log(req.body)
+    //console.log(req.body)
     Usuario.find({email: req.body.email})
         .exec()
         .then(usuario => {
@@ -27,6 +27,7 @@ exports.usuarios_registro =  (req, res, next) => {
                     } else {
                         const usuario = new Usuario({
                             _id: new mongoose.Types.ObjectId(),
+                            username: req.body.username,
                             email: req.body.email,
                             password: hash,
                             estado: req.body.estado
@@ -38,6 +39,7 @@ exports.usuarios_registro =  (req, res, next) => {
                                     message: 'Registro creado correctamente',
                                     registro_creado: {
                                         _id: result._id,
+                                        username: result.username,
                                         email: result.email,
                                         fecha_creacion: result.fecha_creacion,
                                         estado: result.estado,                    
@@ -84,8 +86,10 @@ exports.usuarios_login =  (req, res, next) => {
                 }
                 if (result) {
                     const token = jwt.sign({
+                        usuarioId: usuario[0]._id,
+                        username: usuario[0].username,
                         email:  usuario[0].email,
-                        usuarioId: usuario[0]._id
+                        fecha_creacion: usuario[0].fecha_creacion                        
                         },
                         config.JWT_KEY,
                         {
@@ -104,7 +108,7 @@ exports.usuarios_login =  (req, res, next) => {
             })
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
             res.status(500).json({
                 error: err
             });
@@ -122,6 +126,7 @@ exports.usuarios_get_all =  (req, res, next) => {
                 usuarios: docs.map(doc => {
                     return {
                         _id: doc._id,
+                        username: doc.username,
                         email: doc.email,
                         password: doc.password,
                         fecha_creacion: doc.fecha_creacion,
@@ -152,6 +157,7 @@ exports.usuarios_get_by_id = (req, res, next) => {
             if (doc){
                 res.status(200).json({
                     _id: doc._id,
+                    username: doc.username,
                     email: doc.email,
                     password: doc.password,
                     fecha_creacion: doc.fecha_creacion,
