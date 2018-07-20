@@ -67,7 +67,7 @@ exports.usuarios_login =  (req, res, next) => {
     Usuario.find({email: req.body.email})
         .exec()
         .then(usuario => {
-            console.log(req.body);
+            //console.log(req.body);
 
             // Sin autorización al no existir el email
             if (usuario.length < 1) {
@@ -91,13 +91,13 @@ exports.usuarios_login =  (req, res, next) => {
                         {
                             expiresIn: config.JWT_EXPIRES_TIME
                         });
-                    console.log('Autorización satisfactoria');
+                    //console.log('Autorización satisfactoria');
                     return res.status(200).json({
                         message: 'Autorización satisfactoria',
                         token: token
                     });
                 }
-                console.log('Autorización fallida 401');
+                //console.log('Autorización fallida 401');
                 res.status(401).json({
                     message: 'Autorización fallida'
                 });

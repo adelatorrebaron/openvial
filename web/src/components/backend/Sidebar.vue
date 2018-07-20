@@ -12,43 +12,43 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/dashboard/autoescuela">
+				<router-link to="/autoescuela">
 					<i class="fa fa-building"></i>
 					<span>Autoescuela</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/dashboard/profesores">
+				<router-link to="/profesores">
 					<i class="fa fa-address-card"></i>
 					<span>Profesores</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/dashboard/cursos">
+				<router-link to="/cursos">
 					<i class="fa fa-calendar"></i>
 					<span>Cursos</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/dashboard/alumnos">
+				<router-link to="/alumnos">
 					<i class="fa fa-users"></i>
 					<span>Alumnos</span>
 				</router-link>
 			</li>		
 			<li>
-				<router-link to="/dashboard/pagos">
+				<router-link to="/pagos">
 					<i class="fa fa-calculator"></i>
 					<span>Pagos</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/dashboard/vehiculos">
+				<router-link to="/vehiculos">
 					<i class="fa fa-car"></i>
 					<span>Vehículos</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/dashboard/clases">
+				<router-link to="/clases">
 					<i class="fa fa-calendar-check-o"></i>
 					<span>Clases</span>
 				</router-link>
@@ -64,43 +64,43 @@
           		</a>
           		<ul class="treeview-menu">
             		<li>
-						<router-link to="/dashboard/informes/autoescuela">
+						<router-link to="/informes/autoescuela">
 							<i class="fa fa-building"></i>
 							<span>Autoescuela</span>
 						</router-link>
 					</li>
 					<li>
-						<router-link to="/dashboard/informes/profesores">
+						<router-link to="/informes/profesores">
 							<i class="fa fa-address-card"></i>
 							<span>Profesores</span>
 						</router-link>
 					</li>
 					<li>
-						<router-link to="/dashboard/informes/cursos">
+						<router-link to="/informes/cursos">
 							<i class="fa fa-calendar"></i>
 							<span>Cursos</span>
 						</router-link>
 					</li>
 					<li>
-						<router-link to="/dashboard/informes/alumnos">
+						<router-link to="/informes/alumnos">
 							<i class="fa fa-users"></i>
 							<span>Alumnos</span>
 						</router-link>
 					</li>					
 					<li>
-						<router-link to="/dashboard/informes/pagos">
+						<router-link to="/informes/pagos">
 							<i class="fa fa-calculator"></i>
 							<span>Pagos</span>
 						</router-link>
 					</li>	
 					<li>
-						<router-link to="/dashboard/informes/vehiculos">
+						<router-link to="/informes/vehiculos">
 							<i class="fa fa-car"></i>
 							<span>Vehiculos</span>
 						</router-link>
 					</li>
 					<li>
-						<router-link to="/dashboard/informes/clases">
+						<router-link to="/informes/clases">
 							<i class="fa fa-calendar-check-o"></i>
 							<span>Clases</span>
 						</router-link>

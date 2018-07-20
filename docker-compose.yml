@@ -1,17 +1,17 @@
 version: '3'
 services:
 
-#  web:
-#    container_name: web
-#    build: './web'
-#    ports:
-#      - "8080:3000"
-#    depends_on:
-#      - usuarios
+  web:
+    container_name: web
+    build: './web'
+    ports:
+      - "8080:3000"
+    depends_on:
+      - usuarios
 #      - autoescuelas
 #      - alumnos
-#    environment:
-#      - API_URL = http://localhost:3000/api/v1
+    environment:
+      - API_URL = http://localhost:3000/api/v1
 
 #  web:
 #    container_name: web

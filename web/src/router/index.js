@@ -2,26 +2,40 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Principal from '@/components/frontend/Principal'
 
-import Login from '@/components/auth/Login'
-import Logout from '@/components/auth/Logout'
-import UsuarioPerfil from '@/components/backend/UsuarioPerfil'
+import AutenticacionLogin from '@/components/autenticacion/Login'
+import AutenticacionLogout from '@/components/autenticacion/Logout'
 
-import Dashboard from '@/components/backend/Dashboard'
-import Autoescuela from '@/components/backend/Autoescuela'
-import Profesores from '@/components/backend/Profesores'
-import Cursos from '@/components/backend/Cursos'
-import Alumnos from '@/components/backend/Alumnos'
-import Pagos from '@/components/backend/Pagos'
-import Vehiculos from '@/components/backend/Vehiculos'
-import Clases from '@/components/backend/Clases'
+import UsuarioPerfil from '@/components/usuario/Perfil'
 
-import InformeAutoescuela from '@/components/backend/informes/Autoescuela'
-import InformeProfesores from '@/components/backend/informes/Profesores'
-import InformeCursos from '@/components/backend/informes/Cursos'
-import InformeAlumnos from '@/components/backend/informes/Alumnos'
-import InformePagos from '@/components/backend/informes/Pagos'
-import InformeVehiculos from '@/components/backend/informes/Vehiculos'
-import InformeClases from '@/components/backend/informes/Clases'
+import DashboardIndex from '@/components/dashboard/Index'
+
+import AutoescuelaIndex from '@/components/autoescuela/Index'
+
+import ProfesoresIndex from '@/components/profesores/Index'
+
+import CursosIndex from '@/components/cursos/Index'
+
+import AlumnosIndex from '@/components/alumnos/Index'
+
+import PagosIndex from '@/components/pagos/Index'
+
+import VehiculosIndex from '@/components/vehiculos/Index'
+
+import ClasesIndex from '@/components/clases/Index'
+
+import InformesAutoescuelaIndex from '@/components/informes/autoescuela/Index'
+
+import InformesProfesoresIndex from '@/components/informes/profesores/Index'
+
+import InformesCursosIndex from '@/components/informes/cursos/Index'
+
+import InformesAlumnosIndex from '@/components/informes/alumnos/Index'
+
+import InformesPagosIndex from '@/components/informes/pagos/Index'
+
+import InformesVehiculosIndex from '@/components/informes/vehiculos/Index'
+
+import InformesClasesIndex from '@/components/informes/clases/Index'
 
 
 
@@ -37,13 +51,13 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'Login',
-      component: Login
+      name: 'AutenticacionLogin',
+      component: AutenticacionLogin
     },
     {
       path: '/logout',
-      name: 'Logout',
-      component: Logout
+      name: 'AutenticacionLogout',
+      component: AutenticacionLogout
     },
     {
       path: '/usuario/perfil',
@@ -52,78 +66,78 @@ export default new Router({
     },
     {
       path: '/dashboard',
-      name: 'Dashboard',
-      component: Dashboard
+      name: 'DashboardIndex',
+      component: DashboardIndex
     },
     {
-      path: '/dashboard/autoescuela',
-      name: 'Autoescuela',
-      component: Autoescuela
+      path: '/autoescuela',
+      name: 'AutoescuelaIndex',
+      component: AutoescuelaIndex
     },
     {
-      path: '/dashboard/profesores',
-      name: 'Profesores',
-      component: Profesores
+      path: '/profesores',
+      name: 'ProfesoresIndex',
+      component: ProfesoresIndex
     },
     {
-      path: '/dashboard/cursos',
-      name: 'Cursos',
-      component: Cursos
+      path: '/cursos',
+      name: 'CursosIndex',
+      component: CursosIndex
     },
     {
-      path: '/dashboard/alumnos',
-      name: 'Alumnos',
-      component: Alumnos
+      path: '/alumnos',
+      name: 'AlumnosIndex',
+      component: AlumnosIndex
     },
     {
-      path: '/dashboard/pagos',
-      name: 'Pagos',
-      component: Pagos
+      path: '/pagos',
+      name: 'PagosIndex',
+      component: PagosIndex
     },
     {
-      path: '/dashboard/vehiculos',
-      name: 'Vehiculos',
-      component: Vehiculos
+      path: '/vehiculos',
+      name: 'VehiculosIndex',
+      component: VehiculosIndex
     },
     {
-      path: '/dashboard/clases',
-      name: 'Clases',
-      component: Clases
+      path: '/clases',
+      name: 'ClasesIndex',
+      component: ClasesIndex
     },
     {
-      path: '/dashboard/informes/autoescuela',
-      name: 'InformeAutoescuela',
-      component: InformeAutoescuela
+      path: '/informes/autoescuela',
+      name: 'InformesAutoescuelaIndex',
+      component: InformesAutoescuelaIndex
     },
     {
-      path: '/dashboard/informes/profesores',
-      name: 'InformeProfesores',
-      component: InformeProfesores
+      path: '/informes/profesores',
+      name: 'InformesProfesoresIndex',
+      component: InformesProfesoresIndex
     },
     {
-      path: '/dashboard/informes/cursos',
-      name: 'InformeCursos',
-      component: InformeCursos
+      path: '/informes/cursos',
+      name: 'InformesCursosIndex',
+      component: InformesCursosIndex
     },
     {
-      path: '/dashboard/informes/alumnos',
-      name: 'InformeAlumnos',
-      component: InformeAlumnos
+      path: '/informes/alumnos',
+      name: 'InformesAlumnosIndex',
+      component: InformesAlumnosIndex
     },
     {
-      path: '/dashboard/informes/pagos',
-      name: 'InformePagos',
-      component: InformePagos
+      path: '/informes/pagos',
+      name: 'InformesPagosIndex',
+      component: InformesPagosIndex
     },
     {
-      path: '/dashboard/informes/vehiculos',
-      name: 'InformeVehiculos',
-      component: InformeVehiculos
+      path: '/informes/vehiculos',
+      name: 'InformesVehiculosIndex',
+      component: InformesVehiculosIndex
     },
     {
-      path: '/dashboard/informes/clases',
-      name: 'InformeClases',
-      component: InformeClases
+      path: '/informes/clases',
+      name: 'InformesClasesIndex',
+      component: InformesClasesIndex
     }
   ]
 })
