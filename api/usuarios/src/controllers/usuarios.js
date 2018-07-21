@@ -10,7 +10,7 @@ const config = require('../config');
 
 
 exports.usuarios_registro =  (req, res, next) => {
-    //console.log(req.body)
+    console.log(req.body)
     Usuario.find({email: req.body.email})
         .exec()
         .then(usuario => {
@@ -69,19 +69,19 @@ exports.usuarios_login =  (req, res, next) => {
     Usuario.find({email: req.body.email})
         .exec()
         .then(usuario => {
-            //console.log(req.body);
+            console.log(req.body);
 
             // Sin autorización al no existir el email
             if (usuario.length < 1) {
                 return res.status(401).json({
-                    message: 'Autorización fallida'
+                    message: 'Autenticación fallida'
                 });
             }
             bcrypt.compare(req.body.password, usuario[0].password,(err, result) => {
                 // Sin autorización al no coindicir la contraseña
                 if (err) {
                     return res.status(401).json({
-                        message: 'Autorización fallida'
+                        message: 'Autenticación fallida'
                     });
                 }
                 if (result) {
@@ -95,20 +95,20 @@ exports.usuarios_login =  (req, res, next) => {
                         {
                             expiresIn: config.JWT_EXPIRES_TIME
                         });
-                    //console.log('Autorización satisfactoria');
+                    console.log('Autenticación satisfactoria');
                     return res.status(200).json({
-                        message: 'Autorización satisfactoria',
+                        message: 'Autenticación satisfactoria',
                         token: token
                     });
                 }
-                //console.log('Autorización fallida 401');
+                console.log('Autenticación fallida 401');
                 res.status(401).json({
-                    message: 'Autorización fallida'
+                    message: 'Autenticación fallida'
                 });
             })
         })
         .catch(err => {
-            //console.log(err);
+            console.log(err);
             res.status(500).json({
                 error: err
             });

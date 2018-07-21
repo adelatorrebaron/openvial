@@ -33,8 +33,8 @@ export default {
   },
   methods: {
     checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/login') {
-        this.$router.push('/login')
+      if (!this.currentUser && this.$route.path !== '/usuario/login') {
+        this.$router.push('/usuario/login')
       }
     }
   }
@@ -42,6 +42,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style>
 </style>

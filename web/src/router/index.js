@@ -1,11 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Principal from '@/components/frontend/Principal'
 
-import AutenticacionLogin from '@/components/autenticacion/Login'
-import AutenticacionLogout from '@/components/autenticacion/Logout'
 
-import UsuarioPerfil from '@/components/usuario/Perfil'
+import Inicio from '@/components/frontend/Inicio'
+
+import UsuarioRegister from '@/components/usuario/Register'
+import UsuarioLogin from '@/components/usuario/Login'
+import UsuarioLogout from '@/components/usuario/Logout'
+import UsuarioProfile from '@/components/usuario/Profile'
+
 
 import DashboardIndex from '@/components/dashboard/Index'
 
@@ -38,7 +41,6 @@ import InformesVehiculosIndex from '@/components/informes/vehiculos/Index'
 import InformesClasesIndex from '@/components/informes/clases/Index'
 
 
-
 Vue.use(Router)
 
 export default new Router({
@@ -46,23 +48,28 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Principal',
-      component: Principal
+      name: 'Inicio',
+      component: Inicio
     },
     {
-      path: '/login',
-      name: 'AutenticacionLogin',
-      component: AutenticacionLogin
+      path: '/usuario/registro',
+      name: 'UsuarioRegister',
+      component: UsuarioRegister
     },
     {
-      path: '/logout',
-      name: 'AutenticacionLogout',
-      component: AutenticacionLogout
+      path: '/usuario/login',
+      name: 'UsuarioLogin',
+      component: UsuarioLogin
+    },
+    {
+      path: '/usuario/logout',
+      name: 'UsuarioLogout',
+      component: UsuarioLogout
     },
     {
       path: '/usuario/perfil',
-      name: 'UsuarioPerfil',
-      component: UsuarioPerfil
+      name: 'UsuarioProfile',
+      component: UsuarioProfile
     },
     {
       path: '/dashboard',

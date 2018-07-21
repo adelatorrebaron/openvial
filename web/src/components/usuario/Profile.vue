@@ -1,5 +1,5 @@
 <template>
-  <div class="perfil">
+  <div class="profile">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>{{ msg }}</h1>
@@ -17,7 +17,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'perfil',
+  name: 'profile',
   data () {
     return {
       msg: 'Perfil'
@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/login') {
-        this.$router.push('/login')
+      if (!this.currentUser && this.$route.path !== '/usuario/login') {
+        this.$router.push('/usuario/login')
       }
     }
   }

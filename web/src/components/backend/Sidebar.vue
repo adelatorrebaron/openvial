@@ -1,6 +1,14 @@
 <template>
  	<!-- Left side column. contains the logo and sidebar -->
   	<aside class="main-sidebar">
+
+		<!-- Sidebar user panel -->
+      	<div class="user-panel" style="background-color: #367fa9">
+			<div class="text-center" >
+				<img src="@/assets/logo.png" style="width:130px">
+			</div>
+      	</div>
+
       	<!-- /.search form -->
       	<!-- sidebar menu: : style can be found in sidebar.less -->
       	<ul class="sidebar-menu" data-widget="tree">

@@ -30,33 +30,17 @@
     </form>
 
     <!-- <a href="#">Olvidé mi contraseña</a><br> -->
-    <router-link to="/recuperar-password" class="text-center">Olvidé mi contraseña</router-link>
-    <br>
+    <!--<router-link to="/usuario/recuperar-password" class="text-center">Olvidé mi contraseña</router-link>
+    <br> -->
     <!-- <a href="register.html" class="text-center">Registrarme como un nuevo usuario</a> -->
-    <router-link to="/registro" class="text-center">Registrarme como un nuevo usuario</router-link>
+    <router-link to="/usuario/registro" class="text-center">Quiero registrarme</router-link>
+    <br>
+    <router-link to="/" class="text-center">Ir a la página principal</router-link>
   </div>
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->
-
 </template>
-<!--
-<template>
-  <div class="login-overlay">
-    <div class="login-wrapper border border-light">
-      <form class="form-signin" @submit.prevent="login">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <div class="alert alert-danger" v-if="error">{{ error }}</div>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-    </div>
-  </div>
-</template>
--->
 
 <script>
 import { mapGetters } from 'vuex'
@@ -88,7 +72,8 @@ export default {
     login () {
       this.$http.post('/usuarios/login', { email: this.email, password: this.password })
         .then(request => this.loginSuccessful(request))
-        .catch(() => this.loginFailed())
+        //.catch(() => this.loginFailed())
+        .catch(err => this.loginFailed(err))
     },
     loginSuccessful (req) {
       //console.log(req.data);
@@ -99,12 +84,27 @@ export default {
       this.error = false
       localStorage.token = req.data.token
       this.$store.dispatch('login')
+      
+      // Muestro el panel lateral al hacer login/registro
+      this.toggleBodyClass('removeClass', 'sidebar-collapse');
+      //this.toggleBodyClass('addClass', 'sidebar-mini');
+
       this.$router.replace(this.$route.query.redirect || '/dashboard')
     },
-    loginFailed () {
-      this.error = 'Login failed!'
+    loginFailed (err) {
+      //console.log(err.data);
+      this.error = err.response.data.message;
       this.$store.dispatch('logout')
       delete localStorage.token
+    },
+    toggleBodyClass(addRemoveClass, className) {
+      const el = document.body;
+
+      if (addRemoveClass === 'addClass') {
+        el.classList.add(className);
+      } else {
+        el.classList.remove(className);
+      }
     }
   }
 }
@@ -113,7 +113,11 @@ export default {
 <style lang="css" scoped>
 .login-box-body {
   background-color: #ecf0f5;
+  animation: fadein 1.0s;
 }
 
-
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
 </style>
