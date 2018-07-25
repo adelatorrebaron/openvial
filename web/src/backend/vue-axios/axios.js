@@ -2,7 +2,8 @@
 
 import axios from 'axios'
 
-let API_URL = 'http://localhost:3001/api/v1';
+//let API_URL = 'http://localhost:3001/api/v1';
+let API_URL = 'http://localhost:8080/api/v1';
 
 if (process.env.URL_API_USUARIOS) {
   API_URL = process.env.URL_API_USUARIOS;

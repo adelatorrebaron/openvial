@@ -63,13 +63,13 @@
 			</li>
 
         	<li class="treeview">
-          		<a href="">
+          		<!-- <a href=""> -->
 					<i class="fa fa-files-o"></i>
-					<span>Informes</span>
+						<span>Informes</span>
 					<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 					</span>
-          		</a>
+          		<!-- </a> -->
           		<ul class="treeview-menu">
             		<li>
 						<router-link to="/informes/autoescuela">
@@ -134,5 +134,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

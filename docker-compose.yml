@@ -9,12 +9,10 @@ services:
       - "3000:3000"
     depends_on:
       - usuarios
-#      - autoescuelas
+      - autoescuelas
 #      - alumnos
     environment:
       - URL_API_USUARIOS=http://localhost:3001/api/v1
-#    volumes:
-#      - ./prueba:/app/dist
 
 #  web:
 #    container_name: web
@@ -40,16 +38,16 @@ services:
     environment:
       - MONGO_DB_URI= mongodb://mongo:27017/openvial
 
-#  autoescuelas:
-#    container_name: ms-autoescuelas
-#    restart: always
-#    build: './api/autoescuelas'
-#    ports:
-#      - "3002:3000"
-#    depends_on:
-#      - mongo
-#    environment:
-#      - MONGO_DB_URI= mongodb://mongo:27017/openvial
+  autoescuelas:
+    container_name: autoescuelas
+    restart: always
+    build: './api/autoescuelas'
+    ports:
+      - "3002:3000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_DB_URI= mongodb://mongo:27017/openvial
 
 #  alumnos:
 #    container_name: ms-alumnos
@@ -79,7 +77,7 @@ services:
     depends_on:
       - web
       - usuarios
-#      - autoescuelas
+      - autoescuelas
 #      - alumnos
     volumes:
       - ./web/dist:/srv/www/static

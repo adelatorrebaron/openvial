@@ -7,7 +7,7 @@
     <template v-if="currentUser">
       <Sidebar></Sidebar>
     </template>
-    <div>
+    <div class="wrapper-black-color">
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
 
@@ -68,4 +68,7 @@ export default {
 </script>
 
 <style>
+.wrapper-black-color    {
+  background-color: #222d32;
+}
 </style>
