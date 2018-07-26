@@ -13,7 +13,7 @@
 
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top">
-			<div v-if="currentUser" >
+			<div v-if="isUserLogged" >
 				<!-- Sidebar toggle button-->
 				<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 					<span class="sr-only">Toggle navigation</span>
@@ -75,7 +75,8 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   computed: {
-	...mapGetters({ currentUser: 'currentUser' })
+	...mapGetters({ currentUser: 'currentUser',
+	isUserLogged: 'isUserLogged' })
   }
 }
 </script>

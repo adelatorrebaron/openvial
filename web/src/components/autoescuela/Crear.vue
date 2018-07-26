@@ -20,30 +20,10 @@
         </div>
         <div class="box-body">
           <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Id:</label>
-                <input v-model="autoescuela._id" type="text" class="form-control" placeholder="" disabled>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Usuario Id:</label>
-                <input v-model="autoescuela.usuario_id" type="text" class="form-control" placeholder="" disabled>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <label>Fecha creación:</label>
-                <input v-model="autoescuela.fecha_creacion" type="text" class="form-control" placeholder="" disabled>
-              </div>
-            </div>
-          </div>
-          <div class="row">
             <div class="col-md-12">
               <div class="form-group">
                 <label>Denominación:</label>
-                <input v-model="autoescuela.denominacion" type="text" class="form-control" placeholder="Denominación" readonly>
+                <input v-model="autoescuela.denominacion" type="text" class="form-control" placeholder="Denominación">
               </div>
             </div>
           </div>
@@ -51,25 +31,25 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>Nº Provincial:</label>
-                <input v-model="autoescuela.numero_provincial" type="text" class="form-control" placeholder="Nº Provincial" readonly>
+                <input v-model="autoescuela.numero_provincial" type="text" class="form-control" placeholder="Nº Provincial">
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label>Sección:</label>
-                <input v-model="autoescuela.seccion" type="text" class="form-control" placeholder="Sección" readonly>
+                <input v-model="autoescuela.seccion" type="text" class="form-control" placeholder="Sección">
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label>Dígito de control:</label>
-                <input v-model="autoescuela.digito_control" type="text" class="form-control" placeholder="Dígito de control" readonly>
+                <input v-model="autoescuela.digito_control" type="text" class="form-control" placeholder="Dígito de control">
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label>Nº Secuencial:</label>
-                <input v-model="autoescuela.numero_secuencial" type="text" class="form-control" placeholder="Nº Secuencial" readonly>
+                <input v-model="autoescuela.numero_secuencial" type="text" class="form-control" placeholder="Nº Secuencial">
               </div>
             </div>                                    
           </div>
@@ -86,19 +66,19 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>Tipo de vía:</label>
-                <input v-model="autoescuela.direccion.via.tipo" type="text" class="form-control" placeholder="Tipo de vía" readonly>
+                <input v-model="autoescuela.direccion.via.tipo" type="text" class="form-control" placeholder="Tipo de vía">
               </div>
             </div>
             <div class="col-md-8">
               <div class="form-group">
                 <label>Nombre:</label>
-                <input v-model="autoescuela.direccion.via.nombre" type="text" class="form-control" placeholder="Nombre" readonly>
+                <input v-model="autoescuela.direccion.via.nombre" type="text" class="form-control" placeholder="Nombre">
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>Número:</label>
-                <input v-model="autoescuela.direccion.via.numero" type="text" class="form-control" placeholder="Numero" readonly>
+                <input v-model="autoescuela.direccion.via.numero" type="text" class="form-control" placeholder="Numero">
               </div>
             </div>
           </div>
@@ -106,37 +86,37 @@
             <div class="col-md-2">
               <div class="form-group">
                 <label>Bloque:</label>
-                <input v-model="autoescuela.direccion.via.bloque" type="text" class="form-control" placeholder="Bloque" readonly>
+                <input v-model="autoescuela.direccion.via.bloque" type="text" class="form-control" placeholder="Bloque">
               </div>
             </div>        
             <div class="col-md-2">
               <div class="form-group">
                 <label>Portal:</label>
-                <input v-model="autoescuela.direccion.via.portal" type="text" class="form-control" placeholder="Portal" readonly>
+                <input v-model="autoescuela.direccion.via.portal" type="text" class="form-control" placeholder="Portal">
               </div>
             </div> 
             <div class="col-md-2">
               <div class="form-group">
                 <label>Escalera:</label>
-                <input v-model="autoescuela.direccion.via.escalera" type="text" class="form-control" placeholder="Escalera" readonly>
+                <input v-model="autoescuela.direccion.via.escalera" type="text" class="form-control" placeholder="Escalera">
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>Planta:</label>
-                <input v-model="autoescuela.direccion.via.planta" type="text" class="form-control" placeholder="Planta" readonly>
+                <input v-model="autoescuela.direccion.via.planta" type="text" class="form-control" placeholder="Planta">
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>Puerta:</label>
-                <input v-model="autoescuela.direccion.via.puerta" type="text" class="form-control" placeholder="Puerta" readonly>
+                <input v-model="autoescuela.direccion.via.puerta" type="text" class="form-control" placeholder="Puerta">
               </div>
             </div>            
             <div class="col-md-2">
               <div class="form-group">
                 <label>Kilómetro:</label>
-                <input v-model="autoescuela.direccion.via.kilometro" type="text" class="form-control" placeholder="Kilómetro" readonly>
+                <input v-model="autoescuela.direccion.via.kilometro" type="text" class="form-control" placeholder="Kilómetro">
               </div>
             </div>
           </div>
@@ -145,25 +125,25 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label>Código postal:</label>
-                <input v-model="autoescuela.direccion.codigo_postal" type="text" class="form-control" placeholder="Código postal" readonly>
+                <input v-model="autoescuela.direccion.codigo_postal" type="text" class="form-control" placeholder="Código postal">
               </div>
             </div>        
             <div class="col-md-3">
               <div class="form-group">
                 <label>Población:</label>
-                <input v-model="autoescuela.direccion.poblacion" type="text" class="form-control" placeholder="Población" readonly>
+                <input v-model="autoescuela.direccion.poblacion" type="text" class="form-control" placeholder="Población">
               </div>
             </div> 
             <div class="col-md-3">
               <div class="form-group">
                 <label>Provincia:</label>
-                <input v-model="autoescuela.direccion.provincia" type="text" class="form-control" placeholder="Provincia" readonly>
+                <input v-model="autoescuela.direccion.provincia" type="text" class="form-control" placeholder="Provincia">
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label>País:</label>
-                <input v-model="autoescuela.direccion.pais" type="text" class="form-control" placeholder="Pais" readonly>
+                <input v-model="autoescuela.direccion.pais" type="text" class="form-control" placeholder="Pais">
               </div>
             </div>
           </div>
@@ -180,25 +160,25 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Correo electrónico:</label>
-                <input v-model="autoescuela.contacto.email" type="text" class="form-control" placeholder="Correo electrónico" readonly>
+                <input v-model="autoescuela.contacto.email" type="text" class="form-control" placeholder="Correo electrónico">
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>Teléfono fijo:</label>
-                <input v-model="autoescuela.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo" readonly>
+                <input v-model="autoescuela.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo">
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>Teléfono móvil:</label>
-                <input v-model="autoescuela.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil" readonly>
+                <input v-model="autoescuela.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil">
               </div>
             </div>
             <div class="col-md-2">
               <div class="form-group">
                 <label>Whatsapp:</label>
-                <input v-model="autoescuela.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp" readonly>
+                <input v-model="autoescuela.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp">
               </div>
             </div>
           </div>
@@ -206,19 +186,19 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label>Sitio web:</label>
-                <input v-model="autoescuela.contacto.website" type="text" class="form-control" placeholder="Sitio web" readonly>
+                <input v-model="autoescuela.contacto.website" type="text" class="form-control" placeholder="Sitio web">
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label>Facebook:</label>
-                <input v-model="autoescuela.contacto.facebook" type="text" class="form-control" placeholder="Facebook" readonly>
+                <input v-model="autoescuela.contacto.facebook" type="text" class="form-control" placeholder="Facebook">
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label>Twitter:</label>
-                <input v-model="autoescuela.contacto.twitter" type="text" class="form-control" placeholder="Twitter" readonly>
+                <input v-model="autoescuela.contacto.twitter" type="text" class="form-control" placeholder="Twitter">
               </div>
             </div>
           </div>
@@ -231,7 +211,7 @@
             <span> Cancelar</span>
           </router-link>
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-edit"></i> Editar
+            <i class="fa fa-check"></i> Aceptar
           </button>
         </div>
       </div>

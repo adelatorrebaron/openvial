@@ -128,7 +128,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   computed: {
-	...mapGetters({ currentUser: 'currentUser' })
+	...mapGetters({ currentUser: 'currentUser'})
   }
 }
 </script>

@@ -4,6 +4,7 @@ const mongoose  = require('mongoose')
 
 const AutoescuelaSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
+    usuario_id: mongoose.Schema.Types.ObjectId,
     denominacion: {type: String, required: true, maxlength: 160},
     numero_provincial: {type: String, required: true, maxlength: 8},
     seccion: {type: Number, required: true, min:0, max: 99},

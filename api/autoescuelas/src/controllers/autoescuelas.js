@@ -14,6 +14,7 @@ exports.autoescuelas_get_all =  (req, res, next) => {
                 autoescuelas: docs.map(doc => {
                     return {
                         _id: doc._id,
+                        usuario_id: doc.usuario_id,
                         denominacion: doc.denominacion,
                         numero_provincial: doc.numero_provincial,
                         seccion: doc.seccion,
@@ -68,6 +69,7 @@ exports.autoescuelas_get_all =  (req, res, next) => {
 exports.autoescuelas_create = (req, res, next) => {
     const autoescuela = new Autoescuela({
         _id: new mongoose.Types.ObjectId(),
+        usuario_id: req.body.usuario_id,
         denominacion: req.body.denominacion,
         numero_provincial: req.body.numero_provincial,
         seccion: req.body.seccion,
@@ -107,6 +109,7 @@ exports.autoescuelas_create = (req, res, next) => {
                 mensaje: 'Registro creado correctamente',
                 registro_creado: {
                     _id: result._id,
+                    usuario_id: result.usuario_id,
                     denominacion: result.denominacion,
                     numero_provincial: result.numero_provincial,
                     seccion: result.seccion,
@@ -157,14 +160,17 @@ exports.autoescuelas_create = (req, res, next) => {
 
 
 
-exports.autoescuelas_get_by_id = (req, res, next) => {
-    const id = req.params.autoescuelaId;
-    Autoescuela.findById(id)
+exports.autoescuelas_get_by_usuario_id = (req, res, next) => {
+    const id = req.params.usuarioId;
+    var usuario_id = new mongoose.Types.ObjectId(id);
+    //Autoescuela.findById(id)
+    Autoescuela.findOne({'usuario_id': usuario_id})
         .exec()
         .then(doc => {
             if (doc){
                 res.status(200).json({
                     _id: doc._id,
+                    usuario_id: doc.usuario_id,
                     denominacion: doc.denominacion,
                     numero_provincial: doc.numero_provincial,
                     seccion: doc.seccion,

@@ -19,7 +19,15 @@ const mutations = {
 const getters = {
   currentUser (state) {
     return state.user
+  },
+  isUserLogged (state) {
+    if (state.user === null)
+      return false;
+    else
+      return true;
   }
+
+
 }
 
 const actions = {

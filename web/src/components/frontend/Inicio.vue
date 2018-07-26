@@ -5,7 +5,7 @@
         <router-link to="/"><span class="text-primary"><b>Open</b>Vial</span></router-link>
       </div>
       <p class="login-box-msg"><b>{{ msg }}</b></p>
-      <img src="@/assets/logo.png" alt="Girl in a jacket"/>
+      <img src="@/assets/logo.png" alt="Logo Openvial"/>
       <br>
       <br>
       <router-link to="/usuario/login" class="text-center">Iniciar sesión</router-link>
