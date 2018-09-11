@@ -63,13 +63,11 @@
 			</li>
 
         	<li class="treeview">
-          		<!-- <a href=""> -->
-					<i class="fa fa-files-o"></i>
-						<span>Informes</span>
-					<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
-					</span>
-          		<!-- </a> -->
+				<i class="fa fa-files-o"></i>
+				<span>Informes</span>
+				<span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
+				</span>
           		<ul class="treeview-menu">
             		<li>
 						<router-link to="/informes/autoescuela">

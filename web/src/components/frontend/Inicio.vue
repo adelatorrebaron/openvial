@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'inicio',
   data () {
@@ -23,6 +25,18 @@ export default {
       msg: 'La mejor herramienta para gestión de Autoescuelas'
     }
   },
+
+  computed: {
+    ...mapGetters({ currentUser: 'currentUser' })
+  },
+  created () {
+    this.checkCurrentLogin()
+  },
+  updated () {
+    this.checkCurrentLogin()
+  },
+
+
   methods: {
     checkCurrentLogin () {
       if (this.currentUser) {

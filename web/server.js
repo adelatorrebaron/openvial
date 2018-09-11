@@ -48,4 +48,4 @@ router.get('/*', (req, res, next) => {
 app.use('/', router)
 
 app.listen(port)
-console.log('La aplicacion web está corriendo')
+console.log(`La aplicacion web está corriendo en el puerto ${port}`)
