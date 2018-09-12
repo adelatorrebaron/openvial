@@ -304,10 +304,10 @@ export default {
     },
     cargarDatosAutoescuela() {
       console.log(this.currentUser.id);
-      this.$http.get('/autoescuelas/' + this.currentUser.id)
+      this.$http.get('/autoescuelas/?usuarioId=' + this.currentUser.id)
         .then(request => {
-          this.autoescuela = request.data
-          console.log(request.data)
+          this.autoescuela = request.data.autoescuelas[0]
+          console.log(this.autoescuela)
         })
         .catch(err => {
           console.log(err)

@@ -2,7 +2,7 @@
   <div class="dashboard">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>{{ msg }}</h1>
+      <h1 v-if="autoescuela">{{ msg }}</h1>
       <ol class="breadcrumb">
         <li>
           <router-link to="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</router-link>
@@ -19,7 +19,8 @@ export default {
   name: 'dashboard',
   data () {
     return {
-      msg: 'Dashboard'
+      msg: 'Dashboard',
+      autoescuela: ''
     }
   },
   computed: {
@@ -27,15 +28,35 @@ export default {
   },
   created () {
     this.checkCurrentLogin()
+    this.checkAutoescuelaExiste()
   },
   updated () {
     this.checkCurrentLogin()
+    this.checkAutoescuelaExiste()
   },
   methods: {
     checkCurrentLogin () {
       if (!this.currentUser && this.$route.path !== '/usuario/login') {
         this.$router.push('/usuario/login')
       }
+    },
+    checkAutoescuelaExiste () {
+      //console.log(this.currentUser)
+      this.$http.get('/autoescuelas/?usuarioId=' + this.currentUser.id)
+        .then(request => {
+            //this.autoescuela = request.data
+            if (request.data.autoescuelas[0]) {
+              this.autoescuela = request.data.autoescuelas[0]
+            } else {
+              this.$router.push('/bienvenida')
+            }
+            //console.log(this.autoescuela)
+          })
+        //.catch(() => this.loginFailed())
+        .catch(err => {
+          //this.loginFailed(err)
+          })
+          
     }
   }
 }

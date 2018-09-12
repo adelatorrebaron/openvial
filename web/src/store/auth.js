@@ -26,15 +26,12 @@ const getters = {
     else
       return true;
   }
-
-
 }
 
 const actions = {
   login ({ commit }) {
     commit(MutationTypes.LOGIN)
   },
-
   logout ({ commit }) {
     commit(MutationTypes.LOGOUT)
   }

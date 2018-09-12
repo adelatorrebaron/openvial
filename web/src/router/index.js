@@ -11,6 +11,7 @@ import UsuarioProfile from '@/components/usuario/Profile'
 
 
 import DashboardIndex from '@/components/dashboard/Index'
+import DashboardBienvenida from '@/components/dashboard/Bienvenida'
 
 import AutoescuelaIndex from '@/components/autoescuela/Index'
 
@@ -75,6 +76,11 @@ export default new Router({
       path: '/dashboard',
       name: 'DashboardIndex',
       component: DashboardIndex
+    },
+    {
+      path: '/bienvenida',
+      name: 'DashboardBienvenida',
+      component: DashboardBienvenida
     },
     {
       path: '/autoescuela',

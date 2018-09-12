@@ -11,6 +11,15 @@ export default class User {
     }
   }
 
+
+  constructor ({ id, username, email, fecha_creacion }) {
+    this.id = id // eslint-disable-line camelcase
+    this.email = email
+    this.username = username
+    this.fecha_creacion = fecha_creacion
+  }
+
+  /*
   constructor ({ usuarioId, admin, email, username, fecha_creacion }) {
     this.id = usuarioId // eslint-disable-line camelcase
     this.admin = admin
@@ -22,4 +31,5 @@ export default class User {
   get isAdmin () {
     return this.admin
   }
+*/
 }
