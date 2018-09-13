@@ -62,14 +62,16 @@
 				</router-link>
 			</li>
 
-        	<li class="treeview">
-				<i class="fa fa-files-o"></i>
-				<span>Informes</span>
-				<span class="pull-right-container">
-					<i class="fa fa-angle-left pull-right"></i>
-				</span>
+			<li class="treeview">
+          		<a href="#">
+            		<i class="fa fa-files-o"></i>
+					<span>Informes</span>
+            		<span class="pull-right-container">
+              			<i class="fa fa-angle-left pull-right"></i>
+            		</span>
+          		</a>
           		<ul class="treeview-menu">
-            		<li>
+					  <li>
 						<router-link to="/informes/autoescuela">
 							<i class="fa fa-building"></i>
 							<span>Autoescuela</span>
@@ -111,10 +113,8 @@
 							<span>Clases</span>
 						</router-link>
 					</li>
-
           		</ul>
         	</li>
-
       	</ul>
     <!-- /.sidebar -->
   	</aside>
@@ -133,3 +133,4 @@ export default {
 
 <style lang="scss" scoped>
 </style>
+

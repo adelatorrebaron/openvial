@@ -11,7 +11,7 @@ export default {
   name: 'informe_pagos',
   data () {
     return {
-      msg: 'Informe pagos'
+      msg: 'Informes pagos'
     }
   },
   computed: {

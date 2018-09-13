@@ -1,5 +1,5 @@
 <template>
-  <div class="informe_vehiculos">
+  <div class="informe_profesores">
     <h1>{{ msg }}</h1>
   </div>
 </template>
@@ -8,10 +8,10 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'informe_vehiculos',
+  name: 'informe_profesores',
   data () {
     return {
-      msg: 'Informe vehiculos'
+      msg: 'Informes profesores'
     }
   },
   computed: {

@@ -11,7 +11,7 @@ export default {
   name: 'informe_cursos',
   data () {
     return {
-      msg: 'Informe cursos'
+      msg: 'Informes cursos'
     }
   },
   computed: {

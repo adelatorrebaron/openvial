@@ -4,42 +4,42 @@ import Router from 'vue-router'
 
 import Inicio from '@/components/frontend/Inicio'
 
-import UsuarioRegister from '@/components/usuario/Register'
-import UsuarioLogin from '@/components/usuario/Login'
-import UsuarioLogout from '@/components/usuario/Logout'
-import UsuarioProfile from '@/components/usuario/Profile'
+import UsuarioRegister from '@/components/comun/usuario/Register'
+import UsuarioLogin from '@/components/comun/usuario/Login'
+import UsuarioLogout from '@/components/comun/usuario/Logout'
+import UsuarioProfile from '@/components/comun/usuario/Profile'
 
 
-import DashboardIndex from '@/components/dashboard/Index'
-import DashboardBienvenida from '@/components/dashboard/Bienvenida'
+import DashboardIndex from '@/components/backend/dashboard/Index'
+import DashboardBienvenida from '@/components/backend/dashboard/Bienvenida'
 
-import AutoescuelaIndex from '@/components/autoescuela/Index'
+import AutoescuelaIndex from '@/components/backend/autoescuela/Index'
 
-import ProfesoresIndex from '@/components/profesores/Index'
+import ProfesoresIndex from '@/components/backend/profesores/Index'
 
-import CursosIndex from '@/components/cursos/Index'
+import CursosIndex from '@/components/backend/cursos/Index'
 
-import AlumnosIndex from '@/components/alumnos/Index'
+import AlumnosIndex from '@/components/backend/alumnos/Index'
 
-import PagosIndex from '@/components/pagos/Index'
+import PagosIndex from '@/components/backend/pagos/Index'
 
-import VehiculosIndex from '@/components/vehiculos/Index'
+import VehiculosIndex from '@/components/backend/vehiculos/Index'
 
-import ClasesIndex from '@/components/clases/Index'
+import ClasesIndex from '@/components/backend/clases/Index'
 
-import InformesAutoescuelaIndex from '@/components/informes/autoescuela/Index'
+import InformesAutoescuelaIndex from '@/components/backend/informes/autoescuela/Index'
 
-import InformesProfesoresIndex from '@/components/informes/profesores/Index'
+import InformesProfesoresIndex from '@/components/backend/informes/profesores/Index'
 
-import InformesCursosIndex from '@/components/informes/cursos/Index'
+import InformesCursosIndex from '@/components/backend/informes/cursos/Index'
 
-import InformesAlumnosIndex from '@/components/informes/alumnos/Index'
+import InformesAlumnosIndex from '@/components/backend/informes/alumnos/Index'
 
-import InformesPagosIndex from '@/components/informes/pagos/Index'
+import InformesPagosIndex from '@/components/backend/informes/pagos/Index'
 
-import InformesVehiculosIndex from '@/components/informes/vehiculos/Index'
+import InformesVehiculosIndex from '@/components/backend/informes/vehiculos/Index'
 
-import InformesClasesIndex from '@/components/informes/clases/Index'
+import InformesClasesIndex from '@/components/backend/informes/clases/Index'
 
 
 Vue.use(Router)

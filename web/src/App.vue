@@ -26,8 +26,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Header from '@/components/backend/Header'
-import Sidebar from '@/components/backend/Sidebar'
+import Header from '@/components/comun/Header'
+import Sidebar from '@/components/comun/Sidebar'
 /*
 export default {
   name: 'app',
