@@ -290,18 +290,11 @@ export default {
     ...mapGetters({ currentUser: 'currentUser' })
   },
   created () {
-    this.checkCurrentLogin()
     this.cargarDatosAutoescuela()
   },
   updated () {
-    this.checkCurrentLogin()
   },
   methods: {
-    checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/usuario/login') {
-        this.$router.push('/usuario/login')
-      }
-    },
     cargarDatosAutoescuela() {
       console.log(this.currentUser.id);
       this.$http.get('/autoescuelas/?usuarioId=' + this.currentUser.id)

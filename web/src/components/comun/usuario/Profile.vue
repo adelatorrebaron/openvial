@@ -24,20 +24,22 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
+    //...mapGetters({ currentUser: 'currentUser' })
   },
   created () {
-    this.checkCurrentLogin()
+    //this.checkCurrentLogin()
   },
   updated () {
-    this.checkCurrentLogin()
+    //this.checkCurrentLogin()
   },
   methods: {
+ /*
     checkCurrentLogin () {
       if (!this.currentUser && this.$route.path !== '/usuario/login') {
         this.$router.push('/usuario/login')
       }
     }
+  */
   }
 }
 </script>

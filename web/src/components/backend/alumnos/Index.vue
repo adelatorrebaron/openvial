@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'alumnos',
@@ -24,20 +23,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
   },
   created () {
-    this.checkCurrentLogin()
   },
   updated () {
-    this.checkCurrentLogin()
   },
   methods: {
-    checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/login') {
-        this.$router.push('/login')
-      }
-    }
   }
 }
 </script>

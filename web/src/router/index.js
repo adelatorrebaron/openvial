@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
 
 
 import Inicio from '@/components/frontend/Inicio'
@@ -44,6 +45,24 @@ import InformesClasesIndex from '@/components/backend/informes/clases/Index'
 
 Vue.use(Router)
 
+
+const ifNotAuthenticated = (to, from, next) => {
+  if (!store.getters.isUserLogged) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isUserLogged) {
+    next()
+    return
+  }
+  next('/usuario/login')
+}
+
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -60,97 +79,116 @@ export default new Router({
     {
       path: '/usuario/login',
       name: 'UsuarioLogin',
-      component: UsuarioLogin
+      component: UsuarioLogin,
+      beforeEnter: ifNotAuthenticated
     },
     {
       path: '/usuario/logout',
       name: 'UsuarioLogout',
-      component: UsuarioLogout
+      component: UsuarioLogout,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/usuario/perfil',
       name: 'UsuarioProfile',
-      component: UsuarioProfile
+      component: UsuarioProfile,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/dashboard',
       name: 'DashboardIndex',
-      component: DashboardIndex
+      component: DashboardIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/bienvenida',
       name: 'DashboardBienvenida',
-      component: DashboardBienvenida
+      component: DashboardBienvenida,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/autoescuela',
       name: 'AutoescuelaIndex',
-      component: AutoescuelaIndex
+      component: AutoescuelaIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/profesores',
       name: 'ProfesoresIndex',
-      component: ProfesoresIndex
+      component: ProfesoresIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/cursos',
       name: 'CursosIndex',
-      component: CursosIndex
+      component: CursosIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/alumnos',
       name: 'AlumnosIndex',
-      component: AlumnosIndex
+      component: AlumnosIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/pagos',
       name: 'PagosIndex',
-      component: PagosIndex
+      component: PagosIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/vehiculos',
       name: 'VehiculosIndex',
-      component: VehiculosIndex
+      component: VehiculosIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/clases',
       name: 'ClasesIndex',
-      component: ClasesIndex
+      component: ClasesIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/informes/autoescuela',
       name: 'InformesAutoescuelaIndex',
-      component: InformesAutoescuelaIndex
+      component: InformesAutoescuelaIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/informes/profesores',
       name: 'InformesProfesoresIndex',
-      component: InformesProfesoresIndex
+      component: InformesProfesoresIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/informes/cursos',
       name: 'InformesCursosIndex',
-      component: InformesCursosIndex
+      component: InformesCursosIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/informes/alumnos',
       name: 'InformesAlumnosIndex',
-      component: InformesAlumnosIndex
+      component: InformesAlumnosIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/informes/pagos',
       name: 'InformesPagosIndex',
-      component: InformesPagosIndex
+      component: InformesPagosIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/informes/vehiculos',
       name: 'InformesVehiculosIndex',
-      component: InformesVehiculosIndex
+      component: InformesVehiculosIndex,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/informes/clases',
       name: 'InformesClasesIndex',
-      component: InformesClasesIndex
+      component: InformesClasesIndex,
+      beforeEnter: ifAuthenticated
     }
   ]
 })

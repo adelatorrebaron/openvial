@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+//import { mapGetters } from 'vuex'
 
 export default {
   name: 'dashboard',
@@ -24,22 +24,24 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
+    //...mapGetters({ currentUser: 'currentUser' })
   },
   created () {
-    this.checkCurrentLogin()
+//    this.checkCurrentLogin()
     this.checkAutoescuelaExiste()
   },
   updated () {
-    this.checkCurrentLogin()
+//    this.checkCurrentLogin()
     this.checkAutoescuelaExiste()
   },
   methods: {
+    /*
     checkCurrentLogin () {
       if (!this.currentUser && this.$route.path !== '/usuario/login') {
         this.$router.push('/usuario/login')
       }
     },
+    */
     checkAutoescuelaExiste () {
       //console.log(this.currentUser)
       this.$http.get('/autoescuelas/?usuarioId=' + this.currentUser.id)
