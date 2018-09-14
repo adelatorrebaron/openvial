@@ -1,16 +1,16 @@
 
-const currentUser = (state) => {
-      return state.user
+const currentAutoescuela = (state) => {
+      return state.autoescuela
 }
 
-const isUserLogged = (state) => {
-    if (state.user === null)
+const existAutoescuela = (state) => {
+    if (state.autoescuela === null)
         return false;
     else
         return true;
 }
 
 export default {
-    currentUser,
-    isUserLogged
+    currentAutoescuela,
+    existAutoescuela
 }

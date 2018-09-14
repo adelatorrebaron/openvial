@@ -1,15 +1,14 @@
 /* global localStorage */
-
 import actions from './actions';
 import getters from './getters';
 import mutations from './mutations';
 
 const state = {
-  activeAutoescuela: null
+  autoescuela: null
 };
 
 export default {
-  namespaced: true,
+  namespaced: false,
   state,
   actions,
   getters,
