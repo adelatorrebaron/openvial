@@ -10,6 +10,8 @@ import UsuarioLogin from '@/components/comun/usuario/Login'
 import UsuarioLogout from '@/components/comun/usuario/Logout'
 import UsuarioProfile from '@/components/comun/usuario/Profile'
 
+import NotFound404 from '@/components/comun/errors/NotFound404'
+
 
 import DashboardIndex from '@/components/backend/dashboard/Index'
 import DashboardBienvenida from '@/components/backend/dashboard/Bienvenida'
@@ -189,6 +191,9 @@ export default new Router({
       name: 'InformesClasesIndex',
       component: InformesClasesIndex,
       beforeEnter: ifAuthenticated
-    }
+    },
+    {
+      path: '*',
+      component: NotFound404 }
   ]
 })
