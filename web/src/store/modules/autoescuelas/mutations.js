@@ -1,7 +1,7 @@
 import User from '@/models/User'
 
 
-const GETAUTOESCUELA = (state, autoescuela) => {
+const SET_AUTOESCUELA = (state, autoescuela) => {
       state.autoescuela = autoescuela
 }
 
@@ -12,6 +12,6 @@ const LOGOUT = (state) => {
 */
 
 export default {
-      GETAUTOESCUELA
+      SET_AUTOESCUELA
 
 }

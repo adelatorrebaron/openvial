@@ -11,6 +11,12 @@
       </ol>
     </section>
 
+    <section class="content-header" style="text-align:right">
+      <button type="button" class="btn btn-success btn-circle btn-xl">
+        <i class="fa fa-plus"></i>
+      </button>
+    </section>
+
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -40,7 +46,7 @@
                     <th></th>
                   </tr>
                 </thead>
-                <tbody v-for="(profesor, index) in profesores">
+                <tbody v-for="profesor in profesores" v-bind:key="profesor.dni">
                   <tr>
                     <td>{{ profesor.dni }}</td>
                     <td>{{ profesor.nombre }}</td>
@@ -186,4 +192,25 @@ export default {
 .table > tbody > tr > td {
   vertical-align: middle;
 }
+
+.btn-circle.btn-xl {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+
 </style>

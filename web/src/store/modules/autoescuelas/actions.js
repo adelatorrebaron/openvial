@@ -1,16 +1,18 @@
 
+const loadAutoescuela = ( {commit}, currentUser ) => {
 
-const getAutoescuela = ( context, currentUser ) => {
-    this.$http.get('/autoescuelas/?usuarioId=' + currentUser.id)
-    .then(request => {
-        context.commit('GETAUTOESCUELA', request.data.autoescuelas[0])
-        //this.autoescuela = request.data.autoescuelas[0]
-        console.log(request.data.autoescuelas[0])
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
+    this.$http.get('/autoescuelas/?usuarioId=' + this.currentUser.id)
+        .then(request => {
+            //this.autoescuela = request.data
+            if (request.data.autoescuelas[0]) {
+                commit('SET_AUTOESCUELA', request.data.autoescuelas[0])
+            }
+            //console.log(this.autoescuela)
+          })
+        //.catch(() => this.loginFailed())
+        .catch(err => {
+          //this.loginFailed(err)
+          })
 }
 
 /*
@@ -20,5 +22,5 @@ const logout = ( context ) => {
 */
 
 export default {
-    getAutoescuela
+    loadAutoescuela
 }

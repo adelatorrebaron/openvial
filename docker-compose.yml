@@ -36,7 +36,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_DB_URI= mongodb://mongo:27017/openvial
+      - MONGO_DB_URI= mongodb://mongo:27017/openvial_usuarios
 
   autoescuelas:
     container_name: autoescuelas
@@ -47,7 +47,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGO_DB_URI= mongodb://mongo:27017/openvial
+      - MONGO_DB_URI= mongodb://mongo:27017/openvial_autoescuelas
 
 #  alumnos:
 #    container_name: ms-alumnos
@@ -69,16 +69,17 @@ services:
     ports:
       - "27017:27017"
       
+
   nginx:
     container_name: nginx
     image: nginx:1.15
     ports:
       - "8080:8080"
     depends_on:
-#      - web
+##      - web
       - usuarios
       - autoescuelas
-#      - alumnos
+##      - alumnos
     volumes:
       - ./web/dist:/srv/www/static
       - ./default.conf:/etc/nginx/conf.d/default.conf

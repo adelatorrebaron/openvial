@@ -20,19 +20,6 @@
             De cualquier forma, deberías de <router-link to="/"><span>volver a la página Principal</span></router-link>  
             o intentarlo de otra forma.
           </p>
-          
-          <!-- 
-          <form class="search-form">
-            <div class="input-group">
-              <input type="text" name="search" class="form-control" placeholder="Search">
-
-              <div class="input-group-btn">
-                <button type="submit" name="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </div>
-            </div> 
-          </form>
-          -->
         </div>
         <!-- /.error-content -->
       </div>

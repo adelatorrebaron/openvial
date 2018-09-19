@@ -22,7 +22,7 @@ export default {
     //...mapGetters({ currentUser: 'currentUser' })
   },
   created () {
-
+    
   },
   updated () {
 

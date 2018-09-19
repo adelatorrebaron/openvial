@@ -9,6 +9,7 @@
         </li>
       </ol>
     </section>
+    {{ autoescuela }}
   </div>
 </template>
 
@@ -24,15 +25,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ currentUser: 'currentUser'})
+    ...mapGetters({ currentUser: 'currentUser'}),
+//    ...mapGetters( { currentAutoescuela: 'currentAutoescuela'} )
   },
   created () {
+//    this.$store.dispatch('loadAutoescuela', this.currentUser)
     this.checkAutoescuelaExiste()
   },
   updated () {
+//    this.$store.dispatch('loadAutoescuela', this.currentUser)
     this.checkAutoescuelaExiste()
   },
   methods: {
+    
     checkAutoescuelaExiste () {
       //console.log(this.currentUser)
       this.$http.get('/autoescuelas/?usuarioId=' + this.currentUser.id)
