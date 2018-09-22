@@ -87,6 +87,7 @@ export default {
       
       // Muestro el panel lateral al hacer login/registro
       this.toggleBodyClass('removeClass', 'sidebar-collapse');
+      
       //this.toggleBodyClass('addClass', 'sidebar-mini');
 
       this.$router.replace(this.$route.query.redirect || '/dashboard')

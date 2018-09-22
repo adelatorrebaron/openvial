@@ -4,7 +4,7 @@
     <template>
       <Header></Header>
     </template>
-    <template v-if="currentUser">
+    <template>
       <Sidebar></Sidebar>
     </template>
     <div class="wrapper-black-color">

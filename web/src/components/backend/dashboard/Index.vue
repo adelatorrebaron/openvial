@@ -2,7 +2,7 @@
   <div class="dashboard">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1 v-if="currentAutoescuela">{{ msg }}</h1>
+      <h1 v-if="existAutoescuela">{{ msg }}</h1>
       <ol class="breadcrumb">
         <li>
           <router-link to="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</router-link>
@@ -20,8 +20,7 @@ export default {
   name: 'dashboard',
   data () {
     return {
-      msg: 'Dashboard',
-//      autoescuela: ''
+      msg: 'Dashboard'
     }
   },
   computed: {
@@ -36,7 +35,7 @@ export default {
     //this.checkAutoescuelaExiste()
   },
   updated () {
-    this.cargarDatosAutoescuela()
+    //this.cargarDatosAutoescuela()
     //this.$store.dispatch('loadAutoescuela', this.currentUser)
     //this.checkAutoescuelaExiste()
   },

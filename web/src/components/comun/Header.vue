@@ -75,8 +75,9 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   computed: {
-	...mapGetters({ currentUser: 'currentUser',
-	isUserLogged: 'isUserLogged' })
+	...mapGetters({ currentUser: 'currentUser' }),
+	...mapGetters({ isUserLogged: 'isUserLogged' }),
+	...mapGetters({ existAutoescuela: 'existAutoescuela' })
   }
 }
 </script>
