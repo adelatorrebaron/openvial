@@ -5,6 +5,10 @@ const SET_AUTOESCUELA = (state, autoescuela) => {
       state.autoescuela = autoescuela
 }
 
+const UNSET_AUTOESCUELA = (state) => {
+      state.autoescuela = null
+}
+
 /*
 const LOGOUT = (state) => {
       state.user = null
@@ -12,6 +16,7 @@ const LOGOUT = (state) => {
 */
 
 export default {
-      SET_AUTOESCUELA
+      SET_AUTOESCUELA,
+      UNSET_AUTOESCUELA
 
 }

@@ -247,7 +247,7 @@ export default {
   name: 'autoescuela',
   data () {
     return {
-      autoescuela: {
+      autoescuela1: {
         _id: '',
         usuario_id: '',
         denominacion: '',
@@ -287,25 +287,28 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
+    ...mapGetters({ currentUser: 'currentUser' }),
+    ...mapGetters({ autoescuela: 'currentAutoescuela' })
   },
   created () {
-    this.cargarDatosAutoescuela()
+    
   },
   updated () {
   },
   methods: {
+    /*
     cargarDatosAutoescuela() {
       console.log(this.currentUser.id);
-      this.$http.get('/autoescuelas/?usuarioId=' + this.currentUser.id)
-        .then(request => {
-          this.autoescuela = request.data.autoescuelas[0]
-          console.log(this.autoescuela)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
+      this.$store.dispatch('loadAutoescuela', this.currentUser)
+//      this.$http.get('/autoescuelas/?usuarioId=' + this.currentUser.id)
+//        .then(request => {
+//          this.autoescuela = request.data.autoescuelas[0]
+//          console.log(this.autoescuela)
+//        })
+//        .catch(err => {
+//          console.log(err)
+//        })
+    }*/
   }
 }
 </script>

@@ -6,6 +6,7 @@ export default {
   created () {
     delete localStorage.token
     this.$store.dispatch('logout')
+    this.$store.dispatch('unloadAutoescuela') //Al desloguearnos quitamos la autoescuela por defecto
     
     // Oculto el panel lateral al hacer login/registro
     this.toggleBodyClass('addClass', 'sidebar-collapse');

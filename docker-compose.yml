@@ -65,7 +65,8 @@ services:
     image: mongo:3.7
     command: mongod --smallfiles
     volumes:
-      - /home/alejandro/Documentos/dockerVolumes/databases/mongo/v3.7:/data/db
+#      - /home/alejandro/Documentos/dockerVolumes/databases/mongo/v3.7:/data/db
+      - ../databases/mongo/v3.7:/data/db
     ports:
       - "27017:27017"
       
@@ -75,6 +76,7 @@ services:
     image: nginx:1.15
     ports:
       - "8080:8080"
+      #- "8080:8080"
     depends_on:
 ##      - web
       - usuarios
