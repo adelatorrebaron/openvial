@@ -4,7 +4,7 @@ const currentAutoescuela = (state) => {
 }
 
 const existAutoescuela = (state) => {
-    if (state.autoescuela === null)
+    if (state.autoescuela === null || typeof state.autoescuela == "undefined")
         return false;
     else
         return true;

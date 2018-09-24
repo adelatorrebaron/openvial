@@ -20,49 +20,49 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/autoescuela">
+				<router-link to="/autoescuela" v-if="existAutoescuela">
 					<i class="fa fa-building"></i>
 					<span>Autoescuela</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/profesores">
+				<router-link to="/profesores" v-if="existAutoescuela">
 					<i class="fa fa-address-card"></i>
 					<span>Profesores</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/cursos">
+				<router-link to="/cursos" v-if="existAutoescuela">
 					<i class="fa fa-calendar"></i>
 					<span>Cursos</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/alumnos">
+				<router-link to="/alumnos" v-if="existAutoescuela">
 					<i class="fa fa-users"></i>
 					<span>Alumnos</span>
 				</router-link>
 			</li>		
 			<li>
-				<router-link to="/pagos">
+				<router-link to="/pagos" v-if="existAutoescuela">
 					<i class="fa fa-calculator"></i>
 					<span>Pagos</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/vehiculos">
+				<router-link to="/vehiculos" v-if="existAutoescuela">
 					<i class="fa fa-car"></i>
 					<span>Vehículos</span>
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/clases">
+				<router-link to="/clases" v-if="existAutoescuela">
 					<i class="fa fa-calendar-check-o"></i>
 					<span>Clases</span>
 				</router-link>
 			</li>
 
-			<li class="treeview">
+			<li class="treeview" v-if="existAutoescuela">
           		<a href="#">
             		<i class="fa fa-files-o"></i>
 					<span>Informes</span>
@@ -124,9 +124,10 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Header',
+  name: 'Sidebar',
   computed: {
 	...mapGetters({ currentUser: 'currentUser'}),
+	...mapGetters( { existAutoescuela: 'existAutoescuela'} )
   }
 }
 </script>

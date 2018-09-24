@@ -24,6 +24,13 @@ const loadAutoescuela = ( {commit}, currentUser ) => {
  */
 }
 
+const saveAutoescuela = ({commit}, autoescuela) => {
+    return autoescuelasApi.saveAutoescuela(autoescuela)
+        .then(response => {
+            console.log(response.data)
+        })
+}
+
 const unloadAutoescuela = ( context ) => {
     context.commit('UNSET_AUTOESCUELA')
 }
@@ -32,5 +39,6 @@ const unloadAutoescuela = ( context ) => {
 
 export default {
     loadAutoescuela,
-    unloadAutoescuela
+    unloadAutoescuela,
+    saveAutoescuela
 }

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from '../store'
 
 
+
 import Inicio from '@/components/frontend/Inicio'
 
 import UsuarioRegister from '@/components/comun/usuario/Register'
