@@ -15,7 +15,6 @@ import NotFound404 from '@/components/comun/errors/NotFound404'
 
 
 import DashboardIndex from '@/components/backend/dashboard/Index'
-import DashboardBienvenida from '@/components/backend/dashboard/Bienvenida'
 
 import AutoescuelaIndex from '@/components/backend/autoescuela/Index'
 
@@ -104,12 +103,6 @@ export default new Router({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/bienvenida',
-      name: 'DashboardBienvenida',
-      component: DashboardBienvenida,
-      beforeEnter: ifAuthenticated
-    },
-    {
       path: '/autoescuela',
       name: 'AutoescuelaIndex',
       component: AutoescuelaIndex,
@@ -195,6 +188,7 @@ export default new Router({
     },
     {
       path: '*',
-      component: NotFound404 }
+      component: NotFound404
+    }
   ]
 })

@@ -27,7 +27,9 @@ const loadAutoescuela = ( {commit}, currentUser ) => {
 const saveAutoescuela = ({commit}, autoescuela) => {
     return autoescuelasApi.saveAutoescuela(autoescuela)
         .then(response => {
-            console.log(response.data)
+            //commit('SET_AUTOESCUELA', autoescuela)
+            console.log(response.data.registro_creado)
+            commit('SET_AUTOESCUELA', response.data.registro_creado)
         })
 }
 
