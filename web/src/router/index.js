@@ -14,7 +14,7 @@ import UsuarioProfile from '@/components/comun/usuario/Profile'
 import NotFound404 from '@/components/comun/errors/NotFound404'
 
 
-import DashboardIndex from '@/components/backend/dashboard/Index'
+import DashboardIndex from '@/views/backend/dashboard/Index'
 
 import AutoescuelaIndex from '@/components/backend/autoescuela/Index'
 
