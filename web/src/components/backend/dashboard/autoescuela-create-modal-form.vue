@@ -1,345 +1,285 @@
 <template> 
-    <div v-if="show">
-        <transition name="modal">
-            <div class="modal-mask">
-                <div class="modal-wrapper">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" @click="cerrar()">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">{{ titulo }}</h4>
-                            </div>
-                            <div class="modal-body">
-                              <!-- INFORMACION GENERAL -->
-                              <div class="box box-solid">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Información general</h3>
-                                </div>
-                                <div class="box-body">
-                                  <div class="row">
-                                    <div class="col-md-12">
-                                      <div class="form-group">
-                                        <label>Denominación:</label>
-                                        <input v-model="autoescuela.denominacion" type="text" class="form-control" placeholder="Denominación">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-md-3">
-                                      <div class="form-group">
-                                        <label>Nº Provincial:</label>
-                                        <input v-model="autoescuela.numero_provincial" type="text" class="form-control" placeholder="Nº Provincial">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="form-group">
-                                        <label>Sección:</label>
-                                        <input v-model="autoescuela.seccion" type="text" class="form-control" placeholder="Sección">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="form-group">
-                                        <label>Dígito de control:</label>
-                                        <input v-model="autoescuela.digito_control" type="text" class="form-control" placeholder="Dígito de control">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="form-group">
-                                        <label>Nº Secuencial:</label>
-                                        <input v-model="autoescuela.numero_secuencial" type="text" class="form-control" placeholder="Nº Secuencial">
-                                      </div>
-                                    </div>                                    
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- DIRECCION -->
-                              <div class="box box-solid">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Dirección</h3>
-                                </div>
-                                <div class="box-body">
-                                  <div class="row">
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Tipo de vía:</label>
-                                        <input v-model="autoescuela.direccion.via.tipo" type="text" class="form-control" placeholder="Tipo de vía">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                      <div class="form-group">
-                                        <label>Nombre:</label>
-                                        <input v-model="autoescuela.direccion.via.nombre" type="text" class="form-control" placeholder="Nombre">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Número:</label>
-                                        <input v-model="autoescuela.direccion.via.numero" type="text" class="form-control" placeholder="Numero">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">        
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Bloque:</label>
-                                        <input v-model="autoescuela.direccion.via.bloque" type="text" class="form-control" placeholder="Bloque">
-                                      </div>
-                                    </div>        
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Portal:</label>
-                                        <input v-model="autoescuela.direccion.via.portal" type="text" class="form-control" placeholder="Portal">
-                                      </div>
-                                    </div> 
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Escalera:</label>
-                                        <input v-model="autoescuela.direccion.via.escalera" type="text" class="form-control" placeholder="Escalera">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Planta:</label>
-                                        <input v-model="autoescuela.direccion.via.planta" type="text" class="form-control" placeholder="Planta">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Puerta:</label>
-                                        <input v-model="autoescuela.direccion.via.puerta" type="text" class="form-control" placeholder="Puerta">
-                                      </div>
-                                    </div>            
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Kilómetro:</label>
-                                        <input v-model="autoescuela.direccion.via.kilometro" type="text" class="form-control" placeholder="Kilómetro">
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                  <div class="row">        
-                                    <div class="col-md-3">
-                                      <div class="form-group">
-                                        <label>Código postal:</label>
-                                        <input v-model="autoescuela.direccion.codigo_postal" type="text" class="form-control" placeholder="Código postal">
-                                      </div>
-                                    </div>        
-                                    <div class="col-md-3">
-                                      <div class="form-group">
-                                        <label>Población:</label>
-                                        <input v-model="autoescuela.direccion.poblacion" type="text" class="form-control" placeholder="Población">
-                                      </div>
-                                    </div> 
-                                    <div class="col-md-3">
-                                      <div class="form-group">
-                                        <label>Provincia:</label>
-                                        <input v-model="autoescuela.direccion.provincia" type="text" class="form-control" placeholder="Provincia">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                      <div class="form-group">
-                                        <label>País:</label>
-                                        <input v-model="autoescuela.direccion.pais" type="text" class="form-control" placeholder="Pais">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- CONTACTO -->
-                              <div class="box box-solid">
-                                <div class="box-header with-border">
-                                  <h3 class="box-title">Contacto</h3>
-                                </div>
-                                <div class="box-body">
-                                  <div class="row">
-                                    <div class="col-md-6">
-                                      <div class="form-group">
-                                        <label>Correo electrónico:</label>
-                                        <input v-model="autoescuela.contacto.email" type="text" class="form-control" placeholder="Correo electrónico">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Teléfono fijo:</label>
-                                        <input v-model="autoescuela.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Teléfono móvil:</label>
-                                        <input v-model="autoescuela.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <div class="form-group">
-                                        <label>Whatsapp:</label>
-                                        <input v-model="autoescuela.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-md-4">
-                                      <div class="form-group">
-                                        <label>Sitio web:</label>
-                                        <input v-model="autoescuela.contacto.website" type="text" class="form-control" placeholder="Sitio web">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                      <div class="form-group">
-                                        <label>Facebook:</label>
-                                        <input v-model="autoescuela.contacto.facebook" type="text" class="form-control" placeholder="Facebook">
-                                      </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                      <div class="form-group">
-                                        <label>Twitter:</label>
-                                        <input v-model="autoescuela.contacto.twitter" type="text" class="form-control" placeholder="Twitter">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" @click="cancelar()">Cancelar</button>
-                                <button class="btn btn-primary" @click="aceptar()">Aceptar</button>
-                            </div>
-                        </div>
-                    </div>
+  <div>
+    <modal-form-helper
+      v-bind:show="show"          
+      v-bind:title="title"
+      v-on:onClosed="onClosed()"
+    >
+      <div slot="modal-header"></div>
+      <div slot="modal-body">
+        <!-- INFORMACION GENERAL -->
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title">Información general</h3>
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Denominación:</label>
+                  <input v-model="autoescuela.denominacion" type="text" class="form-control" placeholder="Denominación">
                 </div>
+              </div>
             </div>
-        </transition>
-    </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Nº Provincial:</label>
+                  <input v-model="autoescuela.numero_provincial" type="text" class="form-control" placeholder="Nº Provincial">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Sección:</label>
+                  <input v-model="autoescuela.seccion" type="text" class="form-control" placeholder="Sección">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Dígito de control:</label>
+                  <input v-model="autoescuela.digito_control" type="text" class="form-control" placeholder="Dígito de control">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Nº Secuencial:</label>
+                  <input v-model="autoescuela.numero_secuencial" type="text" class="form-control" placeholder="Nº Secuencial">
+                </div>
+              </div>                                    
+            </div>
+          </div>
+        </div>
+        <!-- DIRECCION -->
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title">Dirección</h3>
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Tipo de vía:</label>
+                  <input v-model="autoescuela.direccion.via.tipo" type="text" class="form-control" placeholder="Tipo de vía">
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Nombre:</label>
+                  <input v-model="autoescuela.direccion.via.nombre" type="text" class="form-control" placeholder="Nombre">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Número:</label>
+                  <input v-model="autoescuela.direccion.via.numero" type="text" class="form-control" placeholder="Numero">
+                </div>
+              </div>
+            </div>
+            <div class="row">        
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Bloque:</label>
+                  <input v-model="autoescuela.direccion.via.bloque" type="text" class="form-control" placeholder="Bloque">
+                </div>
+              </div>        
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Portal:</label>
+                  <input v-model="autoescuela.direccion.via.portal" type="text" class="form-control" placeholder="Portal">
+                </div>
+              </div> 
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Escalera:</label>
+                  <input v-model="autoescuela.direccion.via.escalera" type="text" class="form-control" placeholder="Escalera">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Planta:</label>
+                  <input v-model="autoescuela.direccion.via.planta" type="text" class="form-control" placeholder="Planta">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Puerta:</label>
+                  <input v-model="autoescuela.direccion.via.puerta" type="text" class="form-control" placeholder="Puerta">
+                </div>
+              </div>            
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Kilómetro:</label>
+                  <input v-model="autoescuela.direccion.via.kilometro" type="text" class="form-control" placeholder="Kilómetro">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">        
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Código postal:</label>
+                  <input v-model="autoescuela.direccion.codigo_postal" type="text" class="form-control" placeholder="Código postal">
+                </div>
+              </div>        
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Población:</label>
+                  <input v-model="autoescuela.direccion.poblacion" type="text" class="form-control" placeholder="Población">
+                </div>
+              </div> 
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Provincia:</label>
+                  <input v-model="autoescuela.direccion.provincia" type="text" class="form-control" placeholder="Provincia">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>País:</label>
+                  <input v-model="autoescuela.direccion.pais" type="text" class="form-control" placeholder="Pais">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- CONTACTO -->
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title">Contacto</h3>
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Correo electrónico:</label>
+                  <input v-model="autoescuela.contacto.email" type="text" class="form-control" placeholder="Correo electrónico">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Teléfono fijo:</label>
+                  <input v-model="autoescuela.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Teléfono móvil:</label>
+                  <input v-model="autoescuela.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>Whatsapp:</label>
+                  <input v-model="autoescuela.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Sitio web:</label>
+                  <input v-model="autoescuela.contacto.website" type="text" class="form-control" placeholder="Sitio web">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Facebook:</label>
+                  <input v-model="autoescuela.contacto.facebook" type="text" class="form-control" placeholder="Facebook">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Twitter:</label>
+                  <input v-model="autoescuela.contacto.twitter" type="text" class="form-control" placeholder="Twitter">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div slot="modal-footer">
+        <button class="btn btn-default" @click="onCanceled()">Cancelar</button>
+        <button class="btn btn-primary" @click="onAccepted()">Aceptar</button>
+      </div>
+    </modal-form-helper>
+  </div>
 </template>
 
 
 <script>
+import modalFormLgHelper from '@/components/helpers/modal-form-lg-helper'
+
 export default {
-    props: [
-      'show'
-      ],
-    
-    methods: {
-      cerrar: function () {
-          this.$emit('cerrar');
-      },
-      cancelar: function () {
-          // Some save logic goes here...
+  components: {
+    'modal-form-helper': modalFormLgHelper
+  },
 
-          this.cerrar()
-      },
-      aceptar: function () {
-          // Some save logic goes here...
-          this.$store.dispatch('saveAutoescuela', this.autoescuela)
+  props: [
+    'show'
+  ],
 
-          this.cerrar()
-      }
-    },
-    
-    data () {
-      return {
-        titulo: 'Información del Centro de Formación Vial',
-        autoescuela: {
-          usuario_id: '5ba4d317bf45010012952d5f',
-          denominacion: 'Autoescuela Odisea 18',
-          numero_provincial: 'GR03918',
-          seccion: '18',
-          digito_control: '18',
-          numero_secuencial: '18',
-          direccion: {
-            via: {
-              tipo: 'Avenida',
-              nombre: 'Los solecillos',
-              numero: '18',
-              bloque: 'Los Almendros',
-              portal: '18',
-              escalera: '18',
-              planta: '18ª',
-              puerta: '18C',
-              kilometro: '18'
-            },
-            codigo_postal: '18180',
-            poblacion: 'Alfacar',
-            provincia: 'Granada',
-            pais: 'España'
+  data () {
+    return {
+      title: 'Información del Centro de Formación Vial',
+      autoescuela: {
+        usuario_id: '5ba4d317bf45010012952d5f',
+        denominacion: 'Autoescuela Odisea 18',
+        numero_provincial: 'GR03918',
+        seccion: '18',
+        digito_control: '18',
+        numero_secuencial: '18',
+        direccion: {
+          via: {
+            tipo: 'Avenida',
+            nombre: 'Los solecillos',
+            numero: '18',
+            bloque: 'Los Almendros',
+            portal: '18',
+            escalera: '18',
+            planta: '18ª',
+            puerta: '18C',
+            kilometro: '18'
           },
-          contacto: {
-            telefono_fijo: '958540562',
-            telefono_movil: '636244362',
-            whatsapp: '636244362',
-            email: 'alejandrodelatorrebaron18@gmail.com',
-            website: 'www.autoescuelaodisea.com',
-            facebook: 'mifaceboo.com',
-            twitter: 'mituiter.com'
-          },
-          estado: true
+          codigo_postal: '18180',
+          poblacion: 'Alfacar',
+          provincia: 'Granada',
+          pais: 'España'
         },
-      }
+        contacto: {
+          telefono_fijo: '958540562',
+          telefono_movil: '636244362',
+          whatsapp: '636244362',
+          email: 'alejandrodelatorrebaron18@gmail.com',
+          website: 'www.autoescuelaodisea.com',
+          facebook: 'mifaceboo.com',
+          twitter: 'mituiter.com'
+        },
+        estado: true
+      },
     }
+  },
+
+  methods: {
+    onClosed: function () {
+        this.$emit('onClosed');
+    },
+    onCanceled: function () {
+        // Some save logic goes here...
+
+        this.onClosed()
+    },
+    onAccepted: function () {
+        // Paso al Store los datos del formulario para que los salve en el API
+        this.$store.dispatch('saveAutoescuela', this.autoescuela)
+
+        this.onClosed()
+    }
+  }
+
 }
 </script>
 
 
 <style scoped>
-
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-  display: table;
-  transition: opacity .3s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-  -webkit-transition: opacity 500ms ease-in;
-  -moz-transition: opacity 500ms ease-in;
-  transition: opacity 500ms ease-in;
-  overflow-y: hidden;
-}
-
-.modal-content
-{
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  background-color: transparent;
-}
-
-.modal-header
-{
-  background-color: #337ab7;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  -webkit-border-top-left-radius: 6px;
-  -webkit-border-top-right-radius: 6px;
-  -moz-border-radius-topleft: 6px;
-  -moz-border-radius-topright: 6px;
-}
-
-.modal-body
-{
-  max-height: calc(100vh - 210px);
-  overflow-y: auto;
-  background-color: #FFFFFF;
-}
-
-.modal-footer
-{
-  background-color: #d9edf7;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  -webkit-border-bottom-left-radius: 6px;
-  -webkit-border-bottom-right-radius: 6px;
-  -moz-border-radius-bottomleft: 6px;
-  -moz-border-radius-bottomright: 6px;
-}
 
 </style>
