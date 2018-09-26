@@ -30,6 +30,19 @@ exports.usuarios_registro =  (req, res, next) => {
                             username: req.body.username,
                             email: req.body.email,
                             password: hash,
+                            perfil: {
+                                contacto: {
+                                    telefono_fijo: req.body.perfil.contacto.telefono_fijo,
+                                    telefono_movil: req.body.perfil.contacto.telefono_movil,
+                                    whatsapp: req.body.perfil.contacto.whatsapp,
+                                    website: req.body.perfil.contacto.website,
+                                    facebook: req.body.perfil.contacto.facebook,
+                                    twitter: req.body.perfil.contacto.twitter
+                                },
+                                educacion: req.body.perfil.educacion,
+                                notas: req.body.perfil.notas,
+                                avatar: req.body.perfil.avatar
+                            },
                             estado: req.body.estado
                         });
                         usuario.save()
@@ -41,6 +54,19 @@ exports.usuarios_registro =  (req, res, next) => {
                                         _id: result._id,
                                         username: result.username,
                                         email: result.email,
+                                        perfil: {
+                                            contacto: {
+                                                telefono_fijo: result.perfil.contacto.telefono_fijo,
+                                                telefono_movil: result.perfil.contacto.telefono_movil,
+                                                whatsapp: result.perfil.contacto.whatsapp,
+                                                website: result.perfil.contacto.website,
+                                                facebook: result.perfil.contacto.facebook,
+                                                twitter: result.perfil.contacto.twitter
+                                            },
+                                            educacion: result.perfil.educacion,
+                                            notas: result.perfil.notas,
+                                            avatar: result.perfil.avatar 
+                                        },
                                         fecha_creacion: result.fecha_creacion,
                                         estado: result.estado,                    
                                         request: {
@@ -129,6 +155,19 @@ exports.usuarios_get_all =  (req, res, next) => {
                         username: doc.username,
                         email: doc.email,
                         password: doc.password,
+                        perfil: {
+                            contacto: {
+                                telefono_fijo: doc.perfil.contacto.telefono_fijo,
+                                telefono_movil: doc.perfil.contacto.telefono_movil,
+                                whatsapp: doc.perfil.contacto.whatsapp,
+                                website: doc.perfil.contacto.website,
+                                facebook: doc.perfil.contacto.facebook,
+                                twitter: doc.perfil.contacto.twitter
+                            },
+                            educacion: doc.perfil.educacion,
+                            notas: doc.perfil.notas,
+                            avatar: doc.perfil.avatar
+                        },
                         fecha_creacion: doc.fecha_creacion,
                         estado: doc.estado,
                         request: {
@@ -160,6 +199,19 @@ exports.usuarios_get_by_id = (req, res, next) => {
                     username: doc.username,
                     email: doc.email,
                     password: doc.password,
+                    perfil: {
+                        contacto: {
+                            telefono_fijo: doc.perfil.contacto.telefono_fijo,
+                            telefono_movil: doc.perfil.contacto.telefono_movil,
+                            whatsapp: doc.perfil.contacto.whatsapp,
+                            website: doc.perfil.contacto.website,
+                            facebook: doc.perfil.contacto.facebook,
+                            twitter: doc.perfil.contacto.twitter
+                        },
+                        educacion: doc.perfil.educacion,
+                        notas: doc.perfil.notas,
+                        avatar: doc.perfil.avatar
+                    },
                     fecha_creacion: doc.fecha_creacion,
                     estado: doc.estado,
                     request: {
@@ -181,8 +233,14 @@ exports.usuarios_get_by_id = (req, res, next) => {
         });
 }
 
-
 /*
+El formato que se ha de mandar a esta funcion es de la siguiente forma,
+se ha de tener en cuenta que se manda un array:
+[
+	{"propName": "perfil.contacto.telefono_fijo", "value": "000123456789"},
+	{"propName": "perfil.educacion", "value": "A ver que sale de todo esto jajaja esto si que chanela"}
+]
+*/
 exports.usuarios_update = (req, res, next) => {
     const id = req.params.usuarioId;
     const updatedOps = {};
@@ -224,8 +282,10 @@ exports.usuarios_update = (req, res, next) => {
                 error: err
             });
         });
+
+        
 }
-*/
+
 
 
 
