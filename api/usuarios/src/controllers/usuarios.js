@@ -32,16 +32,16 @@ exports.usuarios_registro =  (req, res, next) => {
                             password: hash,
                             perfil: {
                                 contacto: {
-                                    telefono_fijo: req.body.perfil.contacto.telefono_fijo,
-                                    telefono_movil: req.body.perfil.contacto.telefono_movil,
-                                    whatsapp: req.body.perfil.contacto.whatsapp,
-                                    website: req.body.perfil.contacto.website,
-                                    facebook: req.body.perfil.contacto.facebook,
-                                    twitter: req.body.perfil.contacto.twitter
+                                    telefono_fijo: '',
+                                    telefono_movil: '',
+                                    whatsapp: '',
+                                    website: '',
+                                    facebook: '',
+                                    twitter: ''
                                 },
-                                educacion: req.body.perfil.educacion,
-                                notas: req.body.perfil.notas,
-                                avatar: req.body.perfil.avatar
+                                educacion: '',
+                                notas: '',
+                                avatar: ''
                             },
                             estado: req.body.estado
                         });
