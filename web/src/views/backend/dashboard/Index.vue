@@ -70,7 +70,8 @@ export default {
     ...mapGetters({ existAutoescuela: 'existAutoescuela'})
   },
 
-  created () {
+    created () {
+    console.log('llamado el metodo created del dashboard')
     this.cargarDatosAutoescuela()
   },
 
@@ -80,6 +81,8 @@ export default {
 
   methods: {
     cargarDatosAutoescuela() {
+      console.log(this.currentUser)
+      console.log(this.existAutoescuela)
       if (!this.existAutoescuela)
         this.$store.dispatch('loadAutoescuela', this.currentUser)
     },

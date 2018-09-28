@@ -8,7 +8,7 @@ const config = require('./src/config');
 mongoose.connect(config.DB_URI, { useNewUrlParser: true })
   .then(() => {
     app.listen(config.PORT, () => {
-        console.log('Microservicio autoescuelas: iniciado correctamente');
+      console.log(`Microservicio Autoescuelas: iniciado correctamente en el puerto ${config.PORT}`);
     })
   })
   .catch((err) => {

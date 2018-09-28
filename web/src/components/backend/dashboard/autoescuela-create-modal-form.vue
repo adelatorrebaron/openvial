@@ -208,6 +208,7 @@
 
 <script>
 import modalFormLgHelper from '@/components/helpers/modal-form-lg-helper'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -217,6 +218,10 @@ export default {
   props: [
     'show'
   ],
+
+  computed: {
+      ...mapGetters({ currentUser: 'currentUser'})
+  },
 
   data () {
     return {
@@ -269,6 +274,11 @@ export default {
         this.onClosed()
     },
     onAccepted: function () {
+        // Debido a que el usuario está en el store y no se encuentra en el formulario
+        // Lo leemos del Store y se lo asignamos a la academia para que cuando se cree
+        // se asocie a este usuario
+        this.autoescuela.usuario_id = this.currentUser.id
+
         // Paso al Store los datos del formulario para que los salve en el API
         this.$store.dispatch('saveAutoescuela', this.autoescuela)
 
