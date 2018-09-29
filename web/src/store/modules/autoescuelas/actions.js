@@ -1,9 +1,9 @@
 
 import autoescuelasApi from '@/services/api/autoescuelas.js'
 
-const loadAutoescuela = ( {commit}, currentUserId ) => {
 
-    //console.log(`Id del usuario a leer autoescuela por usuario: ${currentUserId}`)
+const loadAutoescuela = ( {commit}, currentUserId ) => {
+    // Llamamos al API para obtener la autoescuela por el Id del usuario
     return autoescuelasApi.getAutoescuelaByUserId(currentUserId)
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
@@ -19,21 +19,18 @@ const loadAutoescuela = ( {commit}, currentUserId ) => {
         })
         .catch(err => {
             console.log(err)
-            //this.loginFailed(err)
         })
 }
 
 const saveAutoescuela = ({commit}, autoescuela) => {
-    
     // Llamamos al API para enviar los datos y salvarlos
     return autoescuelasApi.saveAutoescuela(autoescuela)
         .then(response => {
-            //commit('SET_AUTOESCUELA', autoescuela)
-            console.log(response.data.registro_creado)
-            commit('SET_AUTOESCUELA', response.data.registro_creado)
+            // Asignamos los datos de la Autoescuela al Store
+            commit('SET_AUTOESCUELA', response.result.autoescuela)
         })
         .catch(err => {
-            //this.loginFailed(err)
+            console.log(err)
         })
 }
 

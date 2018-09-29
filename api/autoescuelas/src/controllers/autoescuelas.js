@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const Autoescuela = require('../models/autoescuela');
 
 
+//
+// Permite obtener todas las autoescuelas
+//
 exports.autoescuelas_get_all =  (req, res, next) => {
     Autoescuela.find()
         .exec()
@@ -70,7 +73,9 @@ exports.autoescuelas_get_all =  (req, res, next) => {
 }
    
 
-
+//
+// Permite crear una Autoescuela asociandola al Id del usuario
+//
 exports.autoescuelas_create = (req, res, next) => {
     const autoescuela = new Autoescuela({
         _id: new mongoose.Types.ObjectId(),
@@ -111,61 +116,71 @@ exports.autoescuelas_create = (req, res, next) => {
     autoescuela.save()
         .then(result => {
             res.status(201).json({
-                mensaje: 'Registro creado correctamente',
-                registro_creado: {
-                    _id: result._id,
-                    usuario_id: result.usuario_id,
-                    denominacion: result.denominacion,
-                    numero_provincial: result.numero_provincial,
-                    seccion: result.seccion,
-                    digito_control: result.digito_control,
-                    numero_secuencial: result.numero_secuencial,
-                    direccion: {
-                        via: {
-                            tipo: result.direccion.via.tipo,
-                            nombre: result.direccion.via.nombre,
-                            numero: result.direccion.via.numero,
-                            bloque: result.direccion.via.bloque,
-                            portal: result.direccion.via.portal,
-                            escalera: result.direccion.via.escalera,
-                            planta: result.direccion.via.planta,
-                            puerta: result.direccion.via.puerta,
-                            kilometro: result.direccion.via.kilometro
+                status: 'created',
+                code: 201,
+                messages: [],
+                result: {
+                    mensaje: 'Registro creado correctamente',
+                    autoescuela: {
+                        _id: result._id,
+                        usuario_id: result.usuario_id,
+                        denominacion: result.denominacion,
+                        numero_provincial: result.numero_provincial,
+                        seccion: result.seccion,
+                        digito_control: result.digito_control,
+                        numero_secuencial: result.numero_secuencial,
+                        direccion: {
+                            via: {
+                                tipo: result.direccion.via.tipo,
+                                nombre: result.direccion.via.nombre,
+                                numero: result.direccion.via.numero,
+                                bloque: result.direccion.via.bloque,
+                                portal: result.direccion.via.portal,
+                                escalera: result.direccion.via.escalera,
+                                planta: result.direccion.via.planta,
+                                puerta: result.direccion.via.puerta,
+                                kilometro: result.direccion.via.kilometro
+                            },
+                            codigo_postal: result.direccion.codigo_postal,
+                            poblacion: result.direccion.poblacion,
+                            provincia: result.direccion.provincia,
+                            pais: result.direccion.pais
                         },
-                        codigo_postal: result.direccion.codigo_postal,
-                        poblacion: result.direccion.poblacion,
-                        provincia: result.direccion.provincia,
-                        pais: result.direccion.pais
-                    },
-                    contacto: {
-                        telefono_fijo: result.contacto.telefono_fijo,
-                        telefono_movil: result.contacto.telefono_movil,
-                        whatsapp: result.contacto.whatsapp,
-                        email: result.contacto.email,
-                        website: result.contacto.website,
-                        facebook: result.contacto.facebook,
-                        twitter: result.contacto.twitter
-                    },
-                    fecha_creacion: result.fecha_creacion,
-                    estado: result.estado,                    
-                    request: {
-                        descripcion: 'Obtener registro creado',
-                        type: 'GET',
-                        url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + result._id
+                        contacto: {
+                            telefono_fijo: result.contacto.telefono_fijo,
+                            telefono_movil: result.contacto.telefono_movil,
+                            whatsapp: result.contacto.whatsapp,
+                            email: result.contacto.email,
+                            website: result.contacto.website,
+                            facebook: result.contacto.facebook,
+                            twitter: result.contacto.twitter
+                        },
+                        fecha_creacion: result.fecha_creacion,
+                        estado: result.estado,                    
+                        request: {
+                            descripcion: 'Obtener registro creado',
+                            type: 'GET',
+                            url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + result._id
+                        }
                     }
                 }
             });
         })
         .catch(err => {
             res.status(500).json({
-                error: err
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
             })
         });
 }
 
 
-
-exports.autoescuelas_get_by_usuario_id = (req, res, next) => {
+//
+// Permite obtener una Autoescuela por el Id del Usuario
+//
+exports.autoescuelas_get_by_usuarioId = (req, res, next) => {
     const usuario_id = req.params.usuarioId;
     //var usuario_id = new mongoose.Types.ObjectId(id);
     //Autoescuela.findById(id)
@@ -233,90 +248,111 @@ exports.autoescuelas_get_by_usuario_id = (req, res, next) => {
         })
         .catch(err => {
             res.status(500).json({
-                error: err
-            });
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            })
         });
 }
 
 
-
+//
+// Permite actualizar los datos de la Autoescuela
+//
 exports.autoescuelas_update = (req, res, next) => {
     const id = req.params.autoescuelaId;
     const update = req.body;
 
-    Autoescuela.update({_id: id}, update)
+    Autoescuela.updateOne({_id: id}, {$set: update})
         .exec()
         .then(result => {
             res.status(200).json({
-                mensaje: 'Registro actualizado correctamente',
-                request: {
-                    descripcion: 'Obtener registro actualizado',
-                    type: 'GET',
-                    url: req.protocol + '://' + req.headers.host + req.originalUrl
-                }
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-}
-
-
-
-exports.autoescuelas_delete = (req, res, next) => {
-    const id = req.params.autoescuelaId;
-    Autoescuela.remove({_id: id})
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                mensaje: 'Registro borrado correctamente',
-                request: {
-                    descripcion: 'Crear un nuevo registro',
-                    type: 'POST',
-                    url: req.protocol + '://' + req.headers.host + '/' + req.originalUrl.split('/')[1] + '/' + req.originalUrl.split('/')[2] +  '/' + req.originalUrl.split('/')[3],
-                    body: {
-                        denominacion: 'String',
-                        numero_provincial: 'String',
-                        seccion: 'Number',
-                        digito_control: 'Number',
-                        numero_secuencial: 'Number',
-                        direccion: {
-                            via: {
-                                tipo: 'String',
-                                nombre: 'String',
-                                numero: 'String',
-                                bloque: 'String',
-                                portal: 'String',
-                                escalera: 'String',
-                                planta: 'String',
-                                puerta: 'String',
-                                kilometro: 'String'
-                            },
-                            codigo_postal: 'String',
-                            poblacion: 'String',
-                            provincia: 'String',
-                            pais: 'String'
-                        },
-                        contacto: {
-                            telefono_fijo: 'String',
-                            telefono_movil: 'String',
-                            whatsapp: 'String',
-                            email: 'String',
-                            website: 'String',
-                            facebook: 'String',
-                            twitter: 'String'
-                        },
-                        estado: 'Boolean'
+                status: "ok",
+                code: 200,
+                messages: [],
+                result: {                
+                    mensaje: 'Registro actualizado correctamente',
+                    request: {
+                        descripcion: 'Obtener registro actualizado',
+                        type: 'GET',
+                        url: req.protocol + '://' + req.headers.host + req.originalUrl
                     }
                 }
             });
         })
         .catch(err => {
             res.status(500).json({
-                error: err
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            })
+        });
+}
+
+
+//
+// Permite eliminar una Autoescuela por el Id de la Autoescuela
+//
+exports.autoescuelas_delete = (req, res, next) => {
+    const id = req.params.autoescuelaId;
+    Autoescuela.deleteOne({_id: id})
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                status: "ok",
+                code: 200,
+                messages: [],
+                result: {
+                    request: {
+                        descripcion: 'Crear un nuevo registro',
+                        type: 'POST',
+                        url: req.protocol + '://' + req.headers.host + '/' + req.originalUrl.split('/')[1] + '/' + req.originalUrl.split('/')[2] +  '/' + req.originalUrl.split('/')[3],
+                        body: {
+                            denominacion: 'String',
+                            numero_provincial: 'String',
+                            seccion: 'Number',
+                            digito_control: 'Number',
+                            numero_secuencial: 'Number',
+                            direccion: {
+                                via: {
+                                    tipo: 'String',
+                                    nombre: 'String',
+                                    numero: 'String',
+                                    bloque: 'String',
+                                    portal: 'String',
+                                    escalera: 'String',
+                                    planta: 'String',
+                                    puerta: 'String',
+                                    kilometro: 'String'
+                                },
+                                codigo_postal: 'String',
+                                poblacion: 'String',
+                                provincia: 'String',
+                                pais: 'String'
+                            },
+                            contacto: {
+                                telefono_fijo: 'String',
+                                telefono_movil: 'String',
+                                whatsapp: 'String',
+                                email: 'String',
+                                website: 'String',
+                                facebook: 'String',
+                                twitter: 'String'
+                            },
+                            estado: 'Boolean'
+                        }
+                    }
+                }
             });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            })
         });
 }

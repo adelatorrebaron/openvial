@@ -23,7 +23,7 @@
     <autoescuela-create-form
       v-bind:show="showAutoescuelaCreateForm"
       @onClosed="showAutoescuelaCreateForm = false"
-      v-on:onClosed="onClosed('Cerrado el formulario de creación de perfil')">
+      v-on:onClosed="onClosed('Cerrado el formulario de creación de la Autoescuela')">
     </autoescuela-create-form>
 
     <!-- Formulario para crear e introducir el Perfil del usuario -->
@@ -33,12 +33,10 @@
       v-on:onClosed="onClosed('Cerrado el formulario de creación de perfil')">      
     </perfil-create-form>
 
-
   </div>
 
-
-
 </template>
+
 
 <script>
 import autoescuelaWelcomeMessage    from '@/components/backend/dashboard/autoescuela-welcome-message'
@@ -65,14 +63,11 @@ export default {
   },
 
   computed: {
-//    ...mapGetters({ currentUser: 'currentUser'}),
-//    ...mapGetters({ currentAutoescuela: 'currentAutoescuela'}),
     ...mapGetters({ isUserLogged: 'isUserLogged'}),
     ...mapGetters({ existAutoescuela: 'existAutoescuela'})
   },
 
   created () {
-    //console.log('llamado el metodo created del dashboard')
     this.cargarDatosAutoescuela()
   },
 
@@ -82,13 +77,7 @@ export default {
 
   methods: {
     cargarDatosAutoescuela() {
-      //console.log('Estoy en el método cargarDatosAutoescuela')
-      //console.log(this.currentUser)
-      //console.log(this.existAutoescuela)
-      //console.log("Estoy en el posible error de cargar la autoescuela")
-      //console.log(this.$store.state.authorization.user.id)
-
-        // Si el usuario está logeado y la autoescuela no existe la cargo
+        // Si el usuario está logeado y la autoescuela no existe la cargo la leo
         if (this.isUserLogged && !this.existAutoescuela){
           this.$store.dispatch('loadAutoescuela', this.$store.state.authorization.user.id)
         }
