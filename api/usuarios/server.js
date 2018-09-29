@@ -1,10 +1,10 @@
 
-
 const mongoose = require('mongoose');
 const app = require('./src/app');
 const config = require('./src/config');
 
-mongoose.connect(config.DB_URI, { useNewUrlParser: true })
+
+mongoose.connect(config.DB_URI, {useCreateIndex: true, useNewUrlParser: true })
   .then(() => {
     app.listen(config.PORT, () => {
       console.log(`Microservicio Usuarios: iniciado correctamente en el puerto ${config.PORT}`);
@@ -15,13 +15,3 @@ mongoose.connect(config.DB_URI, { useNewUrlParser: true })
     console.log('Error al iniciar la aplicación: ' + err.stack);
     process.exit(1);
   });
-
-/*
-app.listen(config.PORT, () => {
-  console.log('Microservicio usuarios: iniciado correctamente');
-});
-
-app.get("/", (req, res) => {
-  res.json({ msg: "Usuarios" });
-});
-*/

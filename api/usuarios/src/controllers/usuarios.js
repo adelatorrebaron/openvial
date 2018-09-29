@@ -8,23 +8,30 @@ const Usuario = require('../models/usuario');
 const config = require('../config');
 
 
-
+//
+// Permite el registro de un usuario
+//
 exports.usuarios_registro =  (req, res, next) => {
-    console.log(req.body)
     Usuario.find({email: req.body.email})
         .exec()
         .then(usuario => {
             if (usuario.length >= 1) {
                 return res.status(409).json({
-                    message: 'Correo electrónico ya existente'
+                    status: "Internal Server Error",
+                    code: 409,
+                    messages: [{error: 'Correo electrónico ya existente'}]
                 })
             } else {
                 bcrypt.hash(req.body.password,10,(err, hash) => {
                     if (err) {
                         return res.status(500).json({
-                            error: err
+                            status: "Internal Server Error",
+                            code: 500,
+                            messages: [{error: err}],
+                            result: {}
                         });
-                    } else {
+                    }
+                    else {
                         const usuario = new Usuario({
                             _id: new mongoose.Types.ObjectId(),
                             username: req.body.username,
@@ -45,12 +52,14 @@ exports.usuarios_registro =  (req, res, next) => {
                             },
                             estado: req.body.estado
                         });
-                        usuario.save()
-                            .then(result => {
-                                console.log(result);
-                                res.status(201).json({
+                        usuario.save().then(result => {
+                            res.status(201).json({
+                                status: "created",
+                                code: 201,
+                                messages: [],
+                                result: {
                                     message: 'Registro creado correctamente',
-                                    registro_creado: {
+                                    usuario: {
                                         _id: result._id,
                                         username: result.username,
                                         email: result.email,
@@ -75,41 +84,51 @@ exports.usuarios_registro =  (req, res, next) => {
                                             url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + result._id
                                         }
                                     }
-                                });
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                res.status(500).json({
-                                    error: err
-                                })
+                                }
                             });
+                        })
+                        .catch(err => {
+                            res.status(500).json({
+                                status: "Internal Server Error",
+                                code: 500,
+                                messages: [{error: err}],
+                                result: {}
+                            })
+                        });
                     }
                 });
             }
-        });
+        })
 }
 
 
-
+//
+// Permite a un usuario previamente registrado logearse y obtener el token JWT
+//
 exports.usuarios_login =  (req, res, next) => {
     Usuario.find({email: req.body.email})
         .exec()
         .then(usuario => {
-            console.log(req.body);
-
             // Sin autorización al no existir el email
             if (usuario.length < 1) {
                 return res.status(401).json({
-                    message: 'Autenticación fallida'
+                    status: "Unauthorized",
+                    code: 401,
+                    messages: [{error: 'Autenticación fallida'}],
+                    result: {}
                 });
             }
             bcrypt.compare(req.body.password, usuario[0].password,(err, result) => {
                 // Sin autorización al no coindicir la contraseña
                 if (err) {
                     return res.status(401).json({
-                        message: 'Autenticación fallida'
+                        status: "Unauthorized",
+                        code: 401,
+                        messages: [{error: 'Autenticación fallida'}],
+                        result: {}
                     });
                 }
+                // Si todo es correcto y la contraseña coincide devuelvo el token
                 if (result) {
                     const token = jwt.sign({
                         id: usuario[0]._id,
@@ -121,36 +140,108 @@ exports.usuarios_login =  (req, res, next) => {
                         {
                             expiresIn: config.JWT_EXPIRES_TIME
                         });
-                    console.log('Autenticación satisfactoria');
-                    return res.status(200).json({
-                        message: 'Autenticación satisfactoria',
-                        token: token
-                    });
+
+                        return res.status(200).json({
+                            status: "ok",
+                            code: 200,
+                            messages: [],
+                            result: {
+                                message: 'Autenticación satisfactoria',
+                                token: token
+                            }
+                        
+                        });
                 }
-                console.log('Autenticación fallida 401');
+                // Devolver error si ocurre algo no esperado
                 res.status(401).json({
-                    message: 'Autenticación fallida'
+                    status: "Unauthorized",
+                    code: 401,
+                    messages: [{error: 'Autenticación fallida'}],
+                    result: {}
                 });
             })
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({
-                error: err
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}                
             });
         });
 }
 
 
-
+//
+// Permite obtener todos los usuarios del sistema
+//
 exports.usuarios_get_all =  (req, res, next) => {
     Usuario.find()
         .exec()
         .then(docs => {
             res.status(200).json({
-                total: docs.length,
-                usuarios: docs.map(doc => {
-                    return {
+                status: "ok",
+                code: 200,
+                messages: [],
+                result: {
+                    total: docs.length,
+                    usuarios: docs.map(doc => {
+                        return {
+                            _id: doc._id,
+                            username: doc.username,
+                            email: doc.email,
+                            password: doc.password,
+                            perfil: {
+                                contacto: {
+                                    telefono_fijo: doc.perfil.contacto.telefono_fijo,
+                                    telefono_movil: doc.perfil.contacto.telefono_movil,
+                                    whatsapp: doc.perfil.contacto.whatsapp,
+                                    website: doc.perfil.contacto.website,
+                                    facebook: doc.perfil.contacto.facebook,
+                                    twitter: doc.perfil.contacto.twitter
+                                },
+                                educacion: doc.perfil.educacion,
+                                notas: doc.perfil.notas,
+                                avatar: doc.perfil.avatar
+                            },
+                            fecha_creacion: doc.fecha_creacion,
+                            estado: doc.estado,
+                            request: {
+                                descripcion: 'Obtener el registro',
+                                type: 'GET',
+                                url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + doc._id
+                            }
+                            
+                        }
+                    })
+                }
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            });
+        });
+}
+
+
+//
+// Permite obtener un usuario por su ID
+//
+exports.usuarios_get_by_usuarioId = (req, res, next) => {
+    const id = req.params.usuarioId;
+    Usuario.findById(id)
+        .exec()
+        .then(doc => {
+            if (doc){
+                res.status(200).json({
+                    status: "ok",
+                    code: 200,
+                    messages: [],
+                    result: {
                         _id: doc._id,
                         username: doc.username,
                         email: doc.email,
@@ -171,68 +262,35 @@ exports.usuarios_get_all =  (req, res, next) => {
                         fecha_creacion: doc.fecha_creacion,
                         estado: doc.estado,
                         request: {
-                            descripcion: 'Obtener el registro',
+                            descripcion: 'Obtener todos los registros',
                             type: 'GET',
-                            url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + doc._id
+                            url: req.protocol + '://' + req.headers.host + '/' + req.originalUrl.split('/')[1] + '/' + req.originalUrl.split('/')[2] + '/' + req.originalUrl.split('/')[3]
                         }
-                    }
-                })
-            })
-        })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            });
-        });
-}
-
-
-
-exports.usuarios_get_by_id = (req, res, next) => {
-    const id = req.params.usuarioId;
-    Usuario.findById(id)
-        .exec()
-        .then(doc => {
-            if (doc){
-                res.status(200).json({
-                    _id: doc._id,
-                    username: doc.username,
-                    email: doc.email,
-                    password: doc.password,
-                    perfil: {
-                        contacto: {
-                            telefono_fijo: doc.perfil.contacto.telefono_fijo,
-                            telefono_movil: doc.perfil.contacto.telefono_movil,
-                            whatsapp: doc.perfil.contacto.whatsapp,
-                            website: doc.perfil.contacto.website,
-                            facebook: doc.perfil.contacto.facebook,
-                            twitter: doc.perfil.contacto.twitter
-                        },
-                        educacion: doc.perfil.educacion,
-                        notas: doc.perfil.notas,
-                        avatar: doc.perfil.avatar
-                    },
-                    fecha_creacion: doc.fecha_creacion,
-                    estado: doc.estado,
-                    request: {
-                        descripcion: 'Obtener todos los registros',
-                        type: 'GET',
-                        url: req.protocol + '://' + req.headers.host + '/' + req.originalUrl.split('/')[1] + '/' + req.originalUrl.split('/')[2] + '/' + req.originalUrl.split('/')[3]
                     }
                 });
             } else {
-                res.status(404).json({
-                    mensaje: 'Registro no encontrado'
+                res.status(200).json({
+                    status: "Not found",
+                    code: 404,
+                    messages: [{mensaje:'Registro no encontrado'}],
+                    result: {}
                 });
             }
         })
         .catch(err => {
             res.status(500).json({
-                error: err
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
             });
         });
 }
 
+
+//
+// Permite actualizar los datos de un usuario en el formato indicado a continuación
+//
 /*
 El formato que se ha de mandar a esta funcion es de la siguiente forma,
 se ha de tener en cuenta que se manda un array:
@@ -246,6 +304,7 @@ exports.usuarios_update = (req, res, next) => {
     const updatedOps = {};
 
     for (const ops of req.body){
+        // Si la propiedad a actualizar es el password, lo encripto
         if (ops.propName == 'password'){
             bcrypt.hash(ops.value, 10, (err, hash) => {
                 if (err) {
@@ -264,29 +323,32 @@ exports.usuarios_update = (req, res, next) => {
         updatedOps[ops.propName] = ops.value;
     }
 
-    Usuario.update({_id: id}, {$set: updatedOps})
+    // Actualizo solo las propiedades que han cambiado
+    Usuario.updateOne({_id: id}, {$set: updatedOps})
         .exec()
         .then(result => {
             res.status(200).json({
-                mensaje: 'Registro actualizado correctamente',
-                request: {
-                    descripcion: 'Obtener registro actualizado',
-                    type: 'GET',
-                    url: req.protocol + '://' + req.headers.host + req.originalUrl
+                status: 'ok',
+                code: 200,
+                messages: [],
+                result: {
+                    request: {
+                        descripcion: 'Obtener registro actualizado',
+                        type: 'GET',
+                        url: req.protocol + '://' + req.headers.host + req.originalUrl
+                    }
                 }
             });
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({
-                error: err
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
             });
         });
-
-        
 }
-
-
 
 
 /*
@@ -316,28 +378,52 @@ exports.usuarios_update = (req, res, next) => {
 */
 
 
+//
+// Permite eliminar un usuario por su ID
+//
 exports.usuarios_delete = (req, res, next) => {
     const id = req.params.usuarioId;
-    Usuario.remove({_id: id})
+    Usuario.deleteOne({_id: id})
         .exec()
         .then(result => {
             res.status(200).json({
-                mensaje: 'Registro borrado correctamente',
-                request: {
-                    descripcion: 'Crear un nuevo registro',
-                    type: 'POST',
-                    url: req.protocol + '://' + req.headers.host + '/' + req.originalUrl.split('/')[1] + '/' + req.originalUrl.split('/')[2] +  '/' + req.originalUrl.split('/')[3],
-                    body: {
-                        email: 'String',
-                        password: 'String',
-                        estado: 'Boolean',
+                status: "ok",
+                code: 200,
+                messages: [],
+                result: {
+                    request: {
+                        descripcion: 'Crear un nuevo registro',
+                        type: 'POST',
+                        url: req.protocol + '://' + req.headers.host + '/' + req.originalUrl.split('/')[1] + '/' + req.originalUrl.split('/')[2] +  '/' + req.originalUrl.split('/')[3],
+                        body: {
+                            username: 'String',
+                            email: 'String',
+                            password: 'String',
+                            perfil: {
+                                contacto: {
+                                    telefono_fijo: 'String',
+                                    telefono_movil: 'String',
+                                    whatsapp: 'String',
+                                    website: 'String',
+                                    facebook: 'String',
+                                    twitter: 'String'
+                                },
+                                educacion: 'String',
+                                notas: 'String',
+                                avatar: 'String'
+                            },
+                            estado: 'Boolena'
+                        }
                     }
                 }
             });
         })
         .catch(err => {
             res.status(500).json({
-                error: err
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
             });
         });
 }

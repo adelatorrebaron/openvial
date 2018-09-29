@@ -75,9 +75,7 @@ export default {
       this.$router.replace(this.$route.query.redirect || '/usuario/login')
     },
     registroFailed (err) {
-      //console.log(error);
-      //this.error = 'El registro fallo!, vuelva a intentarlo de nuevo'
-      this.error = err.response.data.message;
+      this.error = err.response.data.messages[0].error
     }
   }
 }

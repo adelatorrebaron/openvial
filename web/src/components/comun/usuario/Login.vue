@@ -72,17 +72,15 @@ export default {
     login () {
       this.$http.post('/usuarios/login', { email: this.email, password: this.password })
         .then(request => this.loginSuccessful(request))
-        //.catch(() => this.loginFailed())
         .catch(err => this.loginFailed(err))
     },
     loginSuccessful (req) {
-      //console.log(req.data);
-      if (!req.data.token) {
+      if (!req.data.result.token) {
         this.loginFailed()
         return
       }
       this.error = false
-      localStorage.token = req.data.token
+      localStorage.token = req.data.result.token
       this.$store.dispatch('login')
       
       // Muestro el panel lateral al hacer login/registro
@@ -93,8 +91,7 @@ export default {
       this.$router.replace(this.$route.query.redirect || '/dashboard')
     },
     loginFailed (err) {
-      //console.log(err.data);
-      this.error = err.response.data.message;
+      this.error = err.response.data.messages[0].error;
       this.$store.dispatch('logout')
       delete localStorage.token
     },
