@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-//let API_URL = 'http://localhost:8080/api/v1';
 let API_URL = 'http://localhost:3002/api/v1';
 
 if (process.env.URL_API_AUTOESCUELAS) {
@@ -18,14 +17,28 @@ let config = {
 
 export default {
     getAutoescuelaByUserId(usuarioId) {
-        //console.log("Imprimiendo de services api autoescuelas")
-        //console.log(currentUser.id)
-        return axios.get(API_URL + '/autoescuelas/?usuarioId=' + usuarioId)
+        //console.log("IMPRIMIENDO DESDE SERVICES->API->AUTOESCUELAS")
+        //console.log("El usuario actual es: " + usuarioId)
+        //return axios.get(API_URL + '/autoescuelas/?usuarioId=' + usuarioId)
+        return axios.get(API_URL + '/autoescuelas/' + usuarioId)
             .then(request => {
-                //console.log(request.data.autoescuelas[0])
-                return request.data.autoescuelas[0]
+                //console.log(request)
+                
+                /////////////////////////////////////////////////////
+                // HASTA AQUI TODO CORRECTO
+                //////////////////////////////////////////////////////
+                //console.log('Hasta aqui todo correcto')
+                //console.log(request.data)
+                //return request.data.autoescuelas[0]
+                //console.log('SALIDA DEL METODO SERVICE->API->AUTOESCUELAS->GETAUTOESCUELABYUSERID')
+                return request.data
+                
             })
         .catch(err => {
+            console.log("Aqui controlo el error producido")
+            return err
+            
+            //console.log(err)
           //this.loginFailed(err)
             })
     },

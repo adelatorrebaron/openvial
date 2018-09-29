@@ -65,13 +65,14 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ currentUser: 'currentUser'}),
-    ...mapGetters({ currentAutoescuela: 'currentAutoescuela'}),
+//    ...mapGetters({ currentUser: 'currentUser'}),
+//    ...mapGetters({ currentAutoescuela: 'currentAutoescuela'}),
+    ...mapGetters({ isUserLogged: 'isUserLogged'}),
     ...mapGetters({ existAutoescuela: 'existAutoescuela'})
   },
 
-    created () {
-    console.log('llamado el metodo created del dashboard')
+  created () {
+    //console.log('llamado el metodo created del dashboard')
     this.cargarDatosAutoescuela()
   },
 
@@ -81,10 +82,16 @@ export default {
 
   methods: {
     cargarDatosAutoescuela() {
-      console.log(this.currentUser)
-      console.log(this.existAutoescuela)
-      if (!this.existAutoescuela)
-        this.$store.dispatch('loadAutoescuela', this.currentUser)
+      //console.log('Estoy en el método cargarDatosAutoescuela')
+      //console.log(this.currentUser)
+      //console.log(this.existAutoescuela)
+      //console.log("Estoy en el posible error de cargar la autoescuela")
+      //console.log(this.$store.state.authorization.user.id)
+
+        // Si el usuario está logeado y la autoescuela no existe la cargo
+        if (this.isUserLogged && !this.existAutoescuela){
+          this.$store.dispatch('loadAutoescuela', this.$store.state.authorization.user.id)
+        }
     },
     onClosed(mensaje) {
       console.log(mensaje)

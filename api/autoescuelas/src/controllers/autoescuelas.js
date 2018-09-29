@@ -10,51 +10,56 @@ exports.autoescuelas_get_all =  (req, res, next) => {
         .exec()
         .then(docs => {
             res.status(200).json({
-                total: docs.length,
-                autoescuelas: docs.map(doc => {
-                    return {
-                        _id: doc._id,
-                        usuario_id: doc.usuario_id,
-                        denominacion: doc.denominacion,
-                        numero_provincial: doc.numero_provincial,
-                        seccion: doc.seccion,
-                        digito_control: doc.digito_control,
-                        numero_secuencial: doc.numero_secuencial,
-                        direccion: {
-                            via: {
-                                tipo: doc.direccion.via.tipo,
-                                nombre: doc.direccion.via.nombre,
-                                numero: doc.direccion.via.numero,
-                                bloque: doc.direccion.via.bloque,
-                                portal: doc.direccion.via.portal,
-                                escalera: doc.direccion.via.escalera,
-                                planta: doc.direccion.via.planta,
-                                puerta: doc.direccion.via.puerta,
-                                kilometro: doc.direccion.via.kilometro
+                status: 'ok',
+                code: 200,
+                messages: [],
+                result: {
+                    total: docs.length,
+                    autoescuelas: docs.map(doc => {
+                        return {
+                            _id: doc._id,
+                            usuario_id: doc.usuario_id,
+                            denominacion: doc.denominacion,
+                            numero_provincial: doc.numero_provincial,
+                            seccion: doc.seccion,
+                            digito_control: doc.digito_control,
+                            numero_secuencial: doc.numero_secuencial,
+                            direccion: {
+                                via: {
+                                    tipo: doc.direccion.via.tipo,
+                                    nombre: doc.direccion.via.nombre,
+                                    numero: doc.direccion.via.numero,
+                                    bloque: doc.direccion.via.bloque,
+                                    portal: doc.direccion.via.portal,
+                                    escalera: doc.direccion.via.escalera,
+                                    planta: doc.direccion.via.planta,
+                                    puerta: doc.direccion.via.puerta,
+                                    kilometro: doc.direccion.via.kilometro
+                                },
+                                codigo_postal: doc.direccion.codigo_postal,
+                                poblacion: doc.direccion.poblacion,
+                                provincia: doc.direccion.provincia,
+                                pais: doc.direccion.pais
                             },
-                            codigo_postal: doc.direccion.codigo_postal,
-                            poblacion: doc.direccion.poblacion,
-                            provincia: doc.direccion.provincia,
-                            pais: doc.direccion.pais
-                        },
-                        contacto: {
-                            telefono_fijo: doc.contacto.telefono_fijo,
-                            telefono_movil: doc.contacto.telefono_movil,
-                            whatsapp: doc.contacto.whatsapp,
-                            email: doc.contacto.email,
-                            website: doc.contacto.website,
-                            facebook: doc.contacto.facebook,
-                            twitter: doc.contacto.twitter
-                        },
-                        fecha_creacion: doc.fecha_creacion,
-                        estado: doc.estado,
-                        request: {
-                            descripcion: 'Obtener el registro',
-                            type: 'GET',
-                            url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + doc._id
+                            contacto: {
+                                telefono_fijo: doc.contacto.telefono_fijo,
+                                telefono_movil: doc.contacto.telefono_movil,
+                                whatsapp: doc.contacto.whatsapp,
+                                email: doc.contacto.email,
+                                website: doc.contacto.website,
+                                facebook: doc.contacto.facebook,
+                                twitter: doc.contacto.twitter
+                            },
+                            fecha_creacion: doc.fecha_creacion,
+                            estado: doc.estado,
+                            request: {
+                                descripcion: 'Obtener el registro',
+                                type: 'GET',
+                                url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + doc._id
+                            }
                         }
-                    }
-                })
+                    })
+                }
             })
         })
         .catch(err => {
@@ -161,58 +166,68 @@ exports.autoescuelas_create = (req, res, next) => {
 
 
 exports.autoescuelas_get_by_usuario_id = (req, res, next) => {
-    const id = req.params.usuarioId;
-    var usuario_id = new mongoose.Types.ObjectId(id);
+    const usuario_id = req.params.usuarioId;
+    //var usuario_id = new mongoose.Types.ObjectId(id);
     //Autoescuela.findById(id)
     Autoescuela.findOne({'usuario_id': usuario_id})
         .exec()
         .then(doc => {
             if (doc){
                 res.status(200).json({
-                    _id: doc._id,
-                    usuario_id: doc.usuario_id,
-                    denominacion: doc.denominacion,
-                    numero_provincial: doc.numero_provincial,
-                    seccion: doc.seccion,
-                    digito_control: doc.digito_control,
-                    numero_secuencial: doc.numero_secuencial,
-                    direccion: {
-                        via: {
-                            tipo: doc.direccion.via.tipo,
-                            nombre: doc.direccion.via.nombre,
-                            numero: doc.direccion.via.numero,
-                            bloque: doc.direccion.via.bloque,
-                            portal: doc.direccion.via.portal,
-                            escalera: doc.direccion.via.escalera,
-                            planta: doc.direccion.via.planta,
-                            puerta: doc.direccion.via.puerta,
-                            kilometro: doc.direccion.via.kilometro
-                        },
-                        codigo_postal: doc.direccion.codigo_postal,
-                        poblacion: doc.direccion.poblacion,
-                        provincia: doc.direccion.provincia,
-                        pais: doc.direccion.pais
-                    },
-                    contacto: {
-                        telefono_fijo: doc.contacto.telefono_fijo,
-                        telefono_movil: doc.contacto.telefono_movil,
-                        whatsapp: doc.contacto.whatsapp,
-                        email: doc.contacto.email,
-                        website: doc.contacto.website,
-                        facebook: doc.contacto.facebook,
-                        twitter: doc.contacto.twitter
-                    },
-                    fecha_creacion: doc.fecha_creacion,
-                    estado: doc.estado,
-                    request: {
-                        descripcion: 'Obtener todos los registros',
-                        type: 'GET',
-                        url: req.protocol + '://' + req.headers.host + '/' + req.originalUrl.split('/')[1] + '/' + req.originalUrl.split('/')[2] + '/' + req.originalUrl.split('/')[3]
+                    status: "ok",
+                    code: 200,
+                    messages: [],
+                    result: {
+                        autoescuela: {
+                            _id: doc._id,
+                            usuario_id: doc.usuario_id,
+                            denominacion: doc.denominacion,
+                            numero_provincial: doc.numero_provincial,
+                            seccion: doc.seccion,
+                            digito_control: doc.digito_control,
+                            numero_secuencial: doc.numero_secuencial,
+                            direccion: {
+                                via: {
+                                    tipo: doc.direccion.via.tipo,
+                                    nombre: doc.direccion.via.nombre,
+                                    numero: doc.direccion.via.numero,
+                                    bloque: doc.direccion.via.bloque,
+                                    portal: doc.direccion.via.portal,
+                                    escalera: doc.direccion.via.escalera,
+                                    planta: doc.direccion.via.planta,
+                                    puerta: doc.direccion.via.puerta,
+                                    kilometro: doc.direccion.via.kilometro
+                                },
+                                codigo_postal: doc.direccion.codigo_postal,
+                                poblacion: doc.direccion.poblacion,
+                                provincia: doc.direccion.provincia,
+                                pais: doc.direccion.pais
+                            },
+                            contacto: {
+                                telefono_fijo: doc.contacto.telefono_fijo,
+                                telefono_movil: doc.contacto.telefono_movil,
+                                whatsapp: doc.contacto.whatsapp,
+                                email: doc.contacto.email,
+                                website: doc.contacto.website,
+                                facebook: doc.contacto.facebook,
+                                twitter: doc.contacto.twitter
+                            },
+                            fecha_creacion: doc.fecha_creacion,
+                            estado: doc.estado,
+                            request: {
+                                descripcion: 'Obtener todos los registros',
+                                type: 'GET',
+                                url: req.protocol + '://' + req.headers.host + '/' + req.originalUrl.split('/')[1] + '/' + req.originalUrl.split('/')[2] + '/' + req.originalUrl.split('/')[3]
+                            }
+                        }
                     }
                 });
             } else {
-                res.status(404).json({
-                    mensaje: 'Registro no encontrado'
+                res.status(200).json({
+                    status: "Not found",
+                    code: 404,
+                    messages: [{mensaje:'Registro no encontrado'}],
+                    result: {}
                 });
             }
         })
