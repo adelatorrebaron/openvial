@@ -8,7 +8,7 @@ const UsuariosController = require('../controllers/usuarios');
 // Permite el registro de un usuario
 router.post('/usuarios/registro', UsuariosController.usuarios_registro);
 
-// Permite realizar el login y asi obtener el tocken JWT
+// Permite realizar el login y asi obtener el token JWT
 router.post('/usuarios/login', UsuariosController.usuarios_login);
 
 // Obtiene todos los usuarios
