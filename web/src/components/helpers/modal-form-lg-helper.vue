@@ -31,7 +31,7 @@
 export default {
     props: [
       'show',   // Mostrará el formulario
-      'title'   // Permitira asignar el titulo al formulario
+      'title',  // Permitira asignar el titulo al formulario
       ],
     
     methods: {
