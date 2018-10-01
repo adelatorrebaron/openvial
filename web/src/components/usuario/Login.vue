@@ -49,8 +49,8 @@ export default {
   name: 'Login',
   data () {
     return {
-      email: '',
-      password: '',
+      email: 'alejandrodelatorrebaron@gmail.com',
+      password: 'alejandro',
       error: false
     }
   },
@@ -81,7 +81,7 @@ export default {
       }
       this.error = false
       localStorage.token = req.data.result.token
-      this.$store.dispatch('login')
+      this.$store.dispatch('login', req.data.result.usuario)
       
       // Muestro el panel lateral al hacer login/registro
       this.toggleBodyClass('removeClass', 'sidebar-collapse');

@@ -41,5 +41,20 @@ export default {
             .catch(err => {
                 return err
             })
+    },
+
+    updateAutoescuela(autoescuela) {
+        return axios.put(
+                API_URL + '/autoescuelas/' + autoescuela._id,
+                autoescuela,
+                config
+            )
+            .then(response => {
+                // Devuelvo los datos obtenidos del API externo
+                return response.data
+            })
+            .catch(err => {
+                return err
+            })
     }
 }

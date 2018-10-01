@@ -147,6 +147,27 @@ exports.usuarios_login =  (req, res, next) => {
                             messages: [],
                             result: {
                                 message: 'Autenticación satisfactoria',
+                                usuario: {
+                                    _id: usuario[0]._id,
+                                    username: usuario[0].username,
+                                    email: usuario[0].email,
+                                    //password: usuario[0].password,
+                                    perfil: {
+                                        contacto: {
+                                            telefono_fijo: usuario[0].perfil.contacto.telefono_fijo,
+                                            telefono_movil: usuario[0].perfil.contacto.telefono_movil,
+                                            whatsapp: usuario[0].perfil.contacto.whatsapp,
+                                            website: usuario[0].perfil.contacto.website,
+                                            facebook: usuario[0].perfil.contacto.facebook,
+                                            twitter: usuario[0].perfil.contacto.twitter
+                                        },
+                                        educacion: usuario[0].perfil.educacion,
+                                        notas: usuario[0].perfil.notas,
+                                        avatar: usuario[0].perfil.avatar
+                                    },
+                                    fecha_creacion: usuario[0].fecha_creacion,
+                                    estado: usuario[0].estado
+                                },
                                 token: token
                             }
                         

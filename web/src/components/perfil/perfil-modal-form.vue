@@ -3,7 +3,7 @@
     <modal-form-helper
       v-bind:show="show"
       v-bind:title="title"
-      v-on:onClosed="onClosed()"
+      v-on:onClosed="onClosed('Cerrado el formulario de edición de la Autoescuela')" 
     >
       <div slot="modal-header"></div>
       <div slot="modal-body">
@@ -11,14 +11,14 @@
           <div class="col-md-12">
 
             <!-- Imagen del Perfil -->
-            <div class="image-preview" v-if="perfil.imagen.length > 0">
-              <img class="profile-user-img img-responsive img-circle" :src="perfil.imagen" @click="cargarArchivoImagenPerfil()">
+            <div class="image-preview" v-if="currentUser.perfil.avatar.length > 0">
+              <img class="profile-user-img img-responsive img-circle" :src="currentUser.perfil.avatar" @click="cargarArchivoImagenPerfil()">
             </div>
             <div v-else >
               <img class="profile-user-img img-responsive img-circle" @click="$refs.fileInput.click()" src="@/assets/user_default.png" alt="User profile picture">
               <input type="file" id="imagenPerfil" @change="onFileSelected" ref="fileInput" accept="image/*" style="display: none;" />
             </div>
-
+            
             <!-- Username y email -->
             <h3 class="profile-username text-center">{{ currentUser.username }}</h3>
             <p class="text-muted text-center">{{ currentUser.email }}</p>
@@ -36,19 +36,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Teléfono móvil:</label>
-                        <input v-model="perfil.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil">
+                        <input v-model="currentUser.perfil.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Whatsapp:</label>
-                        <input v-model="perfil.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp">
+                        <input v-model="currentUser.perfil.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Teléfono fijo:</label>
-                        <input v-model="perfil.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo">
+                        <input v-model="currentUser.perfil.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo">
                       </div>
                     </div>
                   </div>
@@ -56,7 +56,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Sitio web:</label>
-                        <input v-model="perfil.contacto.website" type="text" class="form-control" placeholder="Sitio web">
+                        <input v-model="currentUser.perfil.contacto.website" type="text" class="form-control" placeholder="Sitio web">
                       </div>
                     </div>
                   </div>
@@ -64,13 +64,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Facebook:</label>
-                        <input v-model="perfil.contacto.facebook" type="text" class="form-control" placeholder="Facebook">
+                        <input v-model="currentUser.perfil.contacto.facebook" type="text" class="form-control" placeholder="Facebook">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Twitter:</label>
-                        <input v-model="perfil.contacto.twitter" type="text" class="form-control" placeholder="Twitter">
+                        <input v-model="currentUser.perfil.contacto.twitter" type="text" class="form-control" placeholder="Twitter">
                       </div>
                     </div>
                   </div>
@@ -78,12 +78,12 @@
                 
                 <!-- Educacion Tab -->
                 <div class="tab-pane" id="tab_Educacion">
-                  <textarea v-model="perfil.educacion" class="form-control noresize" rows="10" placeholder="Introduzca información referente a sus estudios"></textarea>
+                  <textarea v-model="currentUser.perfil.educacion" class="form-control noresize" rows="10" placeholder="Introduzca información referente a sus estudios"></textarea>
                 </div>
                 
                 <!-- Observaciones Tab -->
                 <div class="tab-pane" id="tab_Observaciones">
-                  <textarea v-model="perfil.notas" class="form-control noresize" rows="10" placeholder="Introduzca cualquier información de desee guardar"></textarea>
+                  <textarea v-model="currentUser.perfil.notas" class="form-control noresize" rows="10" placeholder="Introduzca cualquier información de desee guardar"></textarea>
                 </div>
               </div>
             </div>
@@ -113,49 +113,39 @@ export default {
   },
 
   props: [
-    'show'
+    'show',
+    'title',
+    'action'
   ],
 
   computed: {
-      ...mapGetters({ currentUser: 'currentUser'})
+    ...mapGetters({ currentUser: 'currentUser'})
   },
     
   data () {
     return {
-      title: 'Configura tu perfil',
-      perfil: {
-        contacto: {
-          telefono_fijo: '958540562',
-          telefono_movil: '636244362',
-          whatsapp: '636244362',
-          email: 'alejandrodelatorrebaron18@gmail.com',
-          website: 'www.autoescuelaodisea.com',
-          facebook: 'mifaceboo.com',
-          twitter: 'mituiter.com'
-        },
-        educacion: 'Estudios de primaria y secundaria',
-        notas: 'Tengo que acordarme de...',
-        imagen: ''
-      },
     }
-  }, 
+  },
+
+  created () {
+  },
+
+  updated () {
+  },
 
   methods: {
     onClosed: function () {
       this.$emit('onClosed');
     },
     onCanceled: function () {
-      // Some save logic goes here...
-
-      this.onClosed()
+      this.$emit('onCanceled')
     },
     onAccepted: function () {
-      console.log("Se ha llamado al metodo salvarDatosPerfil");
-      
-      // Paso al Store los datos del formulario para que los salve en el API
-      this.$store.dispatch('savePerfil', this.perfil)
-
-      this.onClosed()
+      if (this.action === 'edit'){
+        // Paso al Store los datos del formulario para que los actualice en el API
+        this.$store.dispatch('updateUsuario', this.currentUser)
+      }
+      this.$emit('onAccepted')
     },
     onFileSelected(event) {
       this.perfil.imagen = event.target.files[0]

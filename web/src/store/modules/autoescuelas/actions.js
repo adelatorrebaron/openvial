@@ -34,6 +34,18 @@ const saveAutoescuela = ({commit}, autoescuela) => {
         })
 }
 
+const updateAutoescuela = ({commit}, autoescuela) => {
+    // Llamamos al API para enviar los datos y actualizarlos
+    return autoescuelasApi.updateAutoescuela(autoescuela)
+        .then(response => {
+            // Asignamos los datos de la Autoescuela al Store
+            commit('SET_AUTOESCUELA', autoescuela)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 const unloadAutoescuela = ( context ) => {
     // Pone a null la Autoescuela. Se emplea al deslogearse
     context.commit('UNSET_AUTOESCUELA')
@@ -44,5 +56,6 @@ const unloadAutoescuela = ( context ) => {
 export default {
     loadAutoescuela,
     unloadAutoescuela,
-    saveAutoescuela
+    saveAutoescuela,
+    updateAutoescuela
 }

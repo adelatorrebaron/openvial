@@ -267,6 +267,7 @@ exports.autoescuelas_update = (req, res, next) => {
     Autoescuela.updateOne({_id: id}, {$set: update})
         .exec()
         .then(result => {
+            console.log(result)
             res.status(200).json({
                 status: "ok",
                 code: 200,

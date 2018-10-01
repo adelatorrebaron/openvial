@@ -207,69 +207,37 @@
 
 
 <script>
-import modalFormLgHelper from '@/components/helpers/modal-form-lg-helper'
-import { mapGetters } from 'vuex'
+import modalFormLgHelper            from '@/components/helpers/modal-form-lg-helper'
+import { mapGetters }               from 'vuex'
+
 export default {
   components: {
     'modal-form-helper': modalFormLgHelper
   },
   props: [
     'show',
-    'title'
+    'title',
+    'action',
+    'autoescuela'
   ],
   computed: {
-      ...mapGetters({ currentUser: 'currentUser'})
+    ...mapGetters({ currentUser: 'currentUser'})
   },
   data () {
     return {
-      title: 'Información del Centro de Formación Vial',
-      autoescuela: {
-        usuario_id: '5ba4d317bf45010012952d5f',
-        denominacion: 'Autoescuela Odisea 18',
-        numero_provincial: 'GR03918',
-        seccion: '18',
-        digito_control: '18',
-        numero_secuencial: '18',
-        direccion: {
-          via: {
-            tipo: 'Avenida',
-            nombre: 'Los solecillos',
-            numero: '18',
-            bloque: 'Los Almendros',
-            portal: '18',
-            escalera: '18',
-            planta: '18ª',
-            puerta: '18C',
-            kilometro: '18'
-          },
-          codigo_postal: '18180',
-          poblacion: 'Alfacar',
-          provincia: 'Granada',
-          pais: 'España'
-        },
-        contacto: {
-          telefono_fijo: '958540562',
-          telefono_movil: '636244362',
-          whatsapp: '636244362',
-          email: 'alejandrodelatorrebaron18@gmail.com',
-          website: 'www.autoescuelaodisea.com',
-          facebook: 'mifaceboo.com',
-          twitter: 'mituiter.com'
-        },
-        estado: true
-      },
     }
   },
   methods: {
     onClosed: function () {
         this.$emit('onClosed');
     },
+
     onCanceled: function () {
-        // Some save logic goes here...
         this.$emit('onCanceled');
-        //this.onClosed()
     },
+
     onAccepted: function () {
+      if (this.action === 'create'){
         // Debido a que el usuario está en el store y no se encuentra en el formulario
         // Lo leemos del Store y se lo asignamos a la academia para que cuando se cree
         // se asocie a este usuario
@@ -277,9 +245,14 @@ export default {
         
         // Paso al Store los datos del formulario para que los salve en el API
         this.$store.dispatch('saveAutoescuela', this.autoescuela)
+      }
+      else if (this.action === 'edit'){
+        // Paso al Store los datos del formulario para que los actualice en el API
+        this.$store.dispatch('updateAutoescuela', this.autoescuela)
+      }
 
-        this.$emit('onAccepted');
-        //this.onClosed()
+      // Emito el evento que se ha pulsado el boton aceptar.
+      this.$emit('onAccepted');
     }
   }
 }

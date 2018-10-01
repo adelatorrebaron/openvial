@@ -69,7 +69,6 @@ export default {
   -webkit-transition: opacity 500ms ease-in;
   -moz-transition: opacity 500ms ease-in;
   transition: opacity 500ms ease-in;
-  overflow-y: hidden;
 }
 
 .modal-content

@@ -3,7 +3,7 @@
     <div v-if="existAutoescuela === true">
        <!-- Content Header (Page header) -->
       <section class="content-header">
-        <h1>{{titulo}}</h1>
+        <h1>{{ventanaTitulo}}</h1>
         <ol class="breadcrumb">
           <li>
             <router-link to="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</router-link>
@@ -24,9 +24,11 @@
     <autoescuela-modal-form
       v-bind:show="autoescuelaFormShow"
       v-bind:title="autoescuelaFormTitle"
-      v-on:onClosed="onClosed('Cerrado el formulario de creación de la Autoescuela')" 
-      v-on:onCanceled="onCanceled('Cancelado el formulario de creación de la Autoescuela')" 
-      v-on:onAccepted="onAccepted('Aceptado el formulario de creación de la Autoescuela')">
+      v-bind:action="autoescuelaFormAction"
+      v-bind:autoescuela="autoescuela"
+      v-on:onClosed="onClosedAutoescuelaModalForm('Cerrado el formulario de creación de la Autoescuela')" 
+      v-on:onCanceled="onCanceledAutoescuelaModalForm('Cancelado el formulario de creación de la Autoescuela')" 
+      v-on:onAccepted="onAcceptedAutoescuelaModalForm('Aceptado el formulario de creación de la Autoescuela')">
     </autoescuela-modal-form>
 
     <!-- Formulario para crear e introducir el Perfil del usuario -->
@@ -61,16 +63,54 @@ export default {
 
   data () {
     return {
-      titulo: 'Dashboard',
+      ventanaTitulo: 'Dashboard',
       autoescuelaFormShow: false,
       autoescuelaFormTitle: 'Creación de la Autoescuela',
+      autoescuelaFormAction: 'create',
+      autoescuela: {
+        _id: '',
+        usuario_id: '5ba4d317bf45010012952d5f',
+        denominacion: 'Autoescuela Odisea 18asd',
+        numero_provincial: 'GR03918',
+        seccion: '18',
+        digito_control: '18',
+        numero_secuencial: '18',
+        direccion: {
+          via: {
+            tipo: 'Avenida',
+            nombre: 'Los solecillos',
+            numero: '18',
+            bloque: 'Los Almendros',
+            portal: '18',
+            escalera: '18',
+            planta: '18ª',
+            puerta: '18C',
+            kilometro: '18'
+          },
+          codigo_postal: '18180',
+          poblacion: 'Alfacar',
+          provincia: 'Granada',
+          pais: 'España'
+        },
+        contacto: {
+          telefono_fijo: '958540562',
+          telefono_movil: '636244362',
+          whatsapp: '636244362',
+          email: 'alejandrodelatorrebaron18@gmail.com',
+          website: 'www.autoescuelaodisea.com',
+          facebook: 'mifaceboo.com',
+          twitter: 'mituiter.com'
+        },
+        estado: true
+      },
+
 //      showPerfilCreateForm: false,
     }
   },
 
   computed: {
     ...mapGetters({ isUserLogged: 'isUserLogged'}),
-    ...mapGetters({ existAutoescuela: 'existAutoescuela'})
+    ...mapGetters({ existAutoescuela: 'existAutoescuela'}),
   },
 
   created () {
@@ -85,27 +125,24 @@ export default {
     loadAutoescuelaData() {
         // Si el usuario está logeado y la autoescuela no existe la cargo la leo
         if (this.isUserLogged && !this.existAutoescuela){
-          this.$store.dispatch('loadAutoescuela', this.$store.state.authorization.user.id)
+          this.$store.dispatch('loadAutoescuela', this.$store.state.authorization.user._id)
         }
     },
     showAutoescuelaModalForm(){
       // Muestro el formulario
       this.autoescuelaFormShow = true
     },
-    onClosed(mensaje) {
+    onClosedAutoescuelaModalForm(mensaje) {
       // Cierro el formulario
       this.autoescuelaFormShow = false
-      console.log(mensaje)
     },
-    onCanceled(mensaje){
+    onCanceledAutoescuelaModalForm(mensaje){
       // Cierro el formulario
       this.autoescuelaFormShow = false
-      console.log(mensaje)
     },
-    onAccepted(mensaje){
+    onAcceptedAutoescuelaModalForm(mensaje){
       // Cierro el formulario
       this.autoescuelaFormShow = false
-      console.log(mensaje)
     }
   }
 
@@ -114,6 +151,6 @@ export default {
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 
 </style>

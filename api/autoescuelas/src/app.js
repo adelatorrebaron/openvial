@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 
 
 
-/*
+
 app.use(function(req, res, next) {
     var oneof = false;
     if(req.headers.origin) {
@@ -39,8 +39,8 @@ app.use(function(req, res, next) {
     }
 });
 
-*/
 
+/*
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*'),
     res.header(
@@ -54,7 +54,7 @@ app.use((req, res, next) => {
     }
     next();
   });
-
+*/
 
 app.use('/api/v1', routes)
 
