@@ -241,7 +241,7 @@ export default {
         // Debido a que el usuario está en el store y no se encuentra en el formulario
         // Lo leemos del Store y se lo asignamos a la academia para que cuando se cree
         // se asocie a este usuario
-        this.autoescuela.usuario_id = this.currentUser.id
+        this.autoescuela.usuario_id = this.currentUser._id
         
         // Paso al Store los datos del formulario para que los salve en el API
         this.$store.dispatch('saveAutoescuela', this.autoescuela)
