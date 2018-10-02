@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <loading
+      v-bind:show="showLoading"
+    >
+    </loading>
+
     <!-- <template v-if="currentUser"> -->
     <template>
       <Header></Header>
@@ -28,6 +33,7 @@
 import { mapGetters } from 'vuex'
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
+import Loading from '@/components/Loading'
 /*
 export default {
   name: 'app',
@@ -57,11 +63,13 @@ export default {
 export default {
   name: 'app',
   computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
+    ...mapGetters({ currentUser: 'currentUser' }),
+    ...mapGetters({showLoading: 'getLoading'})
   },
   components: {
     Header,
-    Sidebar
+    Sidebar,
+    loading : Loading,
   }
 }
 

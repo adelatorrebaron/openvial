@@ -65,7 +65,7 @@ export default {
 
 .modal-wrapper {
   display: table-cell;
-  vertical-align: middle;
+/*  vertical-align: middle;*/
   -webkit-transition: opacity 500ms ease-in;
   -moz-transition: opacity 500ms ease-in;
   transition: opacity 500ms ease-in;
@@ -78,6 +78,7 @@ export default {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   background-color: transparent;
+
 }
 
 .modal-header

@@ -148,10 +148,13 @@ export default {
       this.$emit('onAccepted')
     },
     onFileSelected(event) {
+      /*
       this.perfil.imagen = event.target.files[0]
       console.log(this.perfil.imagen)
+      */
     },
     onUpload(){
+      /*
       const fd = new FormData()
       fd.append('image',this.perfil.imagen, this.perfil.imagen.name)
       axios.post('urldelapi', fd, {
@@ -162,6 +165,7 @@ export default {
         .then(res => {
           console.log(res)
         })
+      */
     }
   }
   
