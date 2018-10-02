@@ -15,7 +15,7 @@ const AutoescuelaSchema = mongoose.Schema({
             tipo: {type: String, required: true, maxlength: 25 },
             nombre: {type: String, required: true, maxlength: 120},
             numero: {type: String, required: true, maxlength: 10},
-            bloque: {type: String, maxlength: 20},
+            bloque: {type: String, maxlength: 60},
             portal: {type: String, maxlength: 20},
             escalera: {type: String, maxlength: 20},
             planta: {type: String, maxlength: 20},

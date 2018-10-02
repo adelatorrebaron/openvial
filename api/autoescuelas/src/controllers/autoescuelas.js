@@ -67,8 +67,11 @@ exports.autoescuelas_get_all =  (req, res, next) => {
         })
         .catch(err => {
             res.status(500).json({
-                error: err
-            });
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            })
         });
 }
    
@@ -267,7 +270,6 @@ exports.autoescuelas_update = (req, res, next) => {
     Autoescuela.updateOne({_id: id}, {$set: update})
         .exec()
         .then(result => {
-            console.log(result)
             res.status(200).json({
                 status: "ok",
                 code: 200,
@@ -306,6 +308,7 @@ exports.autoescuelas_delete = (req, res, next) => {
                 code: 200,
                 messages: [],
                 result: {
+                    mensaje: 'Registro eliminado correctamente',
                     request: {
                         descripcion: 'Crear un nuevo registro',
                         type: 'POST',

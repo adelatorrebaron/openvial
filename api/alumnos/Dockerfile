@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install --production
 COPY . /app
-EXPOSE 3000
+EXPOSE 3003
 CMD npm start
 
 # Para doquerizar la aplicacion ejecutar el siguiente comando
