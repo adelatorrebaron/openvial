@@ -107,10 +107,10 @@ import alumnosApi         from '@/services/api/alumnos.js'
 import alumnoModalForm    from '@/components/alumnos/alumno-modal-form'
 
 export default {
-  name: 'profesores',
+  name: 'alumnos',
 
   components: {
-    'alumno-modal-form':     alumnoModalForm
+    'alumno-modal-form':    alumnoModalForm
   },
 
   data () {
@@ -124,6 +124,7 @@ export default {
   },
 
   computed: {
+    // Busca un alumno por el dni
     searchAlumno () {
       return this.alumnos.filter((alumno) => alumno.dni.includes(this.search)); 
     },
@@ -205,7 +206,7 @@ export default {
       if (confirm('¿Está seguro que desea borrar este alumno?')) {
         if (this.model._id === id) {
           this.resetModel()
-        }
+        }      
         // Eliminamos el alumno
         await alumnosApi.deleteAlumno(id)
 
