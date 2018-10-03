@@ -36,8 +36,8 @@ const AutoescuelaSchema = mongoose.Schema({
         facebook: {type: String, maxlength: 255, lowercase: true},
         twitter: {type: String, maxlength: 255, lowercase: true}
     },
-    fecha_creacion: {type: Date, default: Date.now()},
-    estado: {type: Boolean, default: true}
+    fecha_creacion: {type: Date,required: true, default: Date.now()},
+    estado: {type: Boolean, required: true, default: true}
 })
 
 module.exports = mongoose.model('Autoescuela', AutoescuelaSchema)

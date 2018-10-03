@@ -2,9 +2,10 @@
 
 const mongoose  = require('mongoose')
 
-const AlumnoSchema = mongoose.Schema({
+const ProfesorSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     autoescuela_id: mongoose.Schema.Types.ObjectId,
+    numero_profesor: {type: String, required: true, maxlength: 30},    
     dni: {type: String, required: true, maxlength: 9},
     dni_fecha_caducidad: {type: Date, required: true},
     nombre: {type: String, required: true, maxlength: 30},
@@ -39,16 +40,21 @@ const AlumnoSchema = mongoose.Schema({
         facebook: {type: String, maxlength: 255, lowercase: true},
         twitter: {type: String, maxlength: 255, lowercase: true}
     },
-    documentacion_aportada: {
-        entrega_fotocopia_dni: {type: Boolean, default: false},
-        entrega_psicotecnico: {type: Boolean, default: false},
-        entrega_fotografias: {type: Boolean, default: false},
-        firma_tasas_examen: {type: Boolean, default: false},
-        firma_autorizacion: {type: Boolean, default: false},
-        firma_talon_foto: {type: Boolean, default: false}
+    permisos_conduccion: [{
+        tipo: {type: String, required: true , maxlength: 50},
+        fecha_antiguedad: {type: Date, required: true},
+        fecha_caducidad: {type: Date, required: true},
+    }],
+    datos_bancarios: {
+        nombre_entidad: {type: String, maxlength: 30},
+        codigo_iban: {type: String, maxlength: 4},
+        codigo_entidad: {type: String, maxlength: 4},
+        codigo_oficina:{type: String, maxlength: 4},
+        digito_control: {type: String, maxlength: 2},
+        numero_de_cuenta: {type: String, maxlength: 10}
     },
     fecha_creacion: {type: Date, required: true, default: Date.now()},
     estado: {type: Boolean, required: true, default: true}
 })
 
-module.exports = mongoose.model('Alumno', AlumnoSchema)
+module.exports = mongoose.model('Profesor', ProfesorSchema)

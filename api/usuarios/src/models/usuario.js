@@ -26,8 +26,8 @@ const UsuarioSchema = mongoose.Schema({
         notas:{type: String, maxlength: 255},
         avatar:{type: String, maxlength: 255}
     },
-    fecha_creacion: {type: Date, default: Date.now()},
-    estado: {type: Boolean, default: true}
+    fecha_creacion: {type: Date,required: true, default: Date.now()},
+    estado: {type: Boolean,required: true, default: true}
 });
 
 module.exports = mongoose.model('Usuario', UsuarioSchema);
