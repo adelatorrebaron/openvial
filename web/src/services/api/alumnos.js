@@ -39,14 +39,13 @@ export default {
         })
     },
 
-    saveAlumno(alumno) {
+    createAlumno(alumno) {
         return axios.post(
                 API_URL + '/alumnos/',
                 alumno,
                 config
             )
             .then(response => {
-                console.log(response)
                 // Devuelvo los datos obtenidos del API externo
                 return response.data
             })
@@ -68,5 +67,19 @@ export default {
             .catch(err => {
                 return err
             })
-    }
+    },
+
+    deleteAlumno(alumnoId) {
+        return axios.delete(
+                API_URL + '/alumnos/' + alumnoId,
+                config
+            )
+            .then(response => {
+                // Devuelvo los datos obtenidos del API externo
+                return response.data
+            })
+            .catch(err => {
+                return err
+            })
+    }    
 }

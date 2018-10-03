@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 const Alumno = require('../models/alumno');
 
+const moment = require('moment');
+
 //
 // Permite obtener todas los alumnos
 //
@@ -22,12 +24,12 @@ exports.alumnos_get_all =  (req, res, next) => {
                             _id: doc._id,
                             autoescuela_id: doc.autoescuela_id,
                             dni: doc.dni,
-                            dni_fecha_caducidad: doc.dni_fecha_caducidad,
+                            dni_fecha_caducidad: moment(doc.dni_fecha_caducidad, 'YYYY-MM-DD').format('DD/MM/YYYY'),
                             nombre: doc.nombre,
                             primer_apellido: doc.primer_apellido,
                             segundo_apellido: doc.segundo_apellido,
                             sexo: doc.sexo,
-                            fecha_nacimiento: doc.fecha_nacimiento,
+                            fecha_nacimiento: moment(doc.fecha_nacimiento, 'YYYY-MM-DD').format('DD/MM/YYYY'),
                             pais_nacimiento: doc.pais_nacimiento,
                             nacionalidad: doc.nacionalidad,
                             direccion: {
@@ -94,12 +96,12 @@ exports.alumnos_create = (req, res, next) => {
         _id: new mongoose.Types.ObjectId(),
         autoescuela_id: req.body.autoescuela_id,
         dni: req.body.dni,
-        dni_fecha_caducidad: req.body.dni_fecha_caducidad,
+        dni_fecha_caducidad: moment(req.body.dni_fecha_caducidad, 'DD/MM/YYYY').format('YYYY-MM-DD'),
         nombre: req.body.nombre,
         primer_apellido: req.body.primer_apellido,
         segundo_apellido: req.body.segundo_apellido,
         sexo: req.body.sexo,
-        fecha_nacimiento: req.body.fecha_nacimiento,
+        fecha_nacimiento: moment(req.body.fecha_nacimiento, 'DD/MM/YYYY').format('YYYY-MM-DD'),
         pais_nacimiento: req.body.pais_nacimiento,
         nacionalidad: req.body.nacionalidad,
         direccion: {
@@ -202,6 +204,7 @@ exports.alumnos_create = (req, res, next) => {
             });
         })
         .catch(err => {
+            console.log(err)
             res.status(500).json({
                 status: "Internal Server Error",
                 code: 500,
@@ -230,12 +233,12 @@ exports.alumnos_get_by_alumnoId = (req, res, next) => {
                             _id: doc._id,
                             autoescuela_id: doc.autoescuela_id,
                             dni: doc.dni,
-                            dni_fecha_caducidad: doc.dni_fecha_caducidad,
+                            dni_fecha_caducidad: moment(doc.dni_fecha_caducidad, 'DD/MM/YYYY').format('YYYY-MM-DD'),
                             nombre: doc.nombre,
                             primer_apellido: doc.primer_apellido,
                             segundo_apellido: doc.segundo_apellido,
                             sexo: doc.sexo,
-                            fecha_nacimiento: doc.fecha_nacimiento,
+                            fecha_nacimiento: moment(doc.fecha_nacimiento, 'DD/MM/YYYY').format('YYYY-MM-DD'),
                             pais_nacimiento: doc.pais_nacimiento,
                             nacionalidad: doc.nacionalidad,
                             direccion: {
@@ -307,6 +310,12 @@ exports.alumnos_get_by_alumnoId = (req, res, next) => {
 exports.alumnos_update = (req, res, next) => {
     const id = req.params.alumnoId;
     const update = req.body;
+
+    // Cambio de formato de las fechas pasadas que estan en "00/00/0000" y hay que pasarlas a "0000-00-00" en MongoDB
+    const dni_fecha_caducidad   = moment(req.body.dni_fecha_caducidad, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    const fecha_nacimiento      = moment(req.body.fecha_nacimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    update.dni_fecha_caducidad  = dni_fecha_caducidad;
+    update.fecha_nacimiento     = fecha_nacimiento;
 
     Alumno.updateOne({_id: id}, {$set: update})
         .exec()

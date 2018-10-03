@@ -48,7 +48,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Fecha caducidad Dni:</label>
-                        <input v-model="alumno.dni_fecha_caducidad" type="date" class="form-control" placeholder="Fecha de cacudicad del dni" required>
+                        <input v-model="alumno.dni_fecha_caducidad" type="text" class="form-control" placeholder="01/01/2018" required>
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -85,7 +85,7 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Fecha nacimiento:</label>
-                        <input v-model="alumno.fecha_nacimiento" type="date" class="form-control" placeholder="Fecha de nacimiento" required>
+                        <input v-model="alumno.fecha_nacimiento" type="text" class="form-control" placeholder="01/01/2018" required>
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -323,9 +323,6 @@
 
 <script>
 import modalFormLgHelper  from '@/components/helpers/modal-form-lg-helper'
-import axios              from 'axios'
-import alumnosApi         from '@/services/api/alumnos'
-import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -335,105 +332,25 @@ export default {
   props: [
     'show',
     'title',
-    'action',
     'alumno'
   ],
-
-  computed: {
-//    ...mapGetters({ currentUser: 'currentUser'})
-  },
     
   data () {
     return {
     }
   },
 
-  created () {
-  },
-
-  updated () {
-  },
-
   methods: {
     onClosed: function () {
       this.$emit('onClosed');
     },
+
     onCanceled: function () {
       this.$emit('onCanceled')
     },
+
     onAccepted: function () {
-
-      // Creamos un alumno
-      if (this.action === 'create'){
-        
-        this.alumno.autoescuela_id = this.$store.state.autoescuelas.autoescuela._id
-
-        return alumnosApi.saveAlumno(this.alumno)
-          .then(data => {
-            // Si todo es correcto inicializo el formulario
-            this.alumno = {
-              _id: '',
-              autoescuela_id: '',
-              dni: '',
-              dni_fecha_caducidad: '',
-              nombre: '',
-              primer_apellido: '',
-              segundo_apellido: '',
-              sexo: 'H',
-              fecha_nacimiento: '',
-              pais_nacimiento: '',
-              nacionalidad: '',
-              direccion: {
-                via: {
-                  tipo: '',
-                  nombre: '',
-                  numero: '',
-                  bloque: '',
-                  portal: '',
-                  escalera: '',
-                  planta: '',
-                  puerta: '',
-                  kilometro: ''
-                },
-                codigo_postal: '',
-                poblacion: '',
-                provincia: '',
-                pais: ''
-              },
-              contacto: {
-                  telefono_fijo: '',
-                  telefono_movil: '',
-                  whatsapp: '',
-                  email: '',
-                  facebook: '',
-                  twitter: ''
-              },
-              documentacion_aportada: {
-                  entrega_fotocopia_dni: false,
-                  entrega_psicotecnico: false,
-                  entrega_fotografias: false,
-                  firma_tasas_examen: false,
-                  firma_autorizacion: false,
-                  firma_talon_foto: false
-              },
-              fecha_creacion: '',
-              estado: true
-            }
-
-          })
-          .catch(err => {
-              console.log(err)
-          })
-      } 
-
-      // Editamos un usuario
-      if (this.action === 'edit'){
-      
-      }
-
-
       this.$emit('onAccepted')
-
     },
   }
   

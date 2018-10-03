@@ -75,7 +75,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters }     from 'vuex'
+import alumnosApi         from '@/services/api/alumnos.js'
 
 export default {
   name: 'profesores',
@@ -163,26 +164,72 @@ export default {
           fecha_creacion: 'fecha_creacion_asdf2',
           estado: 'estado_asdf2'
         }
-      ]
+      ],
+      alumnos: [],
+      model: {},
     }
   },
   computed: {
 //    ...mapGetters({ currentUser: 'currentUser' })
   },
-  created () {
-//    this.checkCurrentLogin()
+  async created () {
+    this.refreshAlumnos()
   },
   updated () {
 //    this.checkCurrentLogin()
   },
   methods: {
-/*
-    checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/login') {
-        this.$router.push('/login')
+    async refreshAlumnos () {
+      // Muestro el mensaje de Loading
+      this.$store.dispatch('showLoading')
+      
+      // Cargo los datos de la base de datos
+      this.alumnos = await alumnosApi.getAlumnoAll()
+        .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            if (data.code === 200){
+              return data.result.alumnos
+            }else{
+              return null
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+      // Oculto el mensaje de Loading
+      this.$store.dispatch('hideLoading')
+    },
+
+    async populateAlumnoPostToEdit (alumno) {
+      this.model = Object.assign({}, alumno)
+    },
+
+    async saveAlumno () {
+      if (this.model._id) {
+        await api.updateAlumno(this.model._id, this.model)
+      } else {
+        await api.createAlumno(this.model)
+      }
+      this.model = {} // reset form
+      await this.refreshAlumnos()
+    },
+    
+    async deleteAlumno (id) {
+      if (confirm('¿Está seguro que desea borrar este alumno?')) {
+        // if we are editing a post we deleted, remove it from the form
+        if (this.model._id === id) {
+          this.model = {}
+        }
+        await api.deleteAlumno(id)
+        await this.refreshAlumnos()
       }
     }
-*/
+
+
+
+
   }
 }
 </script>
