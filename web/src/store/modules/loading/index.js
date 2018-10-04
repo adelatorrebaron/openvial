@@ -8,7 +8,7 @@ const state = {
 };
 
 export default {
-  namespaced: true,
+  namespaced: false,
   state,
   actions,
   getters,
