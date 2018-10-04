@@ -42,13 +42,13 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Dni:</label>
-                        <input v-model="alumno.dni" type="text" class="form-control" placeholder="Dni" required>
+                        <input v-model="alumno.dni" type="text" class="form-control" placeholder="Dni" maxlength="9" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Fecha caducidad Dni:</label>
-                        <input v-model="alumno.dni_fecha_caducidad" type="text" class="form-control" placeholder="01/01/2018" required>
+                        <input v-model="alumno.dni_fecha_caducidad" type="text" class="form-control" placeholder="01/01/2018" maxlength="10" required>
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -65,19 +65,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Nombre:</label>
-                        <input v-model="alumno.nombre" type="text" class="form-control" placeholder="Nombre" required>
+                        <input v-model="alumno.nombre" type="text" class="form-control" placeholder="Nombre" maxlength="30" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Primer apellido:</label>
-                        <input v-model="alumno.primer_apellido" type="text" class="form-control" placeholder="Primer apellido" required>
+                        <input v-model="alumno.primer_apellido" type="text" class="form-control" placeholder="Primer apellido" maxlength="30" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Segundo apellido:</label>
-                        <input v-model="alumno.segundo_apellido" type="text" class="form-control" placeholder="Segundo apellido" required>
+                        <input v-model="alumno.segundo_apellido" type="text" class="form-control" placeholder="Segundo apellido" maxlength="30" required>
                       </div>
                     </div>
                   </div>
@@ -85,19 +85,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Fecha nacimiento:</label>
-                        <input v-model="alumno.fecha_nacimiento" type="text" class="form-control" placeholder="01/01/2018" required>
+                        <input v-model="alumno.fecha_nacimiento" type="text" class="form-control" placeholder="01/01/2018" maxlength="10" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*País de nacimiento:</label>
-                        <input v-model="alumno.pais_nacimiento" type="text" class="form-control" placeholder="País de nacimiento" required>
+                        <input v-model="alumno.pais_nacimiento" type="text" class="form-control" placeholder="País de nacimiento" maxlength="30" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Nacionalidad:</label>
-                        <input v-model="alumno.nacionalidad" type="text" class="form-control" placeholder="Nacionalidad" required>
+                        <input v-model="alumno.nacionalidad" type="text" class="form-control" placeholder="Nacionalidad" maxlength="30" required>
                       </div>
                     </div>                    
                   </div>
@@ -109,19 +109,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Tipo de via:</label>
-                        <input v-model="alumno.direccion.via.tipo" type="text" class="form-control" placeholder="Tipo de via" required>
+                        <input v-model="alumno.direccion.via.tipo" type="text" class="form-control" placeholder="Tipo de via" maxlength="25" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Nombre de la via:</label>
-                        <input v-model="alumno.direccion.via.nombre" type="text" class="form-control" placeholder="Nombre de la via" required>
+                        <input v-model="alumno.direccion.via.nombre" type="text" class="form-control" placeholder="Nombre de la via" maxlength="120" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Número:</label>
-                        <input v-model="alumno.direccion.via.numero" type="text" class="form-control" placeholder="Numero" required>
+                        <input v-model="alumno.direccion.via.numero" type="text" class="form-control" placeholder="Numero" maxlength="10" required>
                       </div>
                     </div>
                   </div>
@@ -129,19 +129,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Bloque:</label>
-                        <input v-model="alumno.direccion.via.bloque" type="text" class="form-control" placeholder="Bloque">
+                        <input v-model="alumno.direccion.via.bloque" type="text" class="form-control" placeholder="Bloque" maxlength="60">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Portal:</label>
-                        <input v-model="alumno.direccion.via.portal" type="text" class="form-control" placeholder="Portal">
+                        <input v-model="alumno.direccion.via.portal" type="text" class="form-control" placeholder="Portal" maxlength="20">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Escalera:</label>
-                        <input v-model="alumno.direccion.via.escalera" type="text" class="form-control" placeholder="Escalera">
+                        <input v-model="alumno.direccion.via.escalera" type="text" class="form-control" placeholder="Escalera" maxlength="20">
                       </div>
                     </div>
                   </div>
@@ -149,19 +149,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Planta:</label>
-                        <input v-model="alumno.direccion.via.planta" type="text" class="form-control" placeholder="Planta">
+                        <input v-model="alumno.direccion.via.planta" type="text" class="form-control" placeholder="Planta" maxlength="20">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Puerta:</label>
-                        <input v-model="alumno.direccion.via.puerta" type="text" class="form-control" placeholder="Puerta">
+                        <input v-model="alumno.direccion.via.puerta" type="text" class="form-control" placeholder="Puerta" maxlength="20">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Kilómetro:</label>
-                        <input v-model="alumno.direccion.via.kilometro" type="text" class="form-control" placeholder="Kilometro">
+                        <input v-model="alumno.direccion.via.kilometro" type="text" class="form-control" placeholder="Kilometro" maxlength="20">
                       </div>
                     </div>
                   </div>
@@ -169,25 +169,25 @@
                     <div class="col-md-2">
                       <div class="form-group">
                         <label>*Código Postal:</label>
-                        <input v-model="alumno.direccion.codigo_postal" type="text" class="form-control" placeholder="Código Postal" required>
+                        <input v-model="alumno.direccion.codigo_postal" type="text" class="form-control" placeholder="Código Postal" maxlength="5" required>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Población:</label>
-                        <input v-model="alumno.direccion.poblacion" type="text" class="form-control" placeholder="Población" required>
+                        <input v-model="alumno.direccion.poblacion" type="text" class="form-control" placeholder="Población" maxlength="50" required>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>*Provincia:</label>
-                        <input v-model="alumno.direccion.provincia" type="text" class="form-control" placeholder="Provincia" required>
+                        <input v-model="alumno.direccion.provincia" type="text" class="form-control" placeholder="Provincia" maxlength="50" required>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
                         <label>*País:</label>
-                        <input v-model="alumno.direccion.pais" type="text" class="form-control" placeholder="País" required>
+                        <input v-model="alumno.direccion.pais" type="text" class="form-control" placeholder="País" maxlength="30" required>
                       </div>
                     </div>
                   </div>
@@ -199,19 +199,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Teléfono fijo:</label>
-                        <input v-model="alumno.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo">
+                        <input v-model="alumno.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo" maxlength="12">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Teléfono móvil:</label>
-                        <input v-model="alumno.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil">
+                        <input v-model="alumno.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil" maxlength="12">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Whatsapp:</label>
-                        <input v-model="alumno.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp">
+                        <input v-model="alumno.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp" maxlength="12">
                       </div>
                     </div>
                   </div>
@@ -219,19 +219,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Email:</label>
-                        <input v-model="alumno.contacto.email" type="text" class="form-control" placeholder="Email">
+                        <input v-model="alumno.contacto.email" type="text" class="form-control" placeholder="Email" maxlength="255">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Facebook:</label>
-                        <input v-model="alumno.contacto.facebook" type="text" class="form-control" placeholder="Facebook">
+                        <input v-model="alumno.contacto.facebook" type="text" class="form-control" placeholder="Facebook" maxlength="255">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Twitter:</label>
-                        <input v-model="alumno.contacto.twitter" type="text" class="form-control" placeholder="Twitter">
+                        <input v-model="alumno.contacto.twitter" type="text" class="form-control" placeholder="Twitter" maxlength="255">
                       </div>
                     </div>
                   </div>                  

@@ -214,26 +214,14 @@ export default {
       this.$store.dispatch('hideLoading')
     },
 
-/*
-    async deleteAlumno (id) {
-      if (confirm('¿Está seguro que desea borrar este alumno?')) {
-        if (this.model._id === id) {
-          this.resetModel()
-        }      
-        // Eliminamos el alumno
-        await alumnosApi.deleteAlumno(id)
 
-        // Obtenemos la lista de alumnos
-        await this.refreshAlumnos()
-      }
-    },
-*/
     async deleteAlumno (alumno) {
 
       this.model = alumno
 
       this.confirmFormShow = true
     },
+
 
     async resetModel(){
       // Ponemos el modelo con los valores por defecto
