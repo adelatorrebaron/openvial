@@ -14,7 +14,7 @@
       </section>
 
       <section class="content-header" style="text-align:right">
-        <button type="button" class="btn btn-success btn-circle btn-xl" v-on:click="showAlumnoModalForm()">
+        <button type="button" class="btn btn-primary btn-circle btn-xl" v-on:click="showAlumnoModalForm()">
           <i class="fa fa-plus"></i>
         </button>
       </section>

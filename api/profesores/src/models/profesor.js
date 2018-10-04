@@ -34,16 +34,16 @@ const ProfesorSchema = mongoose.Schema({
     },
     contacto: {
         telefono_fijo: {type: String, maxlength: 12},
-        telefono_movil: {type: String, maxlength: 12},
+        telefono_movil: {type: String, required: true, maxlength: 12},
         whatsapp: {type: String, maxlength: 12},
         email:{type: String, maxlength: 255, lowercase: true},
         facebook: {type: String, maxlength: 255, lowercase: true},
         twitter: {type: String, maxlength: 255, lowercase: true}
     },
     permisos_conduccion: [{
-        tipo: {type: String, required: true , maxlength: 50},
-        fecha_antiguedad: {type: Date, required: true},
-        fecha_caducidad: {type: Date, required: true},
+        tipo: {type: String, maxlength: 50},
+        fecha_antiguedad: {type: Date},
+        fecha_caducidad: {type: Date},
     }],
     datos_bancarios: {
         nombre_entidad: {type: String, maxlength: 30},

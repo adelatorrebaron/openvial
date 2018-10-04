@@ -71,7 +71,7 @@ exports.profesores_get_all =  (req, res, next) => {
                                 codigo_iban: doc.datos_bancarios.codigo_iban,
                                 codigo_entidad: doc.datos_bancarios.codigo_entidad,
                                 codigo_oficina: doc.datos_bancarios.codigo_oficina,
-                                digito_control: doc.datos_bancarios.digito_de_control,
+                                digito_control: doc.datos_bancarios.digito_control,
                                 numero_de_cuenta: doc.datos_bancarios.numero_de_cuenta
                             },
                             fecha_creacion: doc.fecha_creacion,
@@ -143,8 +143,8 @@ exports.profesores_create = (req, res, next) => {
         permisos_conduccion: req.body.permisos_conduccion.map(permiso => {
             return {
                 tipo: permiso.tipo,
-                fecha_antiguedad: moment(permiso.fecha_antiguedad, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-                fecha_caducidad: moment(permiso.fecha_antiguedad, 'DD/MM/YYYY').format('YYYY-MM-DD')
+                fecha_antiguedad: permiso.fecha_antiguedad ? moment(permiso.fecha_antiguedad, 'DD/MM/YYYY').format('YYYY-MM-DD') : '',
+                fecha_caducidad: permiso.fecha_caducidad ? moment(permiso.fecha_caducidad, 'DD/MM/YYYY').format('YYYY-MM-DD') : ''
             }
         }),
         datos_bancarios: {
@@ -152,7 +152,7 @@ exports.profesores_create = (req, res, next) => {
             codigo_iban: req.body.datos_bancarios.codigo_iban,
             codigo_entidad: req.body.datos_bancarios.codigo_entidad,
             codigo_oficina: req.body.datos_bancarios.codigo_oficina,
-            digito_control: req.body.datos_bancarios.digito_de_control,
+            digito_control: req.body.datos_bancarios.digito_control,
             numero_de_cuenta: req.body.datos_bancarios.numero_de_cuenta
         },        
         estado: req.body.estado
@@ -215,7 +215,7 @@ exports.profesores_create = (req, res, next) => {
                             codigo_iban: result.datos_bancarios.codigo_iban,
                             codigo_entidad: result.datos_bancarios.codigo_entidad,
                             codigo_oficina: result.datos_bancarios.codigo_oficina,
-                            digito_control: result.datos_bancarios.digito_de_control,
+                            digito_control: result.datos_bancarios.digito_control,
                             numero_de_cuenta: result.datos_bancarios.numero_de_cuenta
                         },
                         fecha_creacion: result.fecha_creacion,
@@ -306,7 +306,7 @@ exports.profesores_get_by_profesorId = (req, res, next) => {
                                 codigo_iban: doc.datos_bancarios.codigo_iban,
                                 codigo_entidad: doc.datos_bancarios.codigo_entidad,
                                 codigo_oficina: doc.datos_bancarios.codigo_oficina,
-                                digito_control: doc.datos_bancarios.digito_de_control,
+                                digito_control: doc.datos_bancarios.digito_control,
                                 numero_de_cuenta: doc.datos_bancarios.numero_de_cuenta
                             },                  
                             fecha_creacion: doc.fecha_creacion,
