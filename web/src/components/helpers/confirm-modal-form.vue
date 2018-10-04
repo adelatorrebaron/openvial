@@ -33,7 +33,6 @@ export default {
       'show',     // Mostrará el formulario
       'title',    // Permitira asignar el titulo al formulario
       'message',  // Permitira asignar el mensaje al formulario
-      'itemId'
       ],
 
     methods: {
@@ -47,7 +46,7 @@ export default {
       },
 
       onAccepted: function () {
-        this.$emit('onAccepted', 'un valor');
+        this.$emit('onAccepted');
       },      
     },
 }

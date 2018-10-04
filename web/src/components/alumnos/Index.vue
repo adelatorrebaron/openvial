@@ -73,7 +73,7 @@
                         <div class="pull-right">
                           <!--<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button>-->
                           <button type="button" class="btn btn-primary btn-sm" @click.prevent="populateAlumnoToEdit(alumno)"><i class="fa fa-pencil"></i></button>
-                          <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteAlumno(alumno._id)"><i class="fa fa-remove"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteAlumno(alumno)"><i class="fa fa-remove"></i></button>
                         </div>
                       </td>
                     </tr>
@@ -98,6 +98,16 @@
       v-on:onAccepted="onAcceptedAlumnoModalForm()">
     </alumno-modal-form>
 
+    <!-- Formulario para confirmar la eliminarcion del alumno -->
+    <confirm-modal-form v-if="model !== null"
+      v-bind:show="confirmFormShow"
+      v-bind:title="'Eliminar alumno'"
+      v-bind:message="'Está seguro que desea borrar el alumno con dni ' + model.dni + ' y de nombre ' + this.fullName(model)"
+      v-on:onClosed="onClosedConfirmModalForm()" 
+      v-on:onCanceled="onCanceledConfirmModalForm()" 
+      v-on:onAccepted="onAcceptedConfirmModalForm()">
+    </confirm-modal-form>
+
   </div>
 
 </template>
@@ -105,18 +115,21 @@
 <script>
 import alumnosApi         from '@/services/api/alumnos.js'
 import alumnoModalForm    from '@/components/alumnos/alumno-modal-form'
+import confirmModalForm   from '@/components/helpers/confirm-modal-form'
 
 export default {
   name: 'alumnos',
 
   components: {
-    'alumno-modal-form':    alumnoModalForm
+    'alumno-modal-form':    alumnoModalForm,
+    'confirm-modal-form':   confirmModalForm
   },
 
   data () {
     return {
       ventanaTitulo: 'Alumnos',
       alumnoFormShow: false,
+      confirmFormShow: false,
       alumnos: [],
       model: {},
       search: ''
@@ -201,7 +214,7 @@ export default {
       this.$store.dispatch('hideLoading')
     },
 
-
+/*
     async deleteAlumno (id) {
       if (confirm('¿Está seguro que desea borrar este alumno?')) {
         if (this.model._id === id) {
@@ -214,7 +227,13 @@ export default {
         await this.refreshAlumnos()
       }
     },
+*/
+    async deleteAlumno (alumno) {
 
+      this.model = alumno
+
+      this.confirmFormShow = true
+    },
 
     async resetModel(){
       // Ponemos el modelo con los valores por defecto
@@ -305,7 +324,56 @@ export default {
 
       // Oculto el mensaje de Loading
       this.$store.dispatch('hideLoading')
+    },
+
+
+    onClosedConfirmModalForm(){
+      // Ocultamos el formulario
+      this.confirmFormShow = false;
+
+      // Reseteamos el modelo
+      this.resetModel()
+    },
+
+
+    onCanceledConfirmModalForm(){
+      // Ocultamos el formulario
+      this.confirmFormShow = false;
+
+      // Reseteamos el modelo
+      this.resetModel()      
+    },
+
+
+    async onAcceptedConfirmModalForm(){
+      // Muestro el mensaje de Loading
+      this.$store.dispatch('showLoading')
+
+      // Ocultamos el formulario de confirmación
+      this.confirmFormShow = false;
+      
+      // Eliminamos el alumno
+       await alumnosApi.deleteAlumno(this.model._id)
+
+      // Actualizamos la lista de alumnos
+      await this.refreshAlumnos()
+
+      // Reseteamos el modelo
+      this.resetModel()
+
+      // Oculto el mensaje de Loading
+      this.$store.dispatch('hideLoading')
     }
+
+
+
+
+
+
+
+
+
+
 
   }
 }
