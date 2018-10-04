@@ -4,11 +4,12 @@ import getters from './getters';
 import mutations from './mutations';
 
 const state = {
-  loading: false
+  alumnos: null,
+  alumno: null
 };
 
 export default {
-  namespaced: true,
+  namespaced: false,
   state,
   actions,
   getters,

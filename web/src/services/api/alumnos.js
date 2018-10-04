@@ -28,7 +28,7 @@ export default {
         })
     },
 
-    getAlumnoAll() {
+    getAlumnosAll() {
         return axios.get(API_URL + '/alumnos/')
             .then(request => {
                 // Devuelvo los datos obtenidos del API externo
