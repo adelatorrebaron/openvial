@@ -36,19 +36,19 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Teléfono móvil:</label>
-                        <input v-model="currentUser.perfil.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil">
+                        <input v-model="currentUser.perfil.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil" maxlength="12">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Whatsapp:</label>
-                        <input v-model="currentUser.perfil.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp">
+                        <input v-model="currentUser.perfil.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp" maxlength="12">
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Teléfono fijo:</label>
-                        <input v-model="currentUser.perfil.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo">
+                        <input v-model="currentUser.perfil.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo" maxlength="12">
                       </div>
                     </div>
                   </div>
@@ -56,7 +56,7 @@
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Sitio web:</label>
-                        <input v-model="currentUser.perfil.contacto.website" type="text" class="form-control" placeholder="Sitio web">
+                        <input v-model="currentUser.perfil.contacto.website" type="text" class="form-control" placeholder="Sitio web" maxlength="255">
                       </div>
                     </div>
                   </div>
@@ -64,13 +64,13 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Facebook:</label>
-                        <input v-model="currentUser.perfil.contacto.facebook" type="text" class="form-control" placeholder="Facebook">
+                        <input v-model="currentUser.perfil.contacto.facebook" type="text" class="form-control" placeholder="Facebook" maxlength="255">
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Twitter:</label>
-                        <input v-model="currentUser.perfil.contacto.twitter" type="text" class="form-control" placeholder="Twitter">
+                        <input v-model="currentUser.perfil.contacto.twitter" type="text" class="form-control" placeholder="Twitter" maxlength="255">
                       </div>
                     </div>
                   </div>
@@ -78,12 +78,12 @@
                 
                 <!-- Educacion Tab -->
                 <div class="tab-pane" id="tab_Educacion">
-                  <textarea v-model="currentUser.perfil.educacion" class="form-control noresize" rows="10" placeholder="Introduzca información referente a sus estudios"></textarea>
+                  <textarea v-model="currentUser.perfil.educacion" class="form-control noresize" rows="10" placeholder="Introduzca información referente a sus estudios" maxlength="255"></textarea>
                 </div>
                 
                 <!-- Observaciones Tab -->
                 <div class="tab-pane" id="tab_Observaciones">
-                  <textarea v-model="currentUser.perfil.notas" class="form-control noresize" rows="10" placeholder="Introduzca cualquier información de desee guardar"></textarea>
+                  <textarea v-model="currentUser.perfil.notas" class="form-control noresize" rows="10" placeholder="Introduzca cualquier información de desee guardar" maxlength="255"></textarea>
                 </div>
               </div>
             </div>

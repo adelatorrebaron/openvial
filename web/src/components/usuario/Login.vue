@@ -11,11 +11,11 @@
     <form @submit.prevent="login">
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <div class="form-group has-feedback">
-        <input v-model="email" type="email" class="form-control" placeholder="Email" required autofocus>
+        <input v-model="email" type="email" class="form-control" placeholder="Email" maxlength="255" required autofocus>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input v-model="password" type="password" class="form-control" placeholder="Password" required>
+        <input v-model="password" type="password" class="form-control" placeholder="Password" maxlength="255" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

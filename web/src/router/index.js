@@ -9,7 +9,6 @@ import Inicio from '@/components/inicio/Index'
 import UsuarioRegister from '@/components/usuario/Register'
 import UsuarioLogin from '@/components/usuario/Login'
 import UsuarioLogout from '@/components/usuario/Logout'
-import UsuarioProfile from '@/components/usuario/Profile'
 
 import NotFound404 from '@/components/errors/NotFound404'
 
@@ -88,12 +87,6 @@ export default new Router({
       path: '/usuario/logout',
       name: 'UsuarioLogout',
       component: UsuarioLogout,
-      beforeEnter: ifAuthenticated
-    },
-    {
-      path: '/usuario/perfil',
-      name: 'UsuarioProfile',
-      component: UsuarioProfile,
       beforeEnter: ifAuthenticated
     },
     {
