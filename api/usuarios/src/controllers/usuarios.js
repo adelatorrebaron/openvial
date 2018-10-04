@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 const Usuario = require('../models/usuario');
 const config = require('../config');
 
+const moment = require('moment');
+
 
 //
 // Permite el registro de un usuario
@@ -165,7 +167,7 @@ exports.usuarios_login =  (req, res, next) => {
                                         notas: usuario[0].perfil.notas,
                                         avatar: usuario[0].perfil.avatar
                                     },
-                                    fecha_creacion: usuario[0].fecha_creacion,
+                                    fecha_creacion: moment(usuario[0].fecha_creacion, 'YYYY-MM-DD').format('DD/MM/YYYY'),
                                     estado: usuario[0].estado
                                 },
                                 token: token
@@ -225,7 +227,7 @@ exports.usuarios_get_all =  (req, res, next) => {
                                 notas: doc.perfil.notas,
                                 avatar: doc.perfil.avatar
                             },
-                            fecha_creacion: doc.fecha_creacion,
+                            fecha_creacion: moment(doc.fecha_creacion, 'YYYY-MM-DD').format('DD/MM/YYYY'),
                             estado: doc.estado,
                             request: {
                                 descripcion: 'Obtener el registro',
@@ -280,7 +282,7 @@ exports.usuarios_get_by_usuarioId = (req, res, next) => {
                             notas: doc.perfil.notas,
                             avatar: doc.perfil.avatar
                         },
-                        fecha_creacion: doc.fecha_creacion,
+                        fecha_creacion: moment(doc.fecha_creacion, 'YYYY-MM-DD').format('DD/MM/YYYY'),
                         estado: doc.estado,
                         request: {
                             descripcion: 'Obtener todos los registros',

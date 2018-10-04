@@ -48,7 +48,7 @@
 										<img src="@/assets/user_default.png" class="img-circle" alt="User Image">
 										<p>
 											{{ currentUser.username }}
-											<small>Miembro desde {{getHumanDate(currentUser.fecha_creacion)}}</small>
+											<small>Miembro desde {{ currentUser.fecha_creacion }}</small>
 										</p>
 									</li>
 									<!-- Menu Footer-->
