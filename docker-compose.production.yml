@@ -54,16 +54,16 @@ services:
     environment:
       - MONGO_DB_URI= mongodb://mongo:27017/openvial_profesores
 
-#  pagos:
-#    container_name: pagos
-#    restart: always
-#    build: './api/pagos'
-#    ports:
-#      - "127.0.0.1:3005:3005"
-#    depends_on:
-#      - mongo
-#    environment:
-#      - MONGO_DB_URI= mongodb://mongo:27017/openvial_pagos
+  vehiculos:
+    container_name: vehiculos
+    restart: always
+    build: './api/vehiculos'
+    ports:
+      - "127.0.0.1:3005:3005"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_DB_URI= mongodb://mongo:27017/openvial_vehiculos
 
 #  cursos:
 #    container_name: cursos
@@ -87,16 +87,16 @@ services:
 #    environment:
 #      - MONGO_DB_URI= mongodb://mongo:27017/openvial_clases
 
-#  vehiculos:
-#    container_name: vehiculos
+#  pagos:
+#    container_name: pagos
 #    restart: always
-#    build: './api/vehiculos'
+#    build: './api/pagos'
 #    ports:
 #      - "127.0.0.1:3008:3008"
 #    depends_on:
 #      - mongo
 #    environment:
-#      - MONGO_DB_URI= mongodb://mongo:27017/openvial_vehiculos
+#      - MONGO_DB_URI= mongodb://mongo:27017/openvial_pagos
 
   correos:
     container_name: correos
@@ -118,18 +118,19 @@ services:
       - autoescuelas
       - alumnos
       - profesores
+      - vehiculos
 #      - pagos
 #      - cursos
 #      - clases
-#      - vehiculos
+
       - correos
     environment:
       - URL_API_USUARIOS=http://localhost:3001/api/v1
       - URL_API_AUTOESCUELAS=http://localhost:3002/api/v1
       - URL_API_ALUMNOS=http://localhost:3003/api/v1
       - URL_API_PROFESORES=http://localhost:3004/api/v1
-#      - URL_API_PAGOS=http://localhost:3005/api/v1
+      - URL_API_VEHICULOS=http://localhost:3005/api/v1
 #      - URL_API_CURSOS=http://localhost:3006/api/v1
 #      - URL_API_CLASES=http://localhost:3007/api/v1
-#      - URL_API_VEHICULOS=http://localhost:3008/api/v1
+#      - URL_API_PAGOS=http://localhost:3008/api/v1
       - URL_API_CORREOS=http://localhost:3010/api/v1

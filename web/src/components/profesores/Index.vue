@@ -51,8 +51,8 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody v-for="profesor in searchProfesor" v-bind:key="profesor.id">
-                    <tr>
+                  <tbody>
+                    <tr v-for="profesor in searchProfesor" v-bind:key="profesor._id">
                       <td v-if="profesor.estado === true">
                         <div class="text-info">
                           <i class="fa fa-circle"></i>
@@ -216,8 +216,8 @@ export default {
 
 
     async deleteProfesor (profesor) {
-
-      this.model = profesor
+      // Clonamos el objeto profesor en el objeto modelo
+      this.model = Object.assign({}, profesor)
 
       this.confirmFormShow = true
     },
@@ -343,7 +343,7 @@ export default {
       this.confirmFormShow = false;
       
       // Eliminamos el profesor
-       await profesoresApi.deleteProfesor(this.model._id)
+      await profesoresApi.deleteProfesor(this.model._id)
 
       // Actualizamos la lista de profesores
       await this.refreshProfesores()

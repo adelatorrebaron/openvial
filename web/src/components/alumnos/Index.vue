@@ -51,8 +51,8 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody v-for="alumno in searchAlumno" v-bind:key="alumno.id">
-                    <tr>
+                  <tbody>
+                    <tr v-for="alumno in searchAlumno" v-bind:key="alumno._id">
                       <td v-if="alumno.estado === true">
                         <div class="text-info">
                           <i class="fa fa-circle"></i>
@@ -216,8 +216,8 @@ export default {
 
 
     async deleteAlumno (alumno) {
-
-      this.model = alumno
+      // Clonamos el objeto profesor en el objeto modelo
+      this.model = Object.assign({}, alumno)
 
       this.confirmFormShow = true
     },
@@ -353,18 +353,10 @@ export default {
       this.$store.dispatch('hideLoading')
     }
 
-
-
-
-
-
-
-
-
-
-
   }
+
 }
+
 </script>
 
 
