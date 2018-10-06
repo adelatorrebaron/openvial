@@ -14,7 +14,7 @@
       </section>
 
       <section class="content-header" style="text-align:right">
-        <button type="button" class="btn btn-primary btn-circle btn-xl" v-on:click="showAlumnoModalForm()">
+        <button type="button" class="btn btn-primary btn-circle btn-xl" v-on:click="showClasePracticaModalForm()">
           <i class="fa fa-plus"></i>
         </button>
       </section>
@@ -26,14 +26,16 @@
             <div class="box">
 
               <div class="box-header">
-                <h3 class="box-title">Listado de alumnos</h3>
+                <h3 class="box-title">Listado de clases prácticas</h3>
                 <div class="box-tools">
+                  <!--
                   <div class="input-group input-group-sm" style="width: 250px;">
                     <input type="text" v-model="search" class="form-control pull-right" placeholder="Busqueda por DNI">
                     <div class="input-group-btn">
                       <button type="button" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
                     </div>
                   </div>
+                  -->
                 </div>
               </div>
               
@@ -41,39 +43,27 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th></th>
-                      <th>Dni</th>
-                      <th>Nombre completo</th>
-                      <th class="text-center">Fecha de nacimiento</th>
-                      <th>Teléfono fijo</th>
-                      <th>Teléfono móvil</th>
-                      <th>Correo electrónico</th>
+                      <th>Alumno</th>
+                      <th>Profesor</th>
+                      <th class="text-center">Matrícula vehículo</th>
+                      <th class="text-center">Fecha</th>
+                      <th class="text-center">Hora inicio</th>
+                      <th class="text-center">Hora finalización</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="alumno in searchAlumno" v-bind:key="alumno._id">
-                      <td v-if="alumno.estado === true">
-                        <div class="text-info">
-                          <i class="fa fa-circle"></i>
-                        </div>
-                      </td>
-                      <td v-else>
-                        <div class="text-info">
-                          <i class="fa fa-circle-o"></i>
-                        </div>                      
-                      </td>
-                      <td>{{ alumno.dni }}</td>
-                      <td>{{ fullName(alumno) }}</td> <!-- Aqui muestro el nombre completo que lo genera una funcion -->
-                      <td class="text-center">{{ alumno.fecha_nacimiento }}</td>
-                      <td>{{ alumno.contacto.telefono_fijo }}</td>
-                      <td>{{ alumno.contacto.telefono_movil }}</td>
-                      <td>{{ alumno.contacto.email }}</td>
+                    <tr v-for="clase_practica in clases_practicas" v-bind:key="clase_practica._id">
+                      <td>{{ nombreAlumnoCompleto(clase_practica.alumno_id) }}</td>
+                      <td>{{ nombreProfesorCompleto(clase_practica.profesor_id) }}</td>
+                      <td class="text-center">{{ matriculaVehiculo(clase_practica.vehiculo_id) }}</td>
+                      <td class="text-center">{{ clase_practica.fecha_clase }}</td>
+                      <td class="text-center">{{ clase_practica.hora_inicio }}</td>
+                      <td class="text-center">{{ clase_practica.hora_finalizacion }}</td>
                       <td>
                         <div class="pull-right">
-                          <!--<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button>-->
-                          <button type="button" class="btn btn-primary btn-sm" @click.prevent="populateAlumnoToEdit(alumno)"><i class="fa fa-pencil"></i></button>
-                          <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteAlumno(alumno)"><i class="fa fa-remove"></i></button>
+                          <button type="button" class="btn btn-primary btn-sm" @click.prevent="populateClasePracticaToEdit(clase_practica)"><i class="fa fa-pencil"></i></button>
+                          <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteClasePractica(clase_practica)"><i class="fa fa-remove"></i></button>
                         </div>
                       </td>
                     </tr>
@@ -86,23 +76,29 @@
           </div>
         </div>
       </section>
+
     </div>
 
-    <!-- Formulario para crear y editar un alumno -->
-    <alumno-modal-form v-if="model !== null"
-      v-bind:show="alumnoFormShow"
-      v-bind:title="(model._id ? 'Editar alumno' : 'Nuevo alumno')"
-      v-bind:alumno="model"
-      v-on:onClosed="onClosedAlumnoModalForm()" 
-      v-on:onCanceled="onCanceledAlumnoModalForm()" 
-      v-on:onAccepted="onAcceptedAlumnoModalForm()">
-    </alumno-modal-form>
+    <!-- Formulario para crear y editar una clase practica -->
 
-    <!-- Formulario para confirmar la eliminarcion del alumno -->
+    <clase_practica-modal-form v-if="model !== null"
+      v-bind:show="clase_practicaFormShow"
+      v-bind:title="(model._id ? 'Editar clase práctica' : 'Nueva clase práctica')"
+      v-bind:clase_practica="model"
+      v-bind:alumnos="alumnos"
+      v-bind:profesores="profesores"
+      v-bind:vehiculos="vehiculos"
+      v-on:onClosed="onClosedClasePracticaModalForm()" 
+      v-on:onCanceled="onCanceledClasePracticaModalForm()" 
+      v-on:onAccepted="onAcceptedClasePracticaModalForm()">
+    </clase_practica-modal-form>
+
+
+    <!-- Formulario para confirmar la eliminarcion de la clase practica -->
     <confirm-modal-form v-if="model !== null"
       v-bind:show="confirmFormShow"
-      v-bind:title="'Eliminar alumno'"
-      v-bind:message="'Está seguro que desea borrar el alumno con dni ' + model.dni + ' y de nombre ' + this.fullName(model)"
+      v-bind:title="'Eliminar clase práctica'"
+      v-bind:message="'¿Está seguro que desea borrar la clase práctica?'"
       v-on:onClosed="onClosedConfirmModalForm()" 
       v-on:onCanceled="onCanceledConfirmModalForm()" 
       v-on:onAccepted="onAcceptedConfirmModalForm()">
@@ -113,24 +109,31 @@
 </template>
 
 <script>
-import alumnosApi         from '@/services/api/alumnos.js'
-import alumnoModalForm    from '@/components/alumnos/alumno-modal-form'
-import confirmModalForm   from '@/components/helpers/confirm-modal-form'
+import clases_practicasApi      from '@/services/api/clases_practicas.js'
+import alumnosApi               from '@/services/api/alumnos.js'
+import profesoresApi            from '@/services/api/profesores.js'
+import vehiculosApi             from '@/services/api/vehiculos.js'
+
+import clase_practicaModalForm  from '@/components/clases_practicas/clases_practicas-modal-form'
+import confirmModalForm         from '@/components/helpers/confirm-modal-form'
 
 export default {
-  name: 'alumnos',
+  name: 'clases_practicas',
 
   components: {
-    'alumno-modal-form':    alumnoModalForm,
-    'confirm-modal-form':   confirmModalForm
+    'clase_practica-modal-form':    clase_practicaModalForm,
+    'confirm-modal-form':           confirmModalForm
   },
 
   data () {
     return {
-      ventanaTitulo: 'Alumnos',
-      alumnoFormShow: false,
+      ventanaTitulo: 'Clases prácticas',
+      clase_practicaFormShow: false,
       confirmFormShow: false,
+      clases_practicas: [],
       alumnos: [],
+      profesores: [],
+      vehiculos:[],
       model: {},
       search: ''
     }
@@ -138,30 +141,72 @@ export default {
 
   computed: {
     // Busca un alumno por el dni
+    /*
     searchAlumno () {
       return this.alumnos.filter((alumno) => alumno.dni.includes(this.search)); 
-    },
+    }
+    */
+
   },
 
   async created () {
-    // Recargamos los alumnos de la base de datos
-    this.refreshAlumnos()
     
+    // Obtengo todos los datos a la vez
+    Promise.all([
+      this.refreshClasesPracticas(),
+      this.refreshAlumnos(),
+      this.refreshVehiculos(),
+      this.refreshProfesores()
+    ])
+      .then((data) => {
+        this.clases_practicas = data[0]
+        this.alumnos          = data[1]
+        this.vehiculos        = data[2]
+        this.profesores       = data[3]
+      })
+
     // Reseteamos el modelo
     this.resetModel()
   },
 
   methods: {
-    fullName: function (alumno) {
-      return alumno.nombre + ' ' + alumno.primer_apellido + ' ' + alumno.segundo_apellido;
+    nombreAlumnoCompleto(alumnoId) {
+      const alumno = this.alumnos.filter((alumno) => alumno._id == alumnoId)[0]
+      return alumno.nombre + " " + alumno.primer_apellido + " " + alumno.segundo_apellido
     },
 
-    async refreshAlumnos () {
-      // Muestro el mensaje de Loading
-      this.$store.dispatch('showLoading')
-      
+    nombreProfesorCompleto(profesorId) {
+      const profesor = this.profesores.filter((profesor) => profesor._id == profesorId)[0]
+      return profesor.nombre + " " + profesor.primer_apellido + " " + profesor.segundo_apellido
+    },
+
+    matriculaVehiculo(vehiculoId) {
+      const vehiculo = this.vehiculos.filter((vehiculo) => vehiculo._id == vehiculoId)[0]
+      return vehiculo.matricula
+    },
+
+
+    refreshClasesPracticas () {
       // Cargo los datos de la base de datos
-      this.alumnos = await alumnosApi.getAlumnoAll()
+      return clases_practicasApi.getClasePracticaAll()
+        .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            if (data.code === 200){
+              return data.result.clases_practicas
+            }else{
+              return null
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
+
+
+    async refreshAlumnos() {
+      // Cargo los datos de la base de datos
+      return alumnosApi.getAlumnoAll()
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
             // Si es 200 es que ha encontrado el registro
@@ -174,50 +219,91 @@ export default {
         .catch(err => {
             console.log(err)
         })
-      // Oculto el mensaje de Loading
-      this.$store.dispatch('hideLoading')
     },
 
 
-    async populateAlumnoToEdit (alumno) {
+    async refreshProfesores () {
+      // Cargo los datos de la base de datos
+      return profesoresApi.getProfesorAll()
+        .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            if (data.code === 200){
+              return data.result.profesores
+            }else{
+              return null
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
+
+
+    async refreshVehiculos () {
+      // Cargo los datos de la base de datos
+      return vehiculosApi.getVehiculoAll()
+        .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            if (data.code === 200){
+              return data.result.vehiculos
+            }else{
+              return null
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
+
+
+    async populateClasePracticaToEdit (clase_practica) {
       // Asigno el elemento seleccionado al modelo
-      this.model = Object.assign({}, alumno)
+      this.model = Object.assign({}, clase_practica)
 
       // Mostramos el formulario
-      this.showAlumnoModalForm()
+      this.showClasePracticaModalForm()
     },
 
 
-    async saveAlumno () {
+    async saveClasePractica () {
       // Muestro el mensaje de Loading
       this.$store.dispatch('showLoading')
+
+      // Convertimos al formato que entiende la base de datos "01/01/2018 08:30"
+      const hora_inicio = this.model.fecha_clase + ' ' + this.model.hora_inicio
+      const hora_finalizacion = this.model.fecha_clase + ' ' + this.model.hora_finalizacion
+      
+      this.model.hora_inicio = hora_inicio
+      this.model.hora_finalizacion = hora_finalizacion
 
       // Si tiene Id lo actualizo en caso contrario lo creo nuevo
       if (this.model._id) {
         // Actualizo el alumno
-        await alumnosApi.updateAlumno(this.model)
+        await clases_practicasApi.updateClasePractica(this.model)
       }
       else {
-        // Al crear un alumno tengo que asignale el Id de autoescuela a la que pertenece
+        // Al crear una clase practica tengo que asignale el Id de autoescuela a la que pertenece
         this.model.autoescuela_id = this.$store.state.autoescuelas.autoescuela._id
 
-        // Creamos el alumno
-        await alumnosApi.createAlumno(this.model)
+        // Creamos la clase practica
+        await clases_practicasApi.createClasePractica(this.model)
       }
       // Reseteamos el modelo
       this.resetModel()
 
-      // Volvemos a recargar los alumnos
-      await this.refreshAlumnos()
+      // Volvemos a recargar las clases practicas
+      this.clases_practicas = await this.refreshClasesPracticas()
 
       // Oculto el mensaje de Loading
       this.$store.dispatch('hideLoading')
     },
 
 
-    async deleteAlumno (alumno) {
+    async deleteClasePractica (clase_practica) {
       // Clonamos el objeto profesor en el objeto modelo
-      this.model = Object.assign({}, alumno)
+      this.model = Object.assign({}, clase_practica)
 
       this.confirmFormShow = true
     },
@@ -228,87 +314,51 @@ export default {
       this.model = {
         _id: '',
         autoescuela_id: '',
-        dni: '',
-        dni_fecha_caducidad: '',
-        nombre: '',
-        primer_apellido: '',
-        segundo_apellido: '',
-        sexo: 'H',
-        fecha_nacimiento: '',
-        pais_nacimiento: '',
-        nacionalidad: '',
-        direccion: {
-          via: {
-            tipo: '',
-            nombre: '',
-            numero: '',
-            bloque: '',
-            portal: '',
-            escalera: '',
-            planta: '',
-            puerta: '',
-            kilometro: ''
-          },
-          codigo_postal: '',
-          poblacion: '',
-          provincia: '',
-          pais: ''
-        },
-        contacto: {
-            telefono_fijo: '',
-            telefono_movil: '',
-            whatsapp: '',
-            email: '',
-            facebook: '',
-            twitter: ''
-        },
-        documentacion_aportada: {
-            entrega_fotocopia_dni: false,
-            entrega_psicotecnico: false,
-            entrega_fotografias: false,
-            firma_tasas_examen: false,
-            firma_autorizacion: false,
-            firma_talon_foto: false
-        },
-        fecha_creacion: '',
-        estado: true
+        profesor_id: '',
+        alumno_id: '',
+        vehiculo_id: '',
+        fecha_clase: '',
+        hora_inicio: '',
+        hora_finalizacion: '',
+        descripcion_recorrido: '',
+        errores_cometidos_alumno: ''
       }
     },
 
 
-    showAlumnoModalForm(){
+    showClasePracticaModalForm(){
       // Mostramos el formulario
-      this.alumnoFormShow = true;
+      this.clase_practicaFormShow = true;
     },
 
 
-    onClosedAlumnoModalForm(){
+    onClosedClasePracticaModalForm(){
       // Ocultamos el formulario
-      this.alumnoFormShow = false;
+      this.clase_practicaFormShow = false;
       
       // Reseteamos el modelo
       this.resetModel()
     },
 
 
-    onCanceledAlumnoModalForm(){
+    onCanceledClasePracticaModalForm(){
       // Ocultamos el formulario
-      this.alumnoFormShow = false;
+      this.clase_practicaFormShow = false;
       
       // Reseteamos el modelo
       this.resetModel()
     },
 
 
-    onAcceptedAlumnoModalForm(model){
+    onAcceptedClasePracticaModalForm(model){
       // Muestro el mensaje de Loading
       this.$store.dispatch('showLoading')
 
       // Ocultamos el formulario
-      this.alumnoFormShow = false;
+      this.clase_practicaFormShow = false;
       
       // Guardamos el registro, ya sea crear o actualizar
-      this.saveAlumno()
+      this.saveClasePractica()
 
       // Oculto el mensaje de Loading
       this.$store.dispatch('hideLoading')
@@ -340,11 +390,11 @@ export default {
       // Ocultamos el formulario de confirmación
       this.confirmFormShow = false;
       
-      // Eliminamos el alumno
-       await alumnosApi.deleteAlumno(this.model._id)
+      // Eliminamos la clase practica
+      await clases_practicasApi.deleteClasePractica(this.model._id)
 
-      // Actualizamos la lista de alumnos
-      await this.refreshAlumnos()
+      // Volvemos a recargar las clases practicas
+      this.clases_practicas = await this.refreshClasesPracticas()
 
       // Reseteamos el modelo
       this.resetModel()
