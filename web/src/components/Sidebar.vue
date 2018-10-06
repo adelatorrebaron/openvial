@@ -32,23 +32,11 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/cursos" v-if="existAutoescuela">
-					<i class="fa fa-calendar"></i>
-					<span>Cursos</span>
-				</router-link>
-			</li>
-			<li>
 				<router-link to="/alumnos" v-if="existAutoescuela">
 					<i class="fa fa-users"></i>
 					<span>Alumnos</span>
 				</router-link>
 			</li>		
-			<li>
-				<router-link to="/pagos" v-if="existAutoescuela">
-					<i class="fa fa-calculator"></i>
-					<span>Pagos</span>
-				</router-link>
-			</li>
 			<li>
 				<router-link to="/vehiculos" v-if="existAutoescuela">
 					<i class="fa fa-car"></i>
@@ -84,23 +72,11 @@
 						</router-link>
 					</li>
 					<li>
-						<router-link to="/informes/cursos">
-							<i class="fa fa-calendar"></i>
-							<span>Cursos</span>
-						</router-link>
-					</li>
-					<li>
 						<router-link to="/informes/alumnos">
 							<i class="fa fa-users"></i>
 							<span>Alumnos</span>
 						</router-link>
 					</li>					
-					<li>
-						<router-link to="/informes/pagos">
-							<i class="fa fa-calculator"></i>
-							<span>Pagos</span>
-						</router-link>
-					</li>	
 					<li>
 						<router-link to="/informes/vehiculos">
 							<i class="fa fa-car"></i>

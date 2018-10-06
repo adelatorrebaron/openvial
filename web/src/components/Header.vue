@@ -84,8 +84,7 @@
 <script>
 import perfilModalForm		from '@/components/perfil/perfil-modal-form'
 import { mapGetters } 		from 'vuex'
-//import moment 				from 'moment';
-import dates				from '@/services/utils/dates'
+
 
 export default {
   	name: 'Header',
@@ -107,9 +106,6 @@ export default {
 		}
 	},
 	methods: {
-		getHumanDate : function (date) {
-            return dates.getHumanDate(date);
-        },
 		showPerfilModalForm(){
 			// Muestro el formulario
 			this.perfilFormShow = true

@@ -19,11 +19,7 @@ import AutoescuelaIndex from '@/components/autoescuela/Index'
 
 import ProfesoresIndex from '@/components/profesores/Index'
 
-import CursosIndex from '@/components/cursos/Index'
-
 import AlumnosIndex from '@/components/alumnos/Index'
-
-import PagosIndex from '@/components/pagos/Index'
 
 import VehiculosIndex from '@/components/vehiculos/Index'
 
@@ -33,11 +29,7 @@ import InformesAutoescuelaIndex from '@/components/informes/autoescuela/Index'
 
 import InformesProfesoresIndex from '@/components/informes/profesores/Index'
 
-import InformesCursosIndex from '@/components/informes/cursos/Index'
-
 import InformesAlumnosIndex from '@/components/informes/alumnos/Index'
-
-import InformesPagosIndex from '@/components/informes/pagos/Index'
 
 import InformesVehiculosIndex from '@/components/informes/vehiculos/Index'
 
@@ -108,21 +100,9 @@ export default new Router({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/cursos',
-      name: 'CursosIndex',
-      component: CursosIndex,
-      beforeEnter: ifAuthenticated
-    },
-    {
       path: '/alumnos',
       name: 'AlumnosIndex',
       component: AlumnosIndex,
-      beforeEnter: ifAuthenticated
-    },
-    {
-      path: '/pagos',
-      name: 'PagosIndex',
-      component: PagosIndex,
       beforeEnter: ifAuthenticated
     },
     {
@@ -150,21 +130,9 @@ export default new Router({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/informes/cursos',
-      name: 'InformesCursosIndex',
-      component: InformesCursosIndex,
-      beforeEnter: ifAuthenticated
-    },
-    {
       path: '/informes/alumnos',
       name: 'InformesAlumnosIndex',
       component: InformesAlumnosIndex,
-      beforeEnter: ifAuthenticated
-    },
-    {
-      path: '/informes/pagos',
-      name: 'InformesPagosIndex',
-      component: InformesPagosIndex,
       beforeEnter: ifAuthenticated
     },
     {

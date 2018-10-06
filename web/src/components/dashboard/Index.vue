@@ -11,86 +11,74 @@
         </ol>
       </section>
       <section class="content">
+        <div class="row">
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+              <div class="inner">
+                <h3>150</h3>
 
-
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>150</h3>
-
-              <p>Alumnos</p>
+                <p>Alumnos</p>
+              </div>
+              <div class="icon">
+                <i class="fa fa-users"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+          <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+              <div class="inner">
+                <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-              <p>Bounce Rate</p>
+                <p>Bounce Rate</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>44</h3>
+          <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+              <div class="inner">
+                <h3>44</h3>
 
-              <p>User Registrations</p>
+                <p>User Registrations</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>65</h3>
+          <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+              <div class="inner">
+                <h3>65</h3>
 
-              <p>Unique Visitors</p>
+                <p>Unique Visitors</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
+          <!-- ./col -->
         </div>
-        <!-- ./col -->
-      </div>
-
-
-
-
-
-
       </section>
     </div>
     <div v-else>
       <!-- Pantalla de presentacion para crear el Centro de Formación Vial -->
       <autoescuela-welcome-message v-on:onClicked="showAutoescuelaModalForm()"></autoescuela-welcome-message>
     </div>
-    <!-- Pantalla de presentacion para cumplimentar el Perfil -->
-    <!--
-    <perfil-welcome-message  v-on:onClicked="showPerfilCreateForm = true"></perfil-welcome-message>
-    -->
 
     <!-- Formulario para crear la Autoescuela -->
     <autoescuela-modal-form
@@ -103,15 +91,6 @@
       v-on:onAccepted="onAcceptedAutoescuelaModalForm('Aceptado el formulario de creación de la Autoescuela')">
     </autoescuela-modal-form>
 
-    <!-- Formulario para crear e introducir el Perfil del usuario -->
-    <!--
-    <perfil-create-form
-      v-bind:show="showPerfilCreateForm"
-      @onClosed="showPerfilCreateForm = false"
-      v-on:onClosed="onClosed('Cerrado el formulario de creación de perfil')">      
-    </perfil-create-form>
-    -->
-
   </div>
 
 </template>
@@ -121,16 +100,12 @@
 import autoescuelaWelcomeMessage    from '@/components/autoescuela/autoescuela-welcome-message'
 import autoescuelaModalForm         from '@/components/autoescuela/autoescuela-modal-form'
 import { mapGetters }               from 'vuex'
-//import perfilWelcomeMessage         from '@/components/perfil/perfil-welcome-message'
-//import perfilCreateForm             from '@/components/perfil/perfil-create-modal-form'
 
 export default {
   name: 'dashboard',
   components: {
      'autoescuela-welcome-message': autoescuelaWelcomeMessage,
      'autoescuela-modal-form':      autoescuelaModalForm,
-//     'perfil-welcome-message':      perfilWelcomeMessage,
-//     'perfil-create-form':          perfilCreateForm,
   },
 
   data () {
@@ -175,8 +150,6 @@ export default {
         },
         estado: true
       },
-
-//      showPerfilCreateForm: false,
     }
   },
 
