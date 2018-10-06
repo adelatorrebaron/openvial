@@ -27,7 +27,7 @@ import PagosIndex from '@/components/pagos/Index'
 
 import VehiculosIndex from '@/components/vehiculos/Index'
 
-import ClasesIndex from '@/components/clases/Index'
+import ClasesPracticasIndex from '@/components/clases_practicas/Index'
 
 import InformesAutoescuelaIndex from '@/components/informes/autoescuela/Index'
 
@@ -132,9 +132,9 @@ export default new Router({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/clases',
+      path: '/clases_practicas',
       name: 'ClasesIndex',
-      component: ClasesIndex,
+      component: ClasesPracticasIndex,
       beforeEnter: ifAuthenticated
     },
     {

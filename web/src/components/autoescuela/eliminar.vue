@@ -1,9 +1,9 @@
 <template> 
   <div>
     <modal-form-helper
-      v-bind:show="show"          
+      v-bind:show="show"
       v-bind:title="title"
-      v-on:onClosed="onClosed()"
+      v-on:onClosed="onClosed('Cerrado el formulario de edición de la Profesor')" 
     >
       <div slot="modal-header"></div>
       <div slot="modal-body">
@@ -147,52 +147,7 @@
                 
                 <!-- Contacto Tab -->
                 <div class="tab-pane" id="tab_Contacto">
-                    <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label>*Correo electrónico:</label>
-                        <input v-model="autoescuela.contacto.email" type="text" class="form-control" placeholder="Correo electrónico" maxlength="255" required>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                        <label>Teléfono fijo:</label>
-                        <input v-model="autoescuela.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo" maxlength="12">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                        <label>Teléfono móvil:</label>
-                        <input v-model="autoescuela.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil" maxlength="12">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                        <label>Whatsapp:</label>
-                        <input v-model="autoescuela.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp" maxlength="12">
-                        </div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                        <label>Sitio web:</label>
-                        <input v-model="autoescuela.contacto.website" type="text" class="form-control" placeholder="Sitio web" maxlength="255">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                        <label>Facebook:</label>
-                        <input v-model="autoescuela.contacto.facebook" type="text" class="form-control" placeholder="Facebook" maxlength="255">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                        <label>Twitter:</label>
-                        <input v-model="autoescuela.contacto.twitter" type="text" class="form-control" placeholder="Twitter" maxlength="255">
-                        </div>
-                    </div>
-                    </div>                
+                
                 </div>
 
               </div>
@@ -210,59 +165,3 @@
   </div>
 </template>
 
-
-<script>
-import modalFormLgHelper            from '@/components/helpers/modal-form-lg-helper'
-import { mapGetters }               from 'vuex'
-
-export default {
-  components: {
-    'modal-form-helper': modalFormLgHelper
-  },
-  props: [
-    'show',
-    'title',
-    'action',
-    'autoescuela'
-  ],
-  computed: {
-    ...mapGetters({ currentUser: 'currentUser'})
-  },
-  data () {
-    return {
-    }
-  },
-  methods: {
-    onClosed: function () {
-        this.$emit('onClosed');
-    },
-
-    onCanceled: function () {
-        this.$emit('onCanceled');
-    },
-
-    onAccepted: function () {
-      if (this.action === 'create'){
-        // Debido a que el usuario está en el store y no se encuentra en el formulario
-        // Lo leemos del Store y se lo asignamos a la academia para que cuando se cree
-        // se asocie a este usuario
-        this.autoescuela.usuario_id = this.currentUser._id
-        
-        // Paso al Store los datos del formulario para que los salve en el API
-        this.$store.dispatch('saveAutoescuela', this.autoescuela)
-      }
-      else if (this.action === 'edit'){
-        // Paso al Store los datos del formulario para que los actualice en el API
-        this.$store.dispatch('updateAutoescuela', this.autoescuela)
-      }
-
-      // Emito el evento que se ha pulsado el boton aceptar.
-      this.$emit('onAccepted');
-    }
-  }
-}
-</script>
-
-
-<style scoped>
-</style>

@@ -56,9 +56,9 @@
 				</router-link>
 			</li>
 			<li>
-				<router-link to="/clases" v-if="existAutoescuela">
+				<router-link to="/clases_practicas" v-if="existAutoescuela">
 					<i class="fa fa-calendar-check-o"></i>
-					<span>Clases</span>
+					<span>Clases prácticas</span>
 				</router-link>
 			</li>
 
