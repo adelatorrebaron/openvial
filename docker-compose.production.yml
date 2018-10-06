@@ -65,7 +65,6 @@ services:
     environment:
       - MONGO_DB_URI= mongodb://mongo:27017/openvial_vehiculos
 
-
   clases_practicas:
     container_name: clases_practicas
     restart: always
@@ -76,30 +75,6 @@ services:
       - mongo
     environment:
       - MONGO_DB_URI= mongodb://mongo:27017/openvial_clases_practicas
-
-
-#  cursos:
-#    container_name: cursos
-#    restart: always
-#    build: './api/cursos'
-#    ports:
-#      - "127.0.0.1:3006:3006"
-#    depends_on:
-#      - mongo
-#    environment:
-#      - MONGO_DB_URI= mongodb://mongo:27017/openvial_cursos
-
-
-#  pagos:
-#    container_name: pagos
-#    restart: always
-#    build: './api/pagos'
-#    ports:
-#      - "127.0.0.1:3008:3008"
-#    depends_on:
-#      - mongo
-#    environment:
-#      - MONGO_DB_URI= mongodb://mongo:27017/openvial_pagos
 
   correos:
     container_name: correos
@@ -123,9 +98,6 @@ services:
       - profesores
       - vehiculos
       - clases_practicas
-#      - pagos
-#      - cursos
-
       - correos
     environment:
       - URL_API_USUARIOS=http://localhost:3001/api/v1
@@ -134,6 +106,4 @@ services:
       - URL_API_PROFESORES=http://localhost:3004/api/v1
       - URL_API_VEHICULOS=http://localhost:3005/api/v1
       - URL_API_CLASES_PRACTICAS=http://localhost:3006/api/v1
-#      - URL_API_CURSOS=http://localhost:3007/api/v1
-#      - URL_API_PAGOS=http://localhost:3008/api/v1
       - URL_API_CORREOS=http://localhost:3010/api/v1
