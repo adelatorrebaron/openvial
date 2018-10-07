@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 const Autoescuela = require('../models/autoescuela');
 
+const moment = require('moment')
+
 
 //
 // Permite obtener todas las autoescuelas
@@ -53,7 +55,7 @@ exports.autoescuelas_get_all =  (req, res, next) => {
                                 facebook: doc.contacto.facebook,
                                 twitter: doc.contacto.twitter
                             },
-                            fecha_creacion: doc.fecha_creacion,
+                            fecha_creacion: moment(doc.fecha_creacion).format('DD/MM/YYYY'),
                             estado: doc.estado,
                             request: {
                                 descripcion: 'Obtener el registro',
@@ -158,7 +160,7 @@ exports.autoescuelas_create = (req, res, next) => {
                             facebook: result.contacto.facebook,
                             twitter: result.contacto.twitter
                         },
-                        fecha_creacion: result.fecha_creacion,
+                        fecha_creacion: moment(result.fecha_creacion).format('DD/MM/YYYY'),
                         estado: result.estado,                    
                         request: {
                             descripcion: 'Obtener registro creado',
@@ -230,7 +232,7 @@ exports.autoescuelas_get_by_usuarioId = (req, res, next) => {
                                 facebook: doc.contacto.facebook,
                                 twitter: doc.contacto.twitter
                             },
-                            fecha_creacion: doc.fecha_creacion,
+                            fecha_creacion: moment(doc.fecha_creacion).format('DD/MM/YYYY'),
                             estado: doc.estado,
                             request: {
                                 descripcion: 'Obtener todos los registros',
