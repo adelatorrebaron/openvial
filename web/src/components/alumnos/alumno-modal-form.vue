@@ -30,7 +30,7 @@
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_Informacion_general" data-toggle="tab" aria-expanded="true">Información general</a></li>
                 <li class=""><a href="#tab_Direccion" data-toggle="tab" aria-expanded="false">Dirección</a></li>
-                <li class=""><a href="#tab_Contacto" data-toggle="tab" aria-expanded="false">Datos de Contacto</a></li>
+                <li class=""><a href="#tab_Contacto" data-toggle="tab" aria-expanded="false">Datos de contacto</a></li>
                 <li class=""><a href="#tab_Documentacion_aportada" data-toggle="tab" aria-expanded="false">Documentos aportados</a></li>
               </ul>
 

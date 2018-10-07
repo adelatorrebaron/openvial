@@ -45,8 +45,8 @@
                       <th>Dni</th>
                       <th>Nombre completo</th>
                       <th class="text-center">Fecha de nacimiento</th>
-                      <th>Teléfono fijo</th>
-                      <th>Teléfono móvil</th>
+                      <th class="text-center">Teléfono fijo</th>
+                      <th class="text-center">Teléfono móvil</th>
                       <th>Correo electrónico</th>
                       <th></th>
                     </tr>
@@ -66,8 +66,8 @@
                       <td>{{ alumno.dni }}</td>
                       <td>{{ fullName(alumno) }}</td> <!-- Aqui muestro el nombre completo que lo genera una funcion -->
                       <td class="text-center">{{ alumno.fecha_nacimiento }}</td>
-                      <td>{{ alumno.contacto.telefono_fijo }}</td>
-                      <td>{{ alumno.contacto.telefono_movil }}</td>
+                      <td class="text-center">{{ alumno.contacto.telefono_fijo }}</td>
+                      <td class="text-center">{{ alumno.contacto.telefono_movil }}</td>
                       <td>{{ alumno.contacto.email }}</td>
                       <td>
                         <div class="pull-right">

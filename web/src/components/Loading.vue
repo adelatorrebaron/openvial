@@ -23,7 +23,6 @@ export default {
 
 
 <style scoped>
-
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -31,13 +30,13 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0, 0, 0, .4);
   display: table;
   transition: opacity .3s ease;
 }
 
 .texto {
-    top: 25px;
+  top: 25px;
   position: absolute;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -45,7 +44,6 @@ export default {
   font-weight: bold;
   font-size: 16px;
   color: white;
-
-}
+  }
 
 </style>

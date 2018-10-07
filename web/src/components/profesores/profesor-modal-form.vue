@@ -13,7 +13,7 @@
               <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_Informacion_general" data-toggle="tab" aria-expanded="true">Información general</a></li>
                 <li class=""><a href="#tab_Direccion" data-toggle="tab" aria-expanded="false">Dirección</a></li>
-                <li class=""><a href="#tab_Contacto" data-toggle="tab" aria-expanded="false">Datos de Contacto</a></li>
+                <li class=""><a href="#tab_Contacto" data-toggle="tab" aria-expanded="false">Datos de contacto</a></li>
                 <li class=""><a href="#tab_Permisos_conduccion" data-toggle="tab" aria-expanded="false">Permisos conducción</a></li>
                 <li class=""><a href="#tab_Datos_bancarios" data-toggle="tab" aria-expanded="false">Datos bancarios</a></li>
               </ul>

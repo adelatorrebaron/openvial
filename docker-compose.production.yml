@@ -70,7 +70,7 @@ services:
     restart: always
     build: './api/clases_practicas'
     ports:
-      - "127.0.0.1:3007:3007"
+      - "127.0.0.1:3006:3006"
     depends_on:
       - mongo
     environment:

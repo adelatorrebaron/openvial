@@ -52,7 +52,7 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody v-if="everythingRight">
                     <tr v-for="clase_practica in clases_practicas" v-bind:key="clase_practica._id">
                       <td>{{ nombreAlumnoCompleto(clase_practica.alumno_id) }}</td>
                       <td>{{ nombreProfesorCompleto(clase_practica.profesor_id) }}</td>
@@ -80,7 +80,6 @@
     </div>
 
     <!-- Formulario para crear y editar una clase practica -->
-
     <clase_practica-modal-form v-if="model !== null"
       v-bind:show="clase_practicaFormShow"
       v-bind:title="(model._id ? 'Editar clase práctica' : 'Nueva clase práctica')"
@@ -104,6 +103,16 @@
       v-on:onAccepted="onAcceptedConfirmModalForm()">
     </confirm-modal-form>
 
+
+    <!-- Formulario para confirmar la eliminarcion de la clase practica -->
+    <notification-modal-form
+      v-bind:show="notificationFormShow"
+      v-bind:title="'Información'"
+      v-bind:message="'No podrá crear ningún registro hasta que por lo menos tenga un registro de profesor, alumno o vehículo. Compruebe que todos los microservicios está funcionando correctamente.'"
+      v-on:onClosed="onClosedNotificationModalForm()" 
+      v-on:onAccepted="onAcceptedNotificationModalForm()" >
+    </notification-modal-form>
+
   </div>
 
 </template>
@@ -116,13 +125,15 @@ import vehiculosApi             from '@/services/api/vehiculos.js'
 
 import clase_practicaModalForm  from '@/components/clases_practicas/clases_practicas-modal-form'
 import confirmModalForm         from '@/components/helpers/confirm-modal-form'
+import nofiticationModalForm    from '@/components/helpers/notification-modal-form'
 
 export default {
   name: 'clases_practicas',
 
   components: {
     'clase_practica-modal-form':    clase_practicaModalForm,
-    'confirm-modal-form':           confirmModalForm
+    'confirm-modal-form':           confirmModalForm,
+    'notification-modal-form':      nofiticationModalForm
   },
 
   data () {
@@ -130,12 +141,14 @@ export default {
       ventanaTitulo: 'Clases prácticas',
       clase_practicaFormShow: false,
       confirmFormShow: false,
+      notificationFormShow: false,
       clases_practicas: [],
       alumnos: [],
       profesores: [],
       vehiculos:[],
       model: {},
-      search: ''
+      search: '',
+      everythingRight: false,
     }
   },
 
@@ -150,9 +163,12 @@ export default {
   },
 
   async created () {
+
+    // Muestro el mensaje de Loading
+    this.$store.dispatch('showLoading')
     
     // Obtengo todos los datos a la vez
-    Promise.all([
+    await Promise.all([
       this.refreshClasesPracticas(),
       this.refreshAlumnos(),
       this.refreshVehiculos(),
@@ -163,10 +179,28 @@ export default {
         this.alumnos          = data[1]
         this.vehiculos        = data[2]
         this.profesores       = data[3]
+
+        if (this.clases_practicas != null &&
+            this.alumnos != null &&
+            this.vehiculos != null &&
+            this.profesores != null
+        ){
+          this.everythingRight  = true
+        }
+
+        // Oculto el mensaje de Loading
+        this.$store.dispatch('hideLoading')
+      })
+      .catch(function(err) {
+
+        this.everythingRight  = false
+        // log that I have an error, return the entire array;
+        console.log('A promise failed to resolve', err);
       })
 
     // Reseteamos el modelo
     this.resetModel()
+
   },
 
   methods: {
@@ -184,7 +218,6 @@ export default {
       const vehiculo = this.vehiculos.filter((vehiculo) => vehiculo._id == vehiculoId)[0]
       return vehiculo.matricula
     },
-
 
     refreshClasesPracticas () {
       // Cargo los datos de la base de datos
@@ -327,8 +360,13 @@ export default {
 
 
     showClasePracticaModalForm(){
-      // Mostramos el formulario
-      this.clase_practicaFormShow = true;
+      if (this.everythingRight) {
+        // Mostramos el formulario
+        this.clase_practicaFormShow = true;
+
+      }else {
+        this.notificationFormShow = true
+      }
     },
 
 
@@ -401,6 +439,18 @@ export default {
 
       // Oculto el mensaje de Loading
       this.$store.dispatch('hideLoading')
+    },
+
+
+    onClosedNotificationModalForm(){
+      // Ocultamos el formulario de notificacion
+      this.notificationFormShow = false;
+    },
+
+
+    onAcceptedNotificationModalForm(){
+      // Ocultamos el formulario de notificacion
+      this.notificationFormShow = false;      
     }
 
   }
