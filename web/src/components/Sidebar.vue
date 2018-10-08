@@ -49,7 +49,7 @@
 					<span>Clases prácticas</span>
 				</router-link>
 			</li>
-
+<!--
 			<li class="treeview" v-if="existAutoescuela">
           		<a href="#">
             		<i class="fa fa-files-o"></i>
@@ -91,6 +91,7 @@
 					</li>
           		</ul>
         	</li>
+			-->
       	</ul>
     <!-- /.sidebar -->
   	</aside>

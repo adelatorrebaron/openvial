@@ -1,0 +1,19 @@
+{
+  "name": "correos",
+  "version": "1.0.0",
+  "description": "Microservicio enviar correos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alejandro de la Torre Barón",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "fs-extra": "^7.0.0",
+    "handlebars": "^4.0.12",
+    "puppeteer": "^1.9.0"
+  }
+}

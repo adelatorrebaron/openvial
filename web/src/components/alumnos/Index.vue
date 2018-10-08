@@ -71,7 +71,7 @@
                       <td>{{ alumno.contacto.email }}</td>
                       <td>
                         <div class="pull-right">
-                          <!--<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button>-->
+                          <button type="button" class="btn btn-info btn-sm" @click.prevent="reportAlumno(alumno)"><i class="fa fa-file-pdf-o"></i></button>
                           <button type="button" class="btn btn-primary btn-sm" @click.prevent="populateAlumnoToEdit(alumno)"><i class="fa fa-pencil"></i></button>
                           <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteAlumno(alumno)"><i class="fa fa-remove"></i></button>
                         </div>
@@ -114,6 +114,7 @@
 
 <script>
 import alumnosApi         from '@/services/api/alumnos.js'
+import informesApi        from '@/services/api/informes.js'
 import alumnoModalForm    from '@/components/alumnos/alumno-modal-form'
 import confirmModalForm   from '@/components/helpers/confirm-modal-form'
 
@@ -220,6 +221,27 @@ export default {
       this.model = Object.assign({}, alumno)
 
       this.confirmFormShow = true
+    },
+
+
+    async reportAlumno (alumno) {
+      // Muestro el mensaje de Loading
+      //this.$store.dispatch('showLoading')
+      //alert('Pulsado el boton informe')
+
+      await informesApi.report('alumno', alumno)
+      .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            //console.log(data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+      // Oculto el mensaje de Loading
+      //this.$store.dispatch('hideLoading')
+
     },
 
 
