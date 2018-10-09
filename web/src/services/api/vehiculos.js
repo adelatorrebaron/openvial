@@ -40,6 +40,17 @@ export default {
         })
     },
 
+    getVehiculoAllByAutoescuelaId(autoescuelaId) {
+        return axios.get(API_URL + '/vehiculos/' + autoescuelaId + '/autoescuela')
+            .then(request => {
+                // Devuelvo los datos obtenidos del API externo
+                return request.data
+            })
+        .catch(err => {
+            return err
+        })
+    },
+
     createVehiculo(vehiculo) {
         return axios.post(
                 API_URL + '/vehiculos/',

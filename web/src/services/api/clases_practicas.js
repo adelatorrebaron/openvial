@@ -39,6 +39,17 @@ export default {
         })
     },
 
+    getClasePracticaAllByAutoescuelaId(autoescuelaId) {
+        return axios.get(API_URL + '/clases_practicas/' + autoescuelaId + '/autoescuela')
+            .then(request => {
+                // Devuelvo los datos obtenidos del API externo
+                return request.data
+            })
+        .catch(err => {
+            return err
+        })
+    },
+
     createClasePractica(clasePractica) {
         return axios.post(
                 API_URL + '/clases_practicas/',

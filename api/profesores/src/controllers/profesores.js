@@ -8,7 +8,7 @@ const moment = require('moment');
 
 
 //
-// Permite obtener todas los profesores
+// Permite obtener todos los profesores
 //
 exports.profesores_get_all =  (req, res, next) => {
     Profesor.find()
@@ -96,7 +96,101 @@ exports.profesores_get_all =  (req, res, next) => {
             })
         });
 }
-   
+
+
+
+//
+// Permite obtener todos los profesores de una Autoescuela
+//
+exports.profesores_get_all_by_autoescuelaId =  (req, res, next) => {
+    const autoescuelaId = req.params.autoescuelaId;
+    Profesor.find({autoescuela_id: autoescuelaId})
+        .exec()
+        .then(docs => {
+            res.status(200).json({
+                status: 'ok',
+                code: 200,
+                messages: [],
+                result: {
+                    total: docs.length,
+                    profesores: docs.map(doc => {
+                        return {
+                            _id: doc._id,
+                            autoescuela_id: doc.autoescuela_id,
+                            numero_profesor: doc.numero_profesor,
+                            dni: doc.dni,
+                            dni_fecha_caducidad: moment(doc.dni_fecha_caducidad, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+                            nombre: doc.nombre,
+                            primer_apellido: doc.primer_apellido,
+                            segundo_apellido: doc.segundo_apellido,
+                            sexo: doc.sexo,
+                            fecha_nacimiento: moment(doc.fecha_nacimiento, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+                            pais_nacimiento: doc.pais_nacimiento,
+                            nacionalidad: doc.nacionalidad,
+                            direccion: {
+                                via: {
+                                    tipo: doc.direccion.via.tipo,
+                                    nombre: doc.direccion.via.nombre,
+                                    numero: doc.direccion.via.numero,
+                                    bloque: doc.direccion.via.bloque,
+                                    portal: doc.direccion.via.portal,
+                                    escalera: doc.direccion.via.escalera,
+                                    planta: doc.direccion.via.planta,
+                                    puerta: doc.direccion.via.puerta,
+                                    kilometro: doc.direccion.via.kilometro
+                                },
+                                codigo_postal: doc.direccion.codigo_postal,
+                                poblacion: doc.direccion.poblacion,
+                                provincia: doc.direccion.provincia,
+                                pais: doc.direccion.pais
+                            },
+                            contacto: {
+                                telefono_fijo: doc.contacto.telefono_fijo,
+                                telefono_movil: doc.contacto.telefono_movil,
+                                whatsapp: doc.contacto.whatsapp,
+                                email: doc.contacto.email,
+                                facebook: doc.contacto.facebook,
+                                twitter: doc.contacto.twitter
+                            },
+                            permisos_conduccion: doc.permisos_conduccion.map(permiso => {
+                                return {
+                                    tipo: permiso.tipo,
+                                    fecha_antiguedad: moment(permiso.fecha_antiguedad, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+                                    fecha_caducidad: moment(permiso.fecha_caducidad, 'YYYY-MM-DD').format('DD/MM/YYYY')
+                                }
+                            }),
+                            datos_bancarios: {
+                                nombre_entidad: doc.datos_bancarios.nombre_entidad,
+                                codigo_iban: doc.datos_bancarios.codigo_iban,
+                                codigo_entidad: doc.datos_bancarios.codigo_entidad,
+                                codigo_oficina: doc.datos_bancarios.codigo_oficina,
+                                digito_control: doc.datos_bancarios.digito_control,
+                                numero_de_cuenta: doc.datos_bancarios.numero_de_cuenta
+                            },
+                            fecha_creacion: doc.fecha_creacion,
+                            estado: doc.estado,
+                            request: {
+                                descripcion: 'Obtener el registro',
+                                type: 'GET',
+                                url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + doc._id
+                            }
+                        }
+                    })
+                }
+            })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            })
+        });
+}
+
+
 
 //
 // Permite crear un Profesor asociandolo al Id de la Autoescuela

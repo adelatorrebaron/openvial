@@ -7,6 +7,8 @@ if (process.env.URL_API_INFORMES) {
 }
 
 let config = {
+    method: 'GET',
+    responseType: 'blob', // Force to receive data in a Blob Format
     headers: {
        //'Content-Type': 'application/x-www-form-urlencoded',
        'content-type': 'application/json',
@@ -27,10 +29,8 @@ export default {
         return axios.post(
             URL_API_INFORMES + '/informes/',
             payload,
-            {
-                method: 'GET',
-                responseType: 'blob' // Force to receive data in a Blob Format
-            })
+            config
+            )
             .then(response => {
 
                 // Create a Blob from the PDF Stream

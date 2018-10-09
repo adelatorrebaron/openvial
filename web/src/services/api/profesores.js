@@ -39,6 +39,19 @@ export default {
         })
     },
 
+
+    getProfesorAllByAutoescuelaId(autoescuelaId) {
+        return axios.get(API_URL + '/profesores/' + autoescuelaId + '/autoescuela')
+            .then(request => {
+                // Devuelvo los datos obtenidos del API externo
+                return request.data
+            })
+        .catch(err => {
+            return err
+        })
+    },
+
+
     createProfesor(profesor) {
         return axios.post(
                 API_URL + '/profesores/',

@@ -145,9 +145,11 @@ export default {
     async refreshVehiculos () {
       // Muestro el mensaje de Loading
       this.$store.dispatch('showLoading')
+
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
       
       // Cargo los datos de la base de datos
-      this.vehiculos = await vehiculosApi.getVehiculoAll()
+      this.vehiculos = await vehiculosApi.getVehiculoAllByAutoescuelaId(autoescuelaId)
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
             // Si es 200 es que ha encontrado el registro

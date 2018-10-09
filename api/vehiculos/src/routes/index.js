@@ -8,6 +8,9 @@ const VehiculosController = require('../controllers/vehiculos');
 // Permite obtener todas las vehiculos
 router.get('/vehiculos/', VehiculosController.vehiculos_get_all);
 
+// Permite obtener todos los vehiculos de una autoescuela
+router.get('/vehiculos/:autoescuelaId/autoescuela', VehiculosController.vehiculos_get_all_by_autoescuelaId);
+
 // Permite obtener una vehiculo por el Id del vehiculo
 router.get('/vehiculos/:vehiculoId', VehiculosController.vehiculos_get_by_vehiculoId);
 

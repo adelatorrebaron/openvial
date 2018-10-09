@@ -25,6 +25,7 @@ import VehiculosIndex from '@/components/vehiculos/Index'
 
 import ClasesPracticasIndex from '@/components/clases_practicas/Index'
 
+/*
 import InformesAutoescuelaIndex from '@/components/informes/autoescuela/Index'
 
 import InformesProfesoresIndex from '@/components/informes/profesores/Index'
@@ -34,7 +35,7 @@ import InformesAlumnosIndex from '@/components/informes/alumnos/Index'
 import InformesVehiculosIndex from '@/components/informes/vehiculos/Index'
 
 import InformesClasesIndex from '@/components/informes/clases/Index'
-
+*/
 
 Vue.use(Router)
 
@@ -117,6 +118,7 @@ export default new Router({
       component: ClasesPracticasIndex,
       beforeEnter: ifAuthenticated
     },
+    /*
     {
       path: '/informes/autoescuela',
       name: 'InformesAutoescuelaIndex',
@@ -146,7 +148,7 @@ export default new Router({
       name: 'InformesClasesIndex',
       component: InformesClasesIndex,
       beforeEnter: ifAuthenticated
-    },
+    },*/
     {
       path: '*',
       component: NotFound404

@@ -48,7 +48,54 @@ exports.vehiculos_get_all =  (req, res, next) => {
             })
         });
 }
+
+
+
+//
+// Permite obtener todas los vehículos de una autoescuela
+//
+exports.vehiculos_get_all_by_autoescuelaId =  (req, res, next) => {
+    const autoescuelaId = req.params.autoescuelaId;
+    Vehiculo.find({autoescuela_id: autoescuelaId})
+        .exec()
+        .then(docs => {
+            res.status(200).json({
+                status: 'ok',
+                code: 200,
+                messages: [],
+                result: {
+                    total: docs.length,
+                    vehiculos: docs.map(doc => {
+                        return {
+                            _id: doc._id,
+                            autoescuela_id: doc.autoescuela_id,
+                            matricula: doc.matricula,
+                            marca: doc.marca,
+                            modelo: doc.modelo,
+                            cilindrada: doc.cilindrada,
+                            color: doc.color,
+                            fecha_creacion: moment(doc.fecha_creacion, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+                            request: {
+                                descripcion: 'Obtener el registro',
+                                type: 'GET',
+                                url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + doc._id
+                            }
+                        }
+                    })
+                }
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            })
+        });
+}
    
+
 
 //
 // Permite crear una Vehiculo asociandola al Id de la Autoescuela

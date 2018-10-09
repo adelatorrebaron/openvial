@@ -160,9 +160,11 @@ export default {
     async refreshAlumnos () {
       // Muestro el mensaje de Loading
       this.$store.dispatch('showLoading')
+
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
       
       // Cargo los datos de la base de datos
-      this.alumnos = await alumnosApi.getAlumnoAll()
+      this.alumnos = await alumnosApi.getAlumnoAllByAutoescuelaId(autoescuelaId)
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
             // Si es 200 es que ha encontrado el registro
@@ -206,7 +208,7 @@ export default {
         await alumnosApi.createAlumno(this.model)
       }
       // Reseteamos el modelo
-      this.resetModel()
+      await this.resetModel()
 
       // Volvemos a recargar los alumnos
       await this.refreshAlumnos()
@@ -217,7 +219,7 @@ export default {
 
 
     async deleteAlumno (alumno) {
-      // Clonamos el objeto profesor en el objeto modelo
+      // Clonamos el objeto alumno en el objeto modelo
       this.model = Object.assign({}, alumno)
 
       this.confirmFormShow = true
@@ -250,20 +252,20 @@ export default {
       this.model = {
         _id: '',
         autoescuela_id: '',
-        dni: '',
-        dni_fecha_caducidad: '',
-        nombre: '',
-        primer_apellido: '',
-        segundo_apellido: '',
+        dni: '44286484F',
+        dni_fecha_caducidad: '01/01/2018',
+        nombre: 'Alejandro',
+        primer_apellido: 'de la Torre',
+        segundo_apellido: 'Barón',
         sexo: 'H',
-        fecha_nacimiento: '',
-        pais_nacimiento: '',
-        nacionalidad: '',
+        fecha_nacimiento: '01/01/2018',
+        pais_nacimiento: 'Argentina',
+        nacionalidad: 'España',
         direccion: {
           via: {
-            tipo: '',
-            nombre: '',
-            numero: '',
+            tipo: 'Calle',
+            nombre: 'Los palotes',
+            numero: '10',
             bloque: '',
             portal: '',
             escalera: '',
@@ -271,16 +273,16 @@ export default {
             puerta: '',
             kilometro: ''
           },
-          codigo_postal: '',
-          poblacion: '',
-          provincia: '',
-          pais: ''
+          codigo_postal: '18000',
+          poblacion: 'Alfacar',
+          provincia: 'Granada',
+          pais: 'España'
         },
         contacto: {
             telefono_fijo: '',
             telefono_movil: '',
             whatsapp: '',
-            email: '',
+            email: 'alejandro@gmail.com',
             facebook: '',
             twitter: ''
         },
@@ -322,7 +324,7 @@ export default {
     },
 
 
-    onAcceptedAlumnoModalForm(model){
+    onAcceptedAlumnoModalForm(){
       // Muestro el mensaje de Loading
       this.$store.dispatch('showLoading')
 

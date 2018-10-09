@@ -8,6 +8,9 @@ const AlumnosController = require('../controllers/alumnos');
 // Permite obtener todos los alumnos
 router.get('/alumnos/', AlumnosController.alumnos_get_all);
 
+// Permite obtener todos los alumnos de una autoescuela
+router.get('/alumnos/:autoescuelaId/autoescuela', AlumnosController.alumnos_get_all_by_autoescuelaId);
+
 // Permite obtener un alumno por el Id del alumno
 router.get('/alumnos/:alumnoId', AlumnosController.alumnos_get_by_alumnoId);
 

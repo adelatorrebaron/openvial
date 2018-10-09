@@ -9,7 +9,7 @@ if (process.env.URL_API_ALUMNOS) {
 let config = {
     headers: {
        //'Content-Type': 'application/x-www-form-urlencoded',
-       'content-type': 'application/pdf',
+       'content-type': 'application/json',
        'Authorization': 'Bearer ' + localStorage.token
     }
 };
@@ -30,6 +30,17 @@ export default {
 
     getAlumnoAll() {
         return axios.get(API_URL + '/alumnos/')
+            .then(request => {
+                // Devuelvo los datos obtenidos del API externo
+                return request.data
+            })
+        .catch(err => {
+            return err
+        })
+    },
+
+    getAlumnoAllByAutoescuelaId(autoescuelaId) {
+        return axios.get(API_URL + '/alumnos/' + autoescuelaId + '/autoescuela')
             .then(request => {
                 // Devuelvo los datos obtenidos del API externo
                 return request.data

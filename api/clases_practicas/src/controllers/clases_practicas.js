@@ -51,7 +51,56 @@ exports.clases_practicas_get_all =  (req, res, next) => {
             })
         });
 }
-   
+
+
+
+//
+// Permite obtener todas las clases de una autoescuela
+//
+exports.clases_practicas_get_all_by_autoescuelaId =  (req, res, next) => {
+    const autoescuelaId = req.params.autoescuelaId;
+    Clase.find({autoescuela_id: autoescuelaId})
+        .exec()
+        .then(docs => {
+            res.status(200).json({
+                status: 'ok',
+                code: 200,
+                messages: [],
+                result: {
+                    total: docs.length,
+                    clases_practicas: docs.map(doc => {
+                        return {
+                            _id: doc._id,
+                            autoescuela_id: doc.autoescuela_id,
+                            profesor_id: doc.profesor_id,
+                            alumno_id: doc.alumno_id,
+                            vehiculo_id: doc.vehiculo_id,                            
+                            fecha_clase: moment(doc.fecha_clase).format('DD/MM/YYYY'),
+                            hora_inicio: moment(doc.hora_inicio).format('HH:mm'),
+                            hora_finalizacion: moment(doc.hora_finalizacion).format('HH:mm'),
+                            descripcion_recorrido: doc.descripcion_recorrido,
+                            errores_cometidos_alumno: doc.errores_cometidos_alumno,
+                            fecha_creacion: moment(doc.fecha_creacion).format('DD/MM/YYYY'),
+                            request: {
+                                descripcion: 'Obtener el registro',
+                                type: 'GET',
+                                url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + doc._id
+                            }
+                        }
+                    })
+                }
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            })
+        });
+}
+
 
 //
 // Permite crear una clase practica asociandola al Id de la Autoescuela y respectivos id de otros micro-servicios

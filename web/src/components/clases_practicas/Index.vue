@@ -79,6 +79,7 @@
 
     </div>
 
+
     <!-- Formulario para crear y editar una clase practica -->
     <clase_practica-modal-form v-if="model !== null"
       v-bind:show="clase_practicaFormShow"
@@ -104,7 +105,7 @@
     </confirm-modal-form>
 
 
-    <!-- Formulario para confirmar la eliminarcion de la clase practica -->
+    <!-- Formulario para notificar que falta dantos de la clase practica -->
     <notification-modal-form
       v-bind:show="notificationFormShow"
       v-bind:title="'Información'"
@@ -188,6 +189,8 @@ export default {
           this.everythingRight  = true
         }
 
+        
+
         // Oculto el mensaje de Loading
         this.$store.dispatch('hideLoading')
       })
@@ -204,24 +207,40 @@ export default {
   },
 
   methods: {
+    
     nombreAlumnoCompleto(alumnoId) {
       const alumno = this.alumnos.filter((alumno) => alumno._id == alumnoId)[0]
-      return alumno.nombre + " " + alumno.primer_apellido + " " + alumno.segundo_apellido
+      if (alumno) {
+        return alumno.nombre + " " + alumno.primer_apellido + " " + alumno.segundo_apellido
+      }else {
+        return ""
+      }
     },
 
     nombreProfesorCompleto(profesorId) {
       const profesor = this.profesores.filter((profesor) => profesor._id == profesorId)[0]
-      return profesor.nombre + " " + profesor.primer_apellido + " " + profesor.segundo_apellido
+      if (profesor) {
+        return profesor.nombre + " " + profesor.primer_apellido + " " + profesor.segundo_apellido
+      }else {
+        return ""
+      }
     },
 
     matriculaVehiculo(vehiculoId) {
       const vehiculo = this.vehiculos.filter((vehiculo) => vehiculo._id == vehiculoId)[0]
-      return vehiculo.matricula
+      if (vehiculo){
+        return vehiculo.matricula
+      }else {
+        return ""
+      }
     },
 
     refreshClasesPracticas () {
+
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
+
       // Cargo los datos de la base de datos
-      return clases_practicasApi.getClasePracticaAll()
+      return clases_practicasApi.getClasePracticaAllByAutoescuelaId(autoescuelaId)
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
             // Si es 200 es que ha encontrado el registro
@@ -238,8 +257,11 @@ export default {
 
 
     async refreshAlumnos() {
+
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
+
       // Cargo los datos de la base de datos
-      return alumnosApi.getAlumnoAll()
+      return alumnosApi.getAlumnoAllByAutoescuelaId(autoescuelaId)
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
             // Si es 200 es que ha encontrado el registro
@@ -256,8 +278,11 @@ export default {
 
 
     async refreshProfesores () {
+
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
+
       // Cargo los datos de la base de datos
-      return profesoresApi.getProfesorAll()
+      return profesoresApi.getProfesorAllByAutoescuelaId(autoescuelaId)
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
             // Si es 200 es que ha encontrado el registro
@@ -274,8 +299,11 @@ export default {
 
 
     async refreshVehiculos () {
+
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
+
       // Cargo los datos de la base de datos
-      return vehiculosApi.getVehiculoAll()
+      return vehiculosApi.getVehiculoAllByAutoescuelaId(autoescuelaId)
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
             // Si es 200 es que ha encontrado el registro

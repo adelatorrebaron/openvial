@@ -86,7 +86,92 @@ exports.alumnos_get_all =  (req, res, next) => {
             })
         });
 }
+
+
+//
+// Permite obtener todas los alumnos por el id de la autoescuela
+//
+exports.alumnos_get_all_by_autoescuelaId =  (req, res, next) => {
+    const autoescuelaId = req.params.autoescuelaId;
+    Alumno.find({autoescuela_id: autoescuelaId})
+        .exec()
+        .then(docs => {
+            res.status(200).json({
+                status: 'ok',
+                code: 200,
+                messages: [],
+                result: {
+                    total: docs.length,
+                    alumnos: docs.map(doc => {
+                        return {
+                            _id: doc._id,
+                            autoescuela_id: doc.autoescuela_id,
+                            dni: doc.dni,
+                            dni_fecha_caducidad: moment(doc.dni_fecha_caducidad, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+                            nombre: doc.nombre,
+                            primer_apellido: doc.primer_apellido,
+                            segundo_apellido: doc.segundo_apellido,
+                            sexo: doc.sexo,
+                            fecha_nacimiento: moment(doc.fecha_nacimiento, 'YYYY-MM-DD').format('DD/MM/YYYY'),
+                            pais_nacimiento: doc.pais_nacimiento,
+                            nacionalidad: doc.nacionalidad,
+                            direccion: {
+                                via: {
+                                    tipo: doc.direccion.via.tipo,
+                                    nombre: doc.direccion.via.nombre,
+                                    numero: doc.direccion.via.numero,
+                                    bloque: doc.direccion.via.bloque,
+                                    portal: doc.direccion.via.portal,
+                                    escalera: doc.direccion.via.escalera,
+                                    planta: doc.direccion.via.planta,
+                                    puerta: doc.direccion.via.puerta,
+                                    kilometro: doc.direccion.via.kilometro
+                                },
+                                codigo_postal: doc.direccion.codigo_postal,
+                                poblacion: doc.direccion.poblacion,
+                                provincia: doc.direccion.provincia,
+                                pais: doc.direccion.pais
+                            },
+                            contacto: {
+                                telefono_fijo: doc.contacto.telefono_fijo,
+                                telefono_movil: doc.contacto.telefono_movil,
+                                whatsapp: doc.contacto.whatsapp,
+                                email: doc.contacto.email,
+                                facebook: doc.contacto.facebook,
+                                twitter: doc.contacto.twitter
+                            },
+                            documentacion_aportada: {
+                                entrega_fotocopia_dni: doc.documentacion_aportada.entrega_fotocopia_dni,
+                                entrega_psicotecnico: doc.documentacion_aportada.entrega_psicotecnico,
+                                entrega_fotografias: doc.documentacion_aportada.entrega_fotografias,
+                                firma_tasas_examen: doc.documentacion_aportada.firma_tasas_examen,
+                                firma_autorizacion: doc.documentacion_aportada.firma_autorizacion,
+                                firma_talon_foto: doc.documentacion_aportada.firma_talon_foto
+                            },
+                            fecha_creacion: doc.fecha_creacion,
+                            estado: doc.estado,
+                            request: {
+                                descripcion: 'Obtener el registro',
+                                type: 'GET',
+                                url: req.protocol + '://' + req.headers.host + req.originalUrl + '/' + doc._id
+                            }
+                        }
+                    })
+                }
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            })
+        });
+}
    
+
+
 
 //
 // Permite crear un Alumno asociandolo al Id de la Autoescuela
@@ -151,12 +236,12 @@ exports.alumnos_create = (req, res, next) => {
                         _id: result._id,
                         autoescuela_id: result.autoescuela_id,
                         dni: result.dni,
-                        dni_fecha_caducidad: result.dni_fecha_caducidad,
+                        dni_fecha_caducidad: moment(result.dni_fecha_caducidad).format('DD/MM/YYYY'),
                         nombre: result.nombre,
                         primer_apellido: result.primer_apellido,
                         segundo_apellido: result.segundo_apellido,
                         sexo: result.sexo,
-                        fecha_nacimiento: result.fecha_nacimiento,
+                        fecha_nacimiento: moment(result.fecha_nacimiento).format('DD/MM/YYYY'),
                         pais_nacimiento: result.pais_nacimiento,
                         nacionalidad: result.nacionalidad,
                         direccion: {
@@ -192,7 +277,7 @@ exports.alumnos_create = (req, res, next) => {
                             firma_autorizacion: result.documentacion_aportada.firma_autorizacion,
                             firma_talon_foto: result.documentacion_aportada.firma_talon_foto
                         },
-                        fecha_creacion: result.fecha_creacion,
+                        fecha_creacion: moment(result.fecha_creacion).format('DD/MM/YYYY'),
                         estado: result.estado,                    
                         request: {
                             descripcion: 'Obtener registro creado',

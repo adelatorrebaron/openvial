@@ -71,7 +71,7 @@
                       <td>{{ profesor.contacto.email }}</td>
                       <td>
                         <div class="pull-right">
-                          <!--<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></button>-->
+                          <button type="button" class="btn btn-info btn-sm" @click.prevent="reportProfesor(profesor)"><i class="fa fa-file-pdf-o"></i></button>
                           <button type="button" class="btn btn-primary btn-sm" @click.prevent="populateProfesorToEdit(profesor)"><i class="fa fa-pencil"></i></button>
                           <button type="button" class="btn btn-danger btn-sm" @click.prevent="deleteProfesor(profesor)"><i class="fa fa-remove"></i></button>
                         </div>
@@ -113,8 +113,9 @@
 </template>
 
 <script>
-import profesoresApi         from '@/services/api/profesores.js'
-import profesorModalForm    from '@/components/profesores/profesor-modal-form'
+import profesoresApi      from '@/services/api/profesores.js'
+import informesApi        from '@/services/api/informes.js'
+import profesorModalForm  from '@/components/profesores/profesor-modal-form'
 import confirmModalForm   from '@/components/helpers/confirm-modal-form'
 
 export default {
@@ -159,9 +160,11 @@ export default {
     async refreshProfesores () {
       // Muestro el mensaje de Loading
       this.$store.dispatch('showLoading')
+
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
       
       // Cargo los datos de la base de datos
-      this.profesores = await profesoresApi.getProfesorAll()
+      this.profesores = await profesoresApi.getProfesorAllByAutoescuelaId(autoescuelaId)
         .then(data => {
             // Compruebo el codigo de los datos de respuesta
             // Si es 200 es que ha encontrado el registro
@@ -223,6 +226,20 @@ export default {
     },
 
 
+    async reportProfesor (profesor) {
+
+      await informesApi.report('profesor', profesor)
+      .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            //console.log(data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
+
+
     async resetModel(){
       // Ponemos el modelo con los valores por defecto
       this.model = {
@@ -234,7 +251,7 @@ export default {
         nombre: '',
         primer_apellido: '',
         segundo_apellido: '',
-        sexo: 'H',
+        sexo: '',
         fecha_nacimiento: '',
         pais_nacimiento: '',
         nacionalidad: '',

@@ -8,6 +8,9 @@ const ProfesoresController = require('../controllers/profesores');
 // Permite obtener todos los profesores
 router.get('/profesores/', ProfesoresController.profesores_get_all);
 
+// Permite obtener todos los profesores de una autoescuela
+router.get('/profesores/:autoescuelaId/autoescuela', ProfesoresController.profesores_get_all_by_autoescuelaId);
+
 // Permite obtener un profesor por el Id del profesor
 router.get('/profesores/:profesorId', ProfesoresController.profesores_get_by_profesorId);
 
