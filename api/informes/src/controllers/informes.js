@@ -29,7 +29,7 @@ const generatePdf = async function(templateName, data) {
         await page.emulateMedia('screen')
 
         await page.pdf({
-            path: `${templateName}.pdf`,
+            path: `./pdfs/${templateName}.pdf`,
             format: 'A4',
             printBackground: true
         })
@@ -52,7 +52,7 @@ exports.getInforme = async (req, res, next) => {
     
     const result = await generatePdf(templateName, data)
 
-    const pdf = path.join(process.cwd(), `${templateName}.pdf`)
+    const pdf = path.join(process.cwd(), `/pdfs/${templateName}.pdf`)
 
     fs.readFile(pdf , function (err,data){
         res.contentType("application/pdf");

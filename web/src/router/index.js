@@ -118,37 +118,6 @@ export default new Router({
       component: ClasesPracticasIndex,
       beforeEnter: ifAuthenticated
     },
-    /*
-    {
-      path: '/informes/autoescuela',
-      name: 'InformesAutoescuelaIndex',
-      component: InformesAutoescuelaIndex,
-      beforeEnter: ifAuthenticated
-    },
-    {
-      path: '/informes/profesores',
-      name: 'InformesProfesoresIndex',
-      component: InformesProfesoresIndex,
-      beforeEnter: ifAuthenticated
-    },
-    {
-      path: '/informes/alumnos',
-      name: 'InformesAlumnosIndex',
-      component: InformesAlumnosIndex,
-      beforeEnter: ifAuthenticated
-    },
-    {
-      path: '/informes/vehiculos',
-      name: 'InformesVehiculosIndex',
-      component: InformesVehiculosIndex,
-      beforeEnter: ifAuthenticated
-    },
-    {
-      path: '/informes/clases',
-      name: 'InformesClasesIndex',
-      component: InformesClasesIndex,
-      beforeEnter: ifAuthenticated
-    },*/
     {
       path: '*',
       component: NotFound404

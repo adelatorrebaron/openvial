@@ -148,7 +148,7 @@ exports.alumnos_get_all_by_autoescuelaId =  (req, res, next) => {
                                 firma_autorizacion: doc.documentacion_aportada.firma_autorizacion,
                                 firma_talon_foto: doc.documentacion_aportada.firma_talon_foto
                             },
-                            fecha_creacion: doc.fecha_creacion,
+                            fecha_creacion: moment(doc.fecha_creacion, 'YYYY-MM-DD').format('DD/MM/YYYY'),
                             estado: doc.estado,
                             request: {
                                 descripcion: 'Obtener el registro',

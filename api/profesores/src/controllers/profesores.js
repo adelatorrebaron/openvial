@@ -167,7 +167,7 @@ exports.profesores_get_all_by_autoescuelaId =  (req, res, next) => {
                                 digito_control: doc.datos_bancarios.digito_control,
                                 numero_de_cuenta: doc.datos_bancarios.numero_de_cuenta
                             },
-                            fecha_creacion: doc.fecha_creacion,
+                            fecha_creacion: moment(doc.fecha_creacion, 'YYYY-MM-DD').format('DD/MM/YYYY'),
                             estado: doc.estado,
                             request: {
                                 descripcion: 'Obtener el registro',

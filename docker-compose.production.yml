@@ -85,17 +85,16 @@ services:
     depends_on:
       - mongo
 
-  informes:
-    container_name: informes
-    restart: always
-    build: './api/informes'
-    ports:
-      - "127.0.0.1:3020:3020"
-    depends_on:
-      - mongo
-    volumes:
-    - ../informes:/app
-
+# Crear contenedor con puppeteer y node.js desde cero para que funcione.
+# Mientras tanto hay que levantarlo manualmente
+#  informes:
+#    container_name: informes
+#    restart: always
+#    build: './api/informes'
+#    ports:
+#      - "127.0.0.1:3020:3020"
+#    depends_on:
+#      - mongo
 
   web:
     container_name: web
@@ -111,7 +110,7 @@ services:
       - vehiculos
       - clases_practicas
       - correos
-      - informes      
+#      - informes      
     environment:
       - URL_API_USUARIOS=http://localhost:3001/api/v1
       - URL_API_AUTOESCUELAS=http://localhost:3002/api/v1
@@ -120,4 +119,4 @@ services:
       - URL_API_VEHICULOS=http://localhost:3005/api/v1
       - URL_API_CLASES_PRACTICAS=http://localhost:3006/api/v1
       - URL_API_CORREOS=http://localhost:3010/api/v1
-      - URL_API_INFORMES=http://localhost:3020/api/v1
+#      - URL_API_INFORMES=http://localhost:3020/api/v1
