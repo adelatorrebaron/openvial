@@ -1,34 +1,57 @@
 'use strict'
 
 const nodemailer = require('nodemailer');
-   
+require('dotenv').load();
+const fs = require('fs-extra');
+const path = require('path');
+
+
+const loadHTML = async function(templateName){
+    // Genero el path donde está la plantilla en formato html
+    const filePath = path.join(process.cwd(), 'templates', `${templateName}.html`)
+    
+    // Leo el archivo
+    const html = await fs.readFileSync(filePath, 'utf-8')
+    
+    // Devuelvo el html
+    return html
+}
+
 
 //
 // Envia correo electrónicos
 //
-exports.correos_send = (req, res, next) => {
+exports.correos_send = async (req, res, next) => {
+    
+    // Cargo los datos del body en variables
+    const template_name = req.body.template_name
+    const user_email = req.body.user_email
 
+    // Cargo el contenido de la plantilla en la variable
+    const html = await loadHTML(template_name);
+    
     const datos = {
-        from: req.body.from,
-        to: req.body.to,
-        subject: req.body.subject,
-        text: req.body.text,
-        html: req.body.html
+        from: process.env.USER_MAIL,
+        to: user_email,
+        subject: 'Bienvenido a OpenVial',
+        html: html
     }
 
+    // Crear un archivo .env he introducir el siguiente texto
+    // USER_MAIL = usuario@gmail.com
+    // PASSWORD_MAIL = contraseña
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'usuario@gmail.com',
-            pass: 'contraseña'
+            user: process.env.USER_MAIL,
+            pass: process.env.PASSWORD_MAIL
         }
     });
-   
+
     const mailOptions = {
-        from: datos.from,
+        from: process.env.USER_MAIL,
         to: datos.to,
         subject: datos.subject,
-        text: datos.text,
         html: datos.html
     };
 
