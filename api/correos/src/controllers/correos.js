@@ -22,7 +22,7 @@ const loadHTML = async function(templateName){
 // Envia correo electrónicos
 //
 exports.correos_send = async (req, res, next) => {
-    
+
     // Cargo los datos del body en variables
     const template_name = req.body.template_name
     const user_email = req.body.user_email
@@ -31,7 +31,7 @@ exports.correos_send = async (req, res, next) => {
     const html = await loadHTML(template_name);
     
     const datos = {
-        from: process.env.USER_MAIL,
+        from: process.env.USER_SENDER_MAIL,
         to: user_email,
         subject: 'Bienvenido a OpenVial',
         html: html
@@ -43,13 +43,13 @@ exports.correos_send = async (req, res, next) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.USER_MAIL,
-            pass: process.env.PASSWORD_MAIL
+            user: process.env.USER_SENDER_MAIL,
+            pass: process.env.PASSWORD_SENDER_MAIL
         }
     });
 
     const mailOptions = {
-        from: process.env.USER_MAIL,
+        from: datos.from,
         to: datos.to,
         subject: datos.subject,
         html: datos.html

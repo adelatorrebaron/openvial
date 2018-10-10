@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let URL_API_INFORMES    = 'http://localhost:3020/api/v1';
+let API_URL    = 'http://localhost:3020/api/v1';
 
 if (process.env.URL_API_INFORMES) {
     API_URL = process.env.URL_API_INFORMES;
@@ -27,7 +27,7 @@ export default {
         }
 
         return axios.post(
-            URL_API_INFORMES + '/informes/',
+            API_URL + '/informes/',
             payload,
             config
             )

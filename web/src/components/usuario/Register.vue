@@ -52,9 +52,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import correosApi     from '@/services/api/correos.js'
 
 export default {
   name: 'Register',
+
   data () {
     return {
       username: '',
@@ -64,19 +66,49 @@ export default {
       error: false
     }
   },
+
+
   methods: {
+
     registro () {
       this.$http.post('/usuarios/registro', {username: this.username, email: this.email, password: this.password})
         .then(request => this.registroSuccessful(request))
         .catch(err => this.registroFailed(err))
     },
+    
+
     registroSuccessful (req) {
+      
+      // Envio un email de bienvenida
+      this.sendEmailBienvenida()
+        .then(data => {
+          //console.log("Email enviado")
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
       this.error = false
       this.$router.replace(this.$route.query.redirect || '/usuario/login')
     },
+
+
     registroFailed (err) {
       this.error = err.response.data.messages[0].error
+    },
+
+
+    async sendEmailBienvenida(){
+      // Envio un correo de bienvenida al usuario registrado
+      correosApi.sendMail('welcome_mail', this.email)
+        .then(data => {
+              //console.log(data)
+          })
+          .catch(err => {
+              console.log(err)
+          })
     }
+    
   }
 }
 </script>
