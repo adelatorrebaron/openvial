@@ -102,6 +102,7 @@ export default {
 		...mapGetters({ isUserLogged: 'isUserLogged' }),
 		...mapGetters({ existAutoescuela: 'existAutoescuela' })
 	},
+	
 	data() {
 		return {
 			perfilFormShow: false,
@@ -109,22 +110,26 @@ export default {
       		perfilFormAction: 'edit',
 		}
 	},
+	
 	methods: {
 		showPerfilModalForm(){
 			// Muestro el formulario
 			this.perfilFormShow = true
 		},
+
 		onClosedPerfilModalForm(mensaje) {
-		// Cierro el formulario
-		this.perfilFormShow = false
+			// Cierro el formulario
+			this.perfilFormShow = false
 		},
+
 		onCanceledPerfilModalForm(mensaje){
-		// Cierro el formulario
-		this.perfilFormShow = false
+			// Cierro el formulario
+			this.perfilFormShow = false
 		},
+
 		onAcceptedAPerfilModalForm(mensaje){
-		// Cierro el formulario
-		this.perfilFormShow = false
+			// Cierro el formulario
+			this.perfilFormShow = false
 		}
 	}
 	  

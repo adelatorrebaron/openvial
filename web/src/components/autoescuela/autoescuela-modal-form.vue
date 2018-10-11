@@ -23,34 +23,39 @@
                     <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                        <label>*Denominación:</label>
-                        <input v-model="autoescuela.denominacion" type="text" class="form-control" placeholder="Denominación" maxlength="160" required>
+                            <label>*Denominación:</label>
+                            <input v-model="autoescuela.denominacion" name="denominacion" v-validate="'required|max:160'" type="text" class="form-control" placeholder="Denominación" maxlength="160">
+                            <span class="help-block">{{ errors.first('denominacion') }}</span>
                         </div>
                     </div>
                     </div>
                     <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label>*Nº Provincial:</label>
-                        <input v-model="autoescuela.numero_provincial" type="text" class="form-control" placeholder="Nº Provincial" maxlength="8" required>
+                            <label>*Nº Provincial:</label>
+                            <input v-model="autoescuela.numero_provincial" name="numero provincial" v-validate="'required|max:8'" type="text" class="form-control" placeholder="Nº Provincial" maxlength="8">
+                            <span class="help-block">{{ errors.first('numero provincial') }}</span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label>*Sección:</label>
-                        <input v-model="autoescuela.seccion" type="text" class="form-control" placeholder="Sección" maxlength="2" required>
+                            <label>*Sección:</label>
+                            <input v-model="autoescuela.seccion" name="seccion" v-validate="'required|min_value:0|max_value:99'" type="text" class="form-control" placeholder="Sección" maxlength="2">
+                            <span class="help-block">{{ errors.first('seccion') }}</span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label>*Dígito de control:</label>
-                        <input v-model="autoescuela.digito_control" type="text" class="form-control" placeholder="Dígito de control" maxlength="2" required>
+                            <label>*Dígito de control:</label>
+                            <input v-model="autoescuela.digito_control" name="digito control" v-validate="'required|min_value:0|max_value:99'" type="text" class="form-control" placeholder="Dígito de control" maxlength="2">
+                            <span class="help-block">{{ errors.first('digito control') }}</span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label>Nº Secuencial:</label>
-                        <input v-model="autoescuela.numero_secuencial" type="text" class="form-control" placeholder="Nº Secuencial" maxlength="2" required>
+                            <label>Nº Secuencial:</label>
+                            <input v-model="autoescuela.numero_secuencial" name="numero secuencial" v-validate="'min_value:0|max_value:99'" type="text" class="form-control" placeholder="Nº Secuencial" maxlength="2">
+                            <span class="help-block">{{ errors.first('numero secuencial') }}</span>
                         </div>
                     </div>                                    
                     </div>
@@ -62,84 +67,97 @@
                     <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>*Tipo de vía:</label>
-                        <input v-model="autoescuela.direccion.via.tipo" type="text" class="form-control" placeholder="Tipo de vía" maxlength="25" required>
+                            <label>*Tipo de vía:</label>
+                            <input v-model="autoescuela.direccion.via.tipo" name="tipo de via" v-validate="'required|max:25'" type="text" class="form-control" placeholder="Tipo de vía" maxlength="25">
+                            <span class="help-block">{{ errors.first('tipo de via') }}</span>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
-                        <label>*Nombre:</label>
-                        <input v-model="autoescuela.direccion.via.nombre" type="text" class="form-control" placeholder="Nombre" maxlength="120" required>
+                            <label>*Nombre:</label>
+                            <input v-model="autoescuela.direccion.via.nombre" name="nombre de via" v-validate="'required|max:120'" type="text" class="form-control" placeholder="Nombre" maxlength="120">
+                            <span class="help-block">{{ errors.first('nombre de via') }}</span>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>*Número:</label>
-                        <input v-model="autoescuela.direccion.via.numero" type="text" class="form-control" placeholder="Numero" maxlength="10" required>
+                            <label>*Número:</label>
+                            <input v-model="autoescuela.direccion.via.numero" name="numero" v-validate="'required|max:10'" type="text" class="form-control" placeholder="Numero" maxlength="10">
+                            <span class="help-block">{{ errors.first('numero') }}</span>
                         </div>
                     </div>
                     </div>
                     <div class="row">        
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Bloque:</label>
-                        <input v-model="autoescuela.direccion.via.bloque" type="text" class="form-control" placeholder="Bloque" maxlength="60">
+                            <label>Bloque:</label>
+                            <input v-model="autoescuela.direccion.via.bloque" name="bloque" v-validate="'max:60'" type="text" class="form-control" placeholder="Bloque" maxlength="60">
+                            <span class="help-block">{{ errors.first('bloque') }}</span>
                         </div>
                     </div>        
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Portal:</label>
-                        <input v-model="autoescuela.direccion.via.portal" type="text" class="form-control" placeholder="Portal" maxlength="20">
+                            <label>Portal:</label>
+                            <input v-model="autoescuela.direccion.via.portal" name="portal" v-validate="'max:20'" type="text" class="form-control" placeholder="Portal" maxlength="20">
+                            <span class="help-block">{{ errors.first('portal') }}</span>
                         </div>
                     </div> 
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Escalera:</label>
-                        <input v-model="autoescuela.direccion.via.escalera" type="text" class="form-control" placeholder="Escalera" maxlength="20">
+                            <label>Escalera:</label>
+                            <input v-model="autoescuela.direccion.via.escalera" name="escalera" v-validate="'max:20'" type="text" class="form-control" placeholder="Escalera" maxlength="20">
+                            <span class="help-block">{{ errors.first('escalera') }}</span>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Planta:</label>
-                        <input v-model="autoescuela.direccion.via.planta" type="text" class="form-control" placeholder="Planta" maxlength="20">
+                            <label>Planta:</label>
+                            <input v-model="autoescuela.direccion.via.planta" name="planta" v-validate="'max:20'" type="text" class="form-control" placeholder="Planta" maxlength="20">
+                            <span class="help-block">{{ errors.first('planta') }}</span>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Puerta:</label>
-                        <input v-model="autoescuela.direccion.via.puerta" type="text" class="form-control" placeholder="Puerta" maxlength="20">
+                            <label>Puerta:</label>
+                            <input v-model="autoescuela.direccion.via.puerta" name="puerta" v-validate="'max:20'" type="text" class="form-control" placeholder="Puerta" maxlength="20">
+                            <span class="help-block">{{ errors.first('puerta') }}</span>
                         </div>
                     </div>            
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Kilómetro:</label>
-                        <input v-model="autoescuela.direccion.via.kilometro" type="text" class="form-control" placeholder="Kilómetro" maxlength="20">
+                            <label>Kilómetro:</label>
+                            <input v-model="autoescuela.direccion.via.kilometro" name="kilometro" v-validate="'max:20'" type="text" class="form-control" placeholder="Kilómetro" maxlength="20">
+                            <span class="help-block">{{ errors.first('kilometro') }}</span>
                         </div>
                     </div>
                     </div>
                     <div class="row">        
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label>*Código postal:</label>
-                        <input v-model="autoescuela.direccion.codigo_postal" type="text" class="form-control" placeholder="Código postal" maxlength="5" required>
+                            <label>*Código postal:</label>
+                            <input v-model="autoescuela.direccion.codigo_postal" name="codigo postal" v-validate="'required|digits:5'" type="text" class="form-control" placeholder="Código postal" maxlength="5">
+                            <span class="help-block">{{ errors.first('codigo postal') }}</span>
                         </div>
                     </div>        
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label>*Población:</label>
-                        <input v-model="autoescuela.direccion.poblacion" type="text" class="form-control" placeholder="Población" maxlength="50" required>
+                            <label>*Población:</label>
+                            <input v-model="autoescuela.direccion.poblacion" name="poblacion" v-validate="'required|max:50'" type="text" class="form-control" placeholder="Población" maxlength="50">
+                            <span class="help-block">{{ errors.first('poblacion') }}</span>
                         </div>
                     </div> 
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label>*Provincia:</label>
-                        <input v-model="autoescuela.direccion.provincia" type="text" class="form-control" placeholder="Provincia" maxlength="50" required>
+                            <label>*Provincia:</label>
+                            <input v-model="autoescuela.direccion.provincia" name="provincia" v-validate="'required|max:50'" type="text" class="form-control" placeholder="Provincia" maxlength="50">
+                            <span class="help-block">{{ errors.first('provincia') }}</span>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                        <label>*País:</label>
-                        <input v-model="autoescuela.direccion.pais" type="text" class="form-control" placeholder="Pais" maxlength="30" required>
+                            <label>*País:</label>
+                            <input v-model="autoescuela.direccion.pais" name="pais" v-validate="'required|max:30'" type="text" class="form-control" placeholder="Pais" maxlength="30">
+                            <span class="help-block">{{ errors.first('pais') }}</span>
                         </div>
                     </div>
                     </div>
@@ -150,46 +168,53 @@
                     <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                        <label>*Correo electrónico:</label>
-                        <input v-model="autoescuela.contacto.email" type="text" class="form-control" placeholder="Correo electrónico" maxlength="255" required>
+                            <label>*Correo electrónico:</label>
+                            <input v-model="autoescuela.contacto.email" name="correo electronico" v-validate="'required|email|max:255'" type="text" class="form-control" placeholder="Correo electrónico" maxlength="255">
+                            <span class="help-block">{{ errors.first('correo electronico') }}</span>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Teléfono fijo:</label>
-                        <input v-model="autoescuela.contacto.telefono_fijo" type="text" class="form-control" placeholder="Teléfono fijo" maxlength="12">
+                            <label>Teléfono fijo:</label>
+                            <input v-model="autoescuela.contacto.telefono_fijo" name="telefono fijo" v-validate="'digits:9'" type="text" class="form-control" placeholder="Teléfono fijo" maxlength="12">
+                            <span class="help-block">{{ errors.first('telefono fijo') }}</span>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Teléfono móvil:</label>
-                        <input v-model="autoescuela.contacto.telefono_movil" type="text" class="form-control" placeholder="Teléfono móvil" maxlength="12">
+                            <label>Teléfono móvil:</label>
+                            <input v-model="autoescuela.contacto.telefono_movil" name="telefono movil" v-validate="'digits:9'" type="text" class="form-control" placeholder="Teléfono móvil" maxlength="12">
+                            <span class="help-block">{{ errors.first('telefono movil') }}</span>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                        <label>Whatsapp:</label>
-                        <input v-model="autoescuela.contacto.whatsapp" type="text" class="form-control" placeholder="Whatsapp" maxlength="12">
+                            <label>Whatsapp:</label>
+                            <input v-model="autoescuela.contacto.whatsapp" name="whatsapp" v-validate="'digits:9'" type="text" class="form-control" placeholder="Whatsapp" maxlength="12">
+                            <span class="help-block">{{ errors.first('whatsapp') }}</span>
                         </div>
                     </div>
                     </div>
                     <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                        <label>Sitio web:</label>
-                        <input v-model="autoescuela.contacto.website" type="text" class="form-control" placeholder="Sitio web" maxlength="255">
+                            <label>Sitio web:</label>
+                            <input v-model="autoescuela.contacto.website" name="website" v-validate="'max:255'" type="text" class="form-control" placeholder="Sitio web" maxlength="255">
+                            <span class="help-block">{{ errors.first('website') }}</span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                        <label>Facebook:</label>
-                        <input v-model="autoescuela.contacto.facebook" type="text" class="form-control" placeholder="Facebook" maxlength="255">
+                            <label>Facebook:</label>
+                            <input v-model="autoescuela.contacto.facebook" name="facebook" v-validate="'max:255'" type="text" class="form-control" placeholder="Facebook" maxlength="255">
+                            <span class="help-block">{{ errors.first('facebook') }}</span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                        <label>Twitter:</label>
-                        <input v-model="autoescuela.contacto.twitter" type="text" class="form-control" placeholder="Twitter" maxlength="255">
+                            <label>Twitter:</label>
+                            <input v-model="autoescuela.contacto.twitter" name="twitter" v-validate="'max:255'" type="text" class="form-control" placeholder="Twitter" maxlength="255">
+                            <span class="help-block">{{ errors.first('twitter') }}</span>
                         </div>
                     </div>
                     </div>                
@@ -242,22 +267,35 @@ export default {
     },
 
     onAccepted: function () {
-      if (this.action === 'create'){
-        // Debido a que el usuario está en el store y no se encuentra en el formulario
-        // Lo leemos del Store y se lo asignamos a la academia para que cuando se cree
-        // se asocie a este usuario
-        this.autoescuela.usuario_id = this.currentUser._id
-        
-        // Paso al Store los datos del formulario para que los salve en el API
-        this.$store.dispatch('saveAutoescuela', this.autoescuela)
-      }
-      else if (this.action === 'edit'){
-        // Paso al Store los datos del formulario para que los actualice en el API
-        this.$store.dispatch('updateAutoescuela', this.autoescuela)
-      }
 
-      // Emito el evento que se ha pulsado el boton aceptar.
-      this.$emit('onAccepted');
+      this.$validator.validateAll()
+        .then((result) => {
+            // Si hay errores salimos
+            if(!result){
+                return
+            }
+            
+            // Si no hay errores procedemos a registral al usuario
+            if (this.action === 'create'){
+                // Debido a que el usuario está en el store y no se encuentra en el formulario
+                // Lo leemos del Store y se lo asignamos a la academia para que cuando se cree
+                // se asocie a este usuario
+                this.autoescuela.usuario_id = this.currentUser._id
+                
+                // Paso al Store los datos del formulario para que los salve en el API
+                this.$store.dispatch('saveAutoescuela', this.autoescuela)
+            }
+            else if (this.action === 'edit'){
+                // Paso al Store los datos del formulario para que los actualice en el API
+                this.$store.dispatch('updateAutoescuela', this.autoescuela)
+            }
+
+            // Emito el evento que se ha pulsado el boton aceptar.
+            this.$emit('onAccepted');
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }

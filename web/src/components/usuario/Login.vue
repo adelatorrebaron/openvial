@@ -11,12 +11,14 @@
     <form @submit.prevent="login">
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <div class="form-group has-feedback">
-        <input v-model="email" type="email" class="form-control" placeholder="Email" maxlength="255" required autofocus>
+        <input v-model="email" name="email" v-validate="'required|email|max:255'" class="form-control" placeholder="Email" maxlength="255">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <span class="help-block">{{ errors.first('email') }}</span>
       </div>
       <div class="form-group has-feedback">
-        <input v-model="password" type="password" class="form-control" placeholder="Password" maxlength="255" required>
+        <input v-model="password" name="password" v-validate="'required|min:5|max:255'" type="password" class="form-control" placeholder="Password" maxlength="255">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="help-block">{{ errors.first('password') }}</span>
       </div>
       <div class="row">
         <div class="col-xs-8">
@@ -47,33 +49,52 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Login',
+
   data () {
     return {
-      email: 'alejandrodelatorrebaron@gmail.com',
-      password: 'alejandro',
+      email: '',
+      password: '',
       error: false
     }
   },
+
   computed: {
     ...mapGetters({ currentUser: 'currentUser' })
   },
+
   created () {
     this.checkCurrentLogin()
   },
+
   updated () {
     this.checkCurrentLogin()
   },
+
   methods: {
     checkCurrentLogin () {
       if (this.currentUser) {
         this.$router.replace(this.$route.query.redirect || '/dashboard')
       }
     },
+
     login () {
-      this.$http.post('/usuarios/login', { email: this.email, password: this.password })
-        .then(request => this.loginSuccessful(request))
-        .catch(err => this.loginFailed(err))
+
+      this.$validator.validateAll()
+        .then((result) => {
+          // Si hay errores salimos
+          if(!result){
+            return
+          }
+          // Si no hay errores procedemos a registral al usuario
+          this.$http.post('/usuarios/login', { email: this.email, password: this.password })
+            .then(request => this.loginSuccessful(request))
+            .catch(err => this.loginFailed(err))
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
+
     loginSuccessful (req) {
       if (!req.data.result.token) {
         this.loginFailed()
@@ -90,11 +111,13 @@ export default {
 
       this.$router.replace(this.$route.query.redirect || '/dashboard')
     },
+
     loginFailed (err) {
       this.error = err.response.data.messages[0].error;
       this.$store.dispatch('logout')
       delete localStorage.token
     },
+
     toggleBodyClass(addRemoveClass, className) {
       const el = document.body;
 

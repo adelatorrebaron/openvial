@@ -23,25 +23,28 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Alumno:</label>
-                        <select v-model="clase_practica.alumno_id" class="form-control">
+                        <select v-model="clase_practica.alumno_id" name="alumno" v-validate="'required'" class="form-control">
                           <option v-for="alumno in alumnos" v-bind:value="alumno._id" v-bind:key="alumno._id">{{alumno.nombre}} {{alumno.primer_apellido}} {{alumno.segundo_nombre}}</option>
                         </select>
+                        <span class="help-block">{{ errors.first('alumno') }}</span>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Profesor:</label>
-                        <select v-model="clase_practica.profesor_id" class="form-control">
+                        <select v-model="clase_practica.profesor_id" name="profesor" v-validate="'required'" class="form-control">
                           <option v-for="profesor in profesores" v-bind:value="profesor._id" v-bind:key="profesor._id">{{profesor.nombre}} {{profesor.primer_apellido}} {{profesor.segundo_nombre}}</option>
                         </select>
+                        <span class="help-block">{{ errors.first('profesor') }}</span>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Vehiculo:</label>
-                        <select v-model="clase_practica.vehiculo_id" class="form-control">
+                        <select v-model="clase_practica.vehiculo_id" name="vehiculo" v-validate="'required'" class="form-control">
                           <option v-for="vehiculo in vehiculos" v-bind:value="vehiculo._id" v-bind:key="vehiculo._id">{{vehiculo.matricula}} - {{vehiculo.marca}} {{vehiculo.modelo}}</option>
                         </select>
+                        <span class="help-block">{{ errors.first('vehiculo') }}</span>
                       </div>
                     </div>
                   </div>
@@ -49,19 +52,22 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Fecha:</label>
-                        <input v-model="clase_practica.fecha_clase" type="text" class="form-control" placeholder="01/01/2018" maxlength="10" required>
+                        <input v-model="clase_practica.fecha_clase" name="fecha" v-validate="'required|date_format:DD/MM/YYYY'" type="text" class="form-control" placeholder="01/01/2018" maxlength="10" required>
+                        <span class="help-block">{{ errors.first('fecha') }}</span>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Hora inicio:</label>
-                        <input v-model="clase_practica.hora_inicio" type="text" class="form-control" placeholder="08:00" maxlength="5" required>
+                        <input v-model="clase_practica.hora_inicio" name="hora de inicio" v-validate="'required|time'" type="text" class="form-control" placeholder="08:00" maxlength="5" required>
+                        <span class="help-block">{{ errors.first('hora de inicio') }}</span>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Hora de finalización:</label>
-                        <input v-model="clase_practica.hora_finalizacion" type="text" class="form-control" placeholder="09:30" maxlength="5" required>
+                        <input v-model="clase_practica.hora_finalizacion" name="hora de finalizacion" v-validate="'required|time'" type="text" class="form-control" placeholder="09:30" maxlength="5" required>
+                        <span class="help-block">{{ errors.first('hora de finalizacion') }}</span>
                       </div>
                     </div>
                   </div>
@@ -69,13 +75,15 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Descripción del recorrido:</label>
-                        <textarea v-model="clase_practica.descripcion_recorrido" rows="10" placeholder="Descripcion" maxlength="255" class="form-control noresize"></textarea>
+                        <textarea v-model="clase_practica.descripcion_recorrido" name="descripcion_recorrido" v-validate="'max:255'" rows="10" placeholder="Descripcion" maxlength="255" class="form-control noresize"></textarea>
+                        <span class="help-block">{{ errors.first('descripcion_recorrido') }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Errores cometidos por el alumno:</label>
-                        <textarea v-model="clase_practica.errores_cometidos_alumno" rows="10" placeholder="Listado de errores" maxlength="255" class="form-control noresize"></textarea>
+                        <textarea v-model="clase_practica.errores_cometidos_alumno" name="errores_cometidos_alumno" v-validate="'max:255'" rows="10" placeholder="Listado de errores" maxlength="255" class="form-control noresize"></textarea>
+                        <span class="help-block">{{ errors.first('errores_cometidos_alumno') }}</span>
                       </div>
                     </div>
                   </div>
@@ -127,7 +135,18 @@ export default {
     },
 
     onAccepted: function () {
-      this.$emit('onAccepted')
+      this.$validator.validateAll()
+        .then((result) => {
+            // Si hay errores salimos
+            if(!result){
+                return
+            }
+            // Emito el evento que se ha pulsado el boton aceptar.
+            this.$emit('onAccepted')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
   }
   

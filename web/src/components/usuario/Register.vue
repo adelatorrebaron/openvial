@@ -11,16 +11,20 @@
     <form @submit.prevent="registro">
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <div class="form-group has-feedback">
-        <input v-model="username" type="username" class="form-control" placeholder="Username"  maxlength="100" required autofocus>
+        <input v-model="username" name="username" v-validate="'required|min:5|max:100'" class="form-control" placeholder="Username"  maxlength="100">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <span class="help-block">{{ errors.first('username') }}</span>
       </div>
       <div class="form-group has-feedback">
-        <input v-model="email" type="email" class="form-control" placeholder="Email" maxlength="255" required>
+        <input v-model="email" name="email" v-validate="'required|email|max:255'" class="form-control" placeholder="Email" maxlength="255">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <span class="help-block">{{ errors.first('email') }}</span>
+
       </div>
       <div class="form-group has-feedback">
-        <input v-model="password" type="password" class="form-control" placeholder="Password" maxlength="255" required>
+        <input v-model="password" name="password" v-validate="'required|min:5|max:255'" class="form-control" type="password" placeholder="Password" maxlength="255">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="help-block">{{ errors.first('password') }}</span>
       </div>
       <!--
       <div class="form-group has-feedback">
@@ -71,9 +75,21 @@ export default {
   methods: {
 
     registro () {
-      this.$http.post('/usuarios/registro', {username: this.username, email: this.email, password: this.password})
-        .then(request => this.registroSuccessful(request))
-        .catch(err => this.registroFailed(err))
+
+      this.$validator.validateAll()
+        .then((result) => {
+          // Si hay errores salimos
+          if(!result){
+            return
+          }
+          // Si no hay errores procedemos a registral al usuario
+          this.$http.post('/usuarios/registro', {username: this.username, email: this.email, password: this.password})
+            .then(request => this.registroSuccessful(request))
+            .catch(err => this.registroFailed(err))
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     
 

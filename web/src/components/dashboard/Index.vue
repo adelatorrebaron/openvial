@@ -116,37 +116,37 @@ export default {
       autoescuelaFormAction: 'create',
       autoescuela: {
         _id: '',
-        usuario_id: '5ba4d317bf45010012952d5f',
-        denominacion: 'Autoescuela Odisea 18asd',
-        numero_provincial: 'GR03918',
-        seccion: '18',
-        digito_control: '18',
-        numero_secuencial: '18',
+        usuario_id: '',
+        denominacion: '',
+        numero_provincial: '',
+        seccion: '',
+        digito_control: '',
+        numero_secuencial: '',
         direccion: {
           via: {
-            tipo: 'Avenida',
-            nombre: 'Los solecillos',
-            numero: '18',
-            bloque: 'Los Almendros',
-            portal: '18',
-            escalera: '18',
-            planta: '18ª',
-            puerta: '18C',
-            kilometro: '18'
+            tipo: '',
+            nombre: '',
+            numero: '',
+            bloque: '',
+            portal: '',
+            escalera: '',
+            planta: '',
+            puerta: '',
+            kilometro: ''
           },
-          codigo_postal: '18180',
-          poblacion: 'Alfacar',
-          provincia: 'Granada',
-          pais: 'España'
+          codigo_postal: '',
+          poblacion: '',
+          provincia: '',
+          pais: ''
         },
         contacto: {
-          telefono_fijo: '958540562',
-          telefono_movil: '636244362',
-          whatsapp: '636244362',
-          email: 'alejandrodelatorrebaron18@gmail.com',
-          website: 'www.autoescuelaodisea.com',
-          facebook: 'mifaceboo.com',
-          twitter: 'mituiter.com'
+          telefono_fijo: '',
+          telefono_movil: '',
+          whatsapp: '',
+          email: '',
+          website: '',
+          facebook: '',
+          twitter: ''
         },
         estado: true
       },

@@ -23,7 +23,8 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>*Matricula:</label>
-                        <input v-model="vehiculo.matricula" type="text" class="form-control" placeholder="Matricula" maxlength="10" required>
+                        <input v-model="vehiculo.matricula" name="matricula" v-validate="'required|max:10'" type="text" class="form-control" placeholder="Matricula" maxlength="10">
+                        <span class="help-block">{{ errors.first('matricula') }}</span>
                       </div>
                     </div>
                   </div>
@@ -31,13 +32,15 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Marca:</label>
-                        <input v-model="vehiculo.marca" type="text" class="form-control" placeholder="Marca" maxlength="150">
+                        <input v-model="vehiculo.marca" name="marca" v-validate="'max:150'" type="text" class="form-control" placeholder="Marca" maxlength="150">
+                        <span class="help-block">{{ errors.first('marca') }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Modelo:</label>
-                        <input v-model="vehiculo.modelo" type="text" class="form-control" placeholder="Modelo" maxlength="150">
+                        <input v-model="vehiculo.modelo" name="modelo" v-validate="'max:150'" type="text" class="form-control" placeholder="Modelo" maxlength="150">
+                        <span class="help-block">{{ errors.first('modelo') }}</span>
                       </div>
                     </div>
                   </div>
@@ -45,13 +48,15 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Cilindrada:</label>
-                        <input v-model="vehiculo.cilindrada" type="text" class="form-control" placeholder="Cilindrada" maxlength="10">
+                        <input v-model="vehiculo.cilindrada" name="cilindrada" v-validate="'max:10'" type="text" class="form-control" placeholder="Cilindrada" maxlength="10">
+                        <span class="help-block">{{ errors.first('cilindrada') }}</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Color:</label>
-                        <input v-model="vehiculo.color" type="text" class="form-control" placeholder="Color" maxlength="25">
+                        <input v-model="vehiculo.color" name="color" v-validate="'max:25'" type="text" class="form-control" placeholder="Color" maxlength="25">
+                        <span class="help-block">{{ errors.first('color') }}</span>
                       </div>
                     </div>
                   </div>
@@ -100,8 +105,20 @@ export default {
     },
 
     onAccepted: function () {
-      this.$emit('onAccepted')
+      this.$validator.validateAll()
+        .then((result) => {
+            // Si hay errores salimos
+            if(!result){
+                return
+            }
+            // Emito el evento que se ha pulsado el boton aceptar.
+            this.$emit('onAccepted')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
+    
   }
   
 }
