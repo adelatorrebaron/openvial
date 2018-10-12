@@ -12,66 +12,65 @@
       </section>
       <section class="content">
         <div class="row">
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-aqua">
-              <div class="inner">
-                <h3>150</h3>
 
-                <p>Alumnos</p>
-              </div>
-              <div class="icon">
-                <i class="fa fa-users"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-green">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-red"><i class="fa fa-address-card"></i></span>
 
-                <p>Bounce Rate</p>
+              <div class="info-box-content">
+                <span class="info-box-text">Profesores</span>
+                <span class="info-box-number">{{ total_profesores }}</span>
               </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
           </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-              <div class="inner">
-                <h3>44</h3>
+          <!-- /.col -->
 
-                <p>User Registrations</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-red">
-              <div class="inner">
-                <h3>65</h3>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-aqua"><i class="fa fa-users"></i></span>
 
-                <p>Unique Visitors</p>
+              <div class="info-box-content">
+                <span class="info-box-text">Alumnos</span>
+                <span class="info-box-number">{{ total_alumnos }}</span>
               </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
           </div>
-          <!-- ./col -->
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix visible-sm-block"></div>
+
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-green"><i class="fa fa-car"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Vehículos</span>
+                <span class="info-box-number">{{ total_vehiculos }}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-yellow"><i class="fa fa-calendar-check-o"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Clases prácticas</span>
+                <span class="info-box-number">{{ total_clases_practicas }}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
         </div>
       </section>
     </div>
@@ -100,6 +99,10 @@
 import autoescuelaWelcomeMessage    from '@/components/autoescuela/autoescuela-welcome-message'
 import autoescuelaModalForm         from '@/components/autoescuela/autoescuela-modal-form'
 import { mapGetters }               from 'vuex'
+import profesoresApi                from '@/services/api/profesores.js'
+import alumnosApi                   from '@/services/api/alumnos.js'
+import vehiculosApi                 from '@/services/api/vehiculos.js'
+import clases_practicasApi          from '@/services/api/clases_practicas.js'
 
 export default {
   name: 'dashboard',
@@ -150,6 +153,10 @@ export default {
         },
         estado: true
       },
+      total_profesores: 0,
+      total_alumnos: 0,
+      total_vehiculos: 0,
+      total_clases_practicas: 0
     }
   },
 
@@ -160,6 +167,12 @@ export default {
 
   created () {
     this.loadAutoescuelaData()
+     if (this.isUserLogged && this.existAutoescuela){
+      this.getTotalProfesores()
+      this.getTotalAlumnos()
+      this.getTotalVehiculos()
+      this.getClasesPracticas()
+     }
   },
 
   updated () {
@@ -173,22 +186,103 @@ export default {
           this.$store.dispatch('loadAutoescuela', this.$store.state.authorization.user._id)
         }
     },
+
     showAutoescuelaModalForm(){
       // Muestro el formulario
       this.autoescuelaFormShow = true
     },
+
     onClosedAutoescuelaModalForm(mensaje) {
       // Cierro el formulario
       this.autoescuelaFormShow = false
     },
+
     onCanceledAutoescuelaModalForm(mensaje){
       // Cierro el formulario
       this.autoescuelaFormShow = false
     },
+
     onAcceptedAutoescuelaModalForm(mensaje){
       // Cierro el formulario
       this.autoescuelaFormShow = false
-    }
+    },
+
+    async getTotalProfesores () {
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
+      
+      // Cargo los datos de la base de datos
+      this.total_profesores = await profesoresApi.getProfesorAllByAutoescuelaId(autoescuelaId)
+        .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            if (data.code === 200){
+              return data.result.total
+            }else{
+              return null
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
+    
+    async getTotalAlumnos () {
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
+      
+      // Cargo los datos de la base de datos
+      this.total_alumnos = await alumnosApi.getAlumnoAllByAutoescuelaId(autoescuelaId)
+        .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            if (data.code === 200){
+              return data.result.total
+            }else{
+              return null
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
+
+    async getTotalVehiculos () {
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
+      
+      // Cargo los datos de la base de datos
+      this.total_vehiculos = await vehiculosApi.getVehiculoAllByAutoescuelaId(autoescuelaId)
+        .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            if (data.code === 200){
+              return data.result.total
+            }else{
+              return null
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
+
+    async getClasesPracticas () {
+      const autoescuelaId = this.$store.state.autoescuelas.autoescuela._id
+
+      // Cargo los datos de la base de datos
+      this.total_clases_practicas = await clases_practicasApi.getClasePracticaAllByAutoescuelaId(autoescuelaId)
+        .then(data => {
+            // Compruebo el codigo de los datos de respuesta
+            // Si es 200 es que ha encontrado el registro
+            if (data.code === 200){
+              return data.result.total
+            }else{
+              return null
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },
+
   }
 
 }

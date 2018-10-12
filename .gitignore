@@ -75,3 +75,4 @@ typings/
 
 # DIRECTORIOS DE TRABAJO PERSONALES
 proyectos_base
+api/informes/pdfs/*.pdf
