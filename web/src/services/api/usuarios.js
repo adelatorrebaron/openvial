@@ -52,5 +52,20 @@ export default {
             .catch(err => {
                 return err
             })
+    },
+
+    updateUsuarioImagenPerfil(data) {
+        return axios.post(
+            API_URL + '/usuarios/imagenPerfil',
+            data
+        )
+        .then(response => {
+            // Devuelvo los datos obtenidos del API externo
+            return response.data
+        })
+        .catch(err => {
+            return err
+        })
     }
+
 }

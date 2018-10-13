@@ -23,8 +23,15 @@ const updateUsuario = ({commit}, usuario) => {
 }
 
 
+const updateImagenPerfilUsuario = ({commit}, pathImagenPerfil) => {
+    // Asignamos los datos de la Autoescuela al Store
+    commit('SET_USUARIO_IMAGEN_PERFIL', pathImagenPerfil)
+}
+
+
 export default {
     login,
     logout,
-    updateUsuario
+    updateUsuario,
+    updateImagenPerfilUsuario
 }

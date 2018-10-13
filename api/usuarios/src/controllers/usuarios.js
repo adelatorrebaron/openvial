@@ -50,7 +50,7 @@ exports.usuarios_registro =  (req, res, next) => {
                                 },
                                 educacion: '',
                                 notas: '',
-                                avatar: ''
+                                avatar: `http://localhost:${config.PORT}/api/v1/usuarios/uploads/user_default.png`
                             },
                             estado: req.body.estado
                         });
@@ -299,6 +299,46 @@ exports.usuarios_get_by_usuarioId = (req, res, next) => {
                     result: {}
                 });
             }
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: "Internal Server Error",
+                code: 500,
+                messages: [{error: err}],
+                result: {}
+            });
+        });
+}
+
+
+//
+// Permite actualizar la foto de perfil del usuario
+//
+exports.usuarios_imagen_perfil =  (req, res, next) => {
+
+    const id = req.body.usuarioId;
+    const updatedOps = {};
+    const imagenPerfilPath = req.protocol + '://' + req.headers.host + '/api/v1/usuarios/' + req.file.path
+
+    updatedOps['perfil.avatar'] = imagenPerfilPath
+
+    // Actualizo solo las propiedades que han cambiado
+    Usuario.updateOne({_id: id}, {$set: updatedOps})
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                status: 'ok',
+                code: 200,
+                messages: [],
+                result: {
+                    imagenPerfil: imagenPerfilPath,
+                    request: {
+                        descripcion: 'Obtener registro actualizado',
+                        type: 'GET',
+                        url: req.protocol + '://' + req.headers.host + req.originalUrl
+                    }
+                }
+            });
         })
         .catch(err => {
             res.status(500).json({

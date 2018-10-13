@@ -12,13 +12,13 @@
             <div class="col-md-12">
 
               <!-- Imagen del Perfil -->
-              <div class="image-preview" v-if="currentUser.perfil.avatar.length > 0">
-                <img class="profile-user-img img-responsive img-circle" :src="currentUser.perfil.avatar" @click="cargarArchivoImagenPerfil()">
+<!--              <div class="image-preview" v-if="currentUser.perfil.avatar.length > 0">
+                <img class="profile-user-img img-responsive img-circle" style="width:150px; height:150px" v-bind:src="currentUser.perfil.avatar" @click="cargarArchivoImagenPerfil()">
               </div>
-              <div v-else >
-                <img class="profile-user-img img-responsive img-circle" @click="$refs.fileInput.click()" src="@/assets/user_default.png" alt="User profile picture">
+              <div v-else >-->
+                <img class="profile-user-img img-responsive img-circle" style="width:150px; height:150px" @click="$refs.fileInput.click()" v-bind:src="currentUser.perfil.avatar" alt="User profile picture">
                 <input type="file" id="imagenPerfil" @change="onFileSelected" ref="fileInput" accept="image/*" style="display: none;" />
-              </div>
+              <!--</div> -->
               
               <!-- Username y email -->
               <h3 class="profile-username text-center">{{ currentUser.username }}</h3>
@@ -113,7 +113,8 @@
 <script>
 import modalFormMdHelper from '@/components/helpers/modal-form-md-helper'
 import { mapGetters } from 'vuex'
-import axios from 'axios'
+import usuariosApi         from '@/services/api/usuarios.js'
+//import axios from 'axios'
 
 
 export default {
@@ -133,6 +134,7 @@ export default {
     
   data () {
     return {
+      imagen_perfil: ''
     }
   },
 
@@ -171,25 +173,26 @@ export default {
           console.log(err)
         })
     },
+
+
     onFileSelected(event) {
-      /*
-      this.perfil.imagen = event.target.files[0]
-      console.log(this.perfil.imagen)
-      */
+      // Obtengo el fichero seleccionado
+      this.imagen_perfil = event.target.files[0]
+      // Subo el fichero al servidor
+      this.onUpload();
     },
-    onUpload(){
-      /*
+
+
+    async onUpload(){
+      // Creamos el formulario para enviar el archivo de foto
       const fd = new FormData()
-      fd.append('image',this.perfil.imagen, this.perfil.imagen.name)
-      axios.post('urldelapi', fd, {
-        onUploadProgress: uploadEvent => {
-          console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%' )
-        }
-      })
-        .then(res => {
-          console.log(res)
-        })
-      */
+      fd.append('imagenPerfil',this.imagen_perfil, this.imagen_perfil.name)
+      fd.append('usuarioId',this.currentUser._id )
+
+      const estado = await usuariosApi.updateUsuarioImagenPerfil(fd)
+
+      // Disporo el state para que se actualicen todas las fotos de perfil de la aplicacion
+      this.$store.dispatch('updateImagenPerfilUsuario', estado.result.imagenPerfil)
     }
   }
   

@@ -6,6 +6,9 @@ const app           = express()
 
 const routes        = require('./routes')
 
+// La URL /api/v1/usuarios/uploads tomorá los archivos de la carpeta local /uploads
+app.use('/api/v1/usuarios/uploads',express.static('uploads'));
+
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
