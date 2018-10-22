@@ -53,7 +53,6 @@ exports.clases_practicas_get_all =  (req, res, next) => {
 }
 
 
-
 //
 // Permite obtener todas las clases de una autoescuela
 //

@@ -1,7 +1,7 @@
 {
-  "name": "autoescuelas",
+  "name": "vehiculos",
   "version": "1.0.0",
-  "description": "Microservicio autoescuelas",
+  "description": "Microservicio vehiculos",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -98,7 +98,6 @@ exports.profesores_get_all =  (req, res, next) => {
 }
 
 
-
 //
 // Permite obtener todos los profesores de una Autoescuela
 //
@@ -189,7 +188,6 @@ exports.profesores_get_all_by_autoescuelaId =  (req, res, next) => {
             })
         });
 }
-
 
 
 //
@@ -335,7 +333,6 @@ exports.profesores_create = (req, res, next) => {
 }
 
 
-
 //
 // Permite obtener un Profesor por el Id del Profesor
 //
@@ -431,7 +428,6 @@ exports.profesores_get_by_profesorId = (req, res, next) => {
             })
         });
 }
-
 
 
 //

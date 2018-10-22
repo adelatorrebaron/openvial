@@ -44,6 +44,9 @@ router.post('/usuarios/imagenPerfil',upload.single('imagenPerfil') ,UsuariosCont
 // Obtiene todos los usuarios
 router.get('/usuarios/', UsuariosController.usuarios_get_all);
 
+// Obtiene los datos de un usuario por su ID
+router.get('/usuarios/:usuarioId', UsuariosController.usuarios_get_by_usuarioId);
+
 // Actualización con PUT
 ////router.put('/usuarios/:usuarioEmail', UsuariosController.usuarios_update);
 

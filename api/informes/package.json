@@ -1,7 +1,7 @@
 {
-  "name": "correos",
+  "name": "informes",
   "version": "1.0.0",
-  "description": "Microservicio enviar correos",
+  "description": "Microservicio generar informes PDF",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

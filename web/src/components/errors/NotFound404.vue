@@ -3,7 +3,6 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
 
-
       <div class="error-page">
         <h2 class="headline text-yellow"> 404</h2>
 

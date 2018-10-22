@@ -1,11 +1,3 @@
-# create a file named Dockerfile
-#FROM node:9.11.2
-
-#RUN npm install node-gyp -g
-#RUN apt-get install python
-#RUN apt-get install make
-#RUN apt-get install g++
-
 FROM mhart/alpine-node:10.6
 RUN npm install node-gyp -g
 RUN apk add --no-cache make gcc g++ python

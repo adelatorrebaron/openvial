@@ -1,7 +1,7 @@
 {
-  "name": "autoescuelas",
+  "name": "clasespracticas",
   "version": "1.0.0",
-  "description": "Microservicio autoescuelas",
+  "description": "Microservicio clases practicas",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

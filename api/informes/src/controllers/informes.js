@@ -5,7 +5,9 @@ const fs = require('fs-extra');
 const path = require('path');
 const handlebars = require('handlebars');
 
-
+//
+// Lee la plantilla y la llena con los datos
+//
 const compile = async function(templateName, data){
     // Genero el path donde está la plantilla en formato Handlebars (html y css)
     const filePath = path.join(process.cwd(), 'templates', `${templateName}.hbs`)

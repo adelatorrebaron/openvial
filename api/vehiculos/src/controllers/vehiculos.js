@@ -50,7 +50,6 @@ exports.vehiculos_get_all =  (req, res, next) => {
 }
 
 
-
 //
 // Permite obtener todas los vehículos de una autoescuela
 //
@@ -94,7 +93,6 @@ exports.vehiculos_get_all_by_autoescuelaId =  (req, res, next) => {
             })
         });
 }
-   
 
 
 //

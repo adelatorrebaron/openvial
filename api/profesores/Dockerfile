@@ -9,7 +9,7 @@ EXPOSE 3004
 CMD npm start
 
 # Para doquerizar la aplicacion ejecutar el siguiente comando
-# docker build -t openvial/microservicio_alumnos:1.0 .
+# docker build -t openvial/microservicio_profesores:1.0 .
 
 # Para ejecutar el docker
-# docker run -p 3000:3000 -d --name openvial/ms_alumnos openvial/microservicio_alumnos:1.0
+# docker run -p 3000:3000 -d --name openvial/ms_profesores openvial/microservicio_profesores:1.0

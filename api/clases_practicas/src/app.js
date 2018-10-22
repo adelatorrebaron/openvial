@@ -10,8 +10,6 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 
-
-
 app.use(function(req, res, next) {
     var oneof = false;
     if(req.headers.origin) {

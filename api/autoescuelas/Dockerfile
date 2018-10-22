@@ -1,6 +1,5 @@
 # create a file named Dockerfile
 FROM mhart/alpine-node:10.6
-#FROM node:9.11.2
 RUN mkdir /app
 WORKDIR /app
 COPY package.json /app

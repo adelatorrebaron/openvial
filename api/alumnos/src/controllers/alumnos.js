@@ -169,8 +169,6 @@ exports.alumnos_get_all_by_autoescuelaId =  (req, res, next) => {
             })
         });
 }
-   
-
 
 
 //

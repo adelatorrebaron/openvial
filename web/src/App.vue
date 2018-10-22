@@ -34,31 +34,7 @@ import { mapGetters } from 'vuex'
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
 import Loading from '@/components/Loading'
-/*
-export default {
-  name: 'app',
-  computed: {
-    ...mapGetters({ currentUser: 'currentUser' })
-  },
-  created () {
-    this.checkCurrentLogin()
-  },
-  updated () {
-    this.checkCurrentLogin()
-  },
-  methods: {
-    checkCurrentLogin () {
-      if (!this.currentUser && this.$route.path !== '/login') {
-        this.$router.push('/?redirect=' + this.$route.path)
-      }
-    }
-  },
-  components: {
-    Navbar,
-    Foot
-  }
-}
-*/
+
 
 export default {
   name: 'app',

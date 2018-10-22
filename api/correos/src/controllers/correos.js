@@ -5,7 +5,9 @@ require('dotenv').load();
 const fs = require('fs-extra');
 const path = require('path');
 
-
+//
+// Lee la plantilla y la introduce en una variable
+//
 const loadHTML = async function(templateName){
     // Genero el path donde está la plantilla en formato html
     const filePath = path.join(process.cwd(), 'templates', `${templateName}.html`)

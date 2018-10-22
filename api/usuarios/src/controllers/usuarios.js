@@ -136,7 +136,7 @@ exports.usuarios_login =  (req, res, next) => {
                         id: usuario[0]._id,
                         username: usuario[0].username,
                         email:  usuario[0].email,
-                        fecha_creacion: usuario[0].fecha_creacion                        
+                        fecha_creacion: usuario[0].fecha_creacion                       
                         },
                         config.JWT_KEY,
                         {
@@ -414,33 +414,6 @@ exports.usuarios_update = (req, res, next) => {
 }
 
 
-/*
-exports.usuarios_update = (req, res, next) => {
-    const id = req.params.usuarioId;
-    const update = req.body;
-
-    Usuario.update({_id: id}, update)
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                mensaje: 'Registro actualizado correctamente',
-                request: {
-                    descripcion: 'Obtener registro actualizado',
-                    type: 'GET',
-                    url: req.protocol + '://' + req.headers.host + req.originalUrl
-                }
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-}
-*/
-
-
 //
 // Permite eliminar un usuario por su ID
 //
@@ -475,7 +448,7 @@ exports.usuarios_delete = (req, res, next) => {
                                 notas: 'String',
                                 avatar: 'String'
                             },
-                            estado: 'Boolena'
+                            estado: 'Boolean'
                         }
                     }
                 }
