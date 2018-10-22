@@ -399,6 +399,7 @@ exports.alumnos_update = (req, res, next) => {
     const fecha_nacimiento      = moment(req.body.fecha_nacimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
     update.dni_fecha_caducidad  = dni_fecha_caducidad;
     update.fecha_nacimiento     = fecha_nacimiento;
+    update.fecha_creacion       = moment(update.fecha_creacion, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
     Alumno.updateOne({_id: id}, {$set: update})
         .exec()

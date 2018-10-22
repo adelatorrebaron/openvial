@@ -442,7 +442,7 @@ exports.profesores_update = (req, res, next) => {
     const fecha_nacimiento      = moment(req.body.fecha_nacimiento, 'DD/MM/YYYY').format('YYYY-MM-DD');
     update.dni_fecha_caducidad  = dni_fecha_caducidad;
     update.fecha_nacimiento     = fecha_nacimiento;
-
+    update.fecha_creacion       = moment(update.fecha_creacion, 'DD/MM/YYYY').format('YYYY-MM-DD')
     
     // Mapeo los permisos de conduccion en una variable para reasignar las fechas
     const permisos_conduccion = req.body.permisos_conduccion.map(permiso => {

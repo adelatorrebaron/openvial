@@ -197,6 +197,7 @@ exports.vehiculos_get_by_vehiculoId = (req, res, next) => {
 exports.vehiculos_update = (req, res, next) => {
     const id = req.params.vehiculoId;
     const update = req.body;
+    update.fecha_creacion = moment(update.fecha_creacion, 'DD/MM/YYYY').format('YYYY-MM-DD')
 
     Vehiculo.updateOne({_id: id}, {$set: update})
         .exec()

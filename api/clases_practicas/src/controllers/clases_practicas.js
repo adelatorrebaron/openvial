@@ -210,8 +210,12 @@ exports.clases_practicas_get_by_clasePracticaId = (req, res, next) => {
 // Permite actualizar los datos de una clase practica
 //
 exports.clases_practicas_update = (req, res, next) => {
-    const id = req.params.clasePracticaId;
-    const update = req.body;
+    const id                    = req.params.clasePracticaId;
+    const update                = req.body;
+    update.fecha_clase          = moment(update.fecha_clase, 'DD/MM/YYYY').format('YYYY-MM-DD')
+    update.hora_inicio          = moment(update.hora_inicio, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm'),
+    update.hora_finalizacion    = moment(update.hora_finalizacion, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm'),
+    update.fecha_creacion       = moment(update.fecha_creacion, 'DD/MM/YYYY').format('YYYY-MM-DD')
 
     Clase.updateOne({_id: id}, {$set: update})
         .exec()

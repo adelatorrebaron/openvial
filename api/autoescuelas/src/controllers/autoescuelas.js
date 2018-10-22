@@ -269,6 +269,8 @@ exports.autoescuelas_update = (req, res, next) => {
     const id = req.params.autoescuelaId;
     const update = req.body;
 
+    update.fecha_creacion = moment(update.fecha_creacion, 'DD/MM/YYYY').format('YYYY-MM-DD')
+
     Autoescuela.updateOne({_id: id}, {$set: update})
         .exec()
         .then(result => {

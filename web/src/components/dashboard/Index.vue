@@ -177,6 +177,12 @@ export default {
 
   updated () {
     this.loadAutoescuelaData()
+    if (this.isUserLogged && this.existAutoescuela){
+      this.getTotalProfesores()
+      this.getTotalAlumnos()
+      this.getTotalVehiculos()
+      this.getClasesPracticas()
+     }
   },
 
   methods: {
